@@ -1,14 +1,26 @@
-import { SimpleGrid } from "@chakra-ui/react";
-import ProductCard from "./ProductCard";
 
+import StateGrid from './StateGrid';
+import data from '../constants/mockData'
 
-const Body = () => {
-
-    return (
-    <SimpleGrid columns={3} spacing={20} >    
-    <ProductCard />
-    </SimpleGrid>
-  )
+interface StateData {
+  id: number;
+  state: string;
+  warehouse: WarehouseItem[];
 }
 
-export default Body
+interface WarehouseItem {
+  id: number;
+  category: string;
+  color: string;
+  total: number;
+}
+
+function Body() {
+  return (
+    <div>
+      <StateGrid stateData={data} />
+    </div>
+  );
+}
+
+export default Body;
