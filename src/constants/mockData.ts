@@ -4,17 +4,61 @@ export interface WarehouseItem {
     color: string;
     total: number;
   }
-  
+export interface MonthItem {
+    id: number,
+    name: string,
+    total: number
+}
   export interface StateData {
     id: number;
     state: string;
     warehouse: WarehouseItem[];
+    type: string,
+    months: MonthItem[];
   }
  
  const data: StateData[] =[
     {
         id: 1,
         state: "KANO",
+        type: 'Territorial',
+        months: [
+            {
+              id: 1,
+              name: 'January',
+              total: 12000  
+            },
+            {
+                id: 1,
+                name: 'January',
+                total: 10000  
+            },
+            {
+                id: 2,
+                name: 'February',
+                total: 5000  
+            },
+            {
+                id: 3,
+                name: 'March',
+                total: 7000  
+            },
+            {
+                id: 4,
+                name: 'April',
+                total: 16000  
+            },
+            {
+                id: 5,
+                name: 'May',
+                total: 3000  
+            },
+            {
+                id: 6,
+                name: 'June',
+                total: 9000  
+            }
+        ],
         warehouse:[
     {
         id: 1,
@@ -55,6 +99,44 @@ export interface WarehouseItem {
 {
     id: 2,
     state: "LAGOS",
+    type: 'Territorial',
+    months: [
+        {
+          id: 1,
+          name: 'January',
+          total: 15000  
+        },
+        {
+            id: 1,
+            name: 'January',
+            total: 9000  
+        },
+        {
+            id: 2,
+            name: 'February',
+            total: 7500  
+        },
+        {
+            id: 3,
+            name: 'March',
+            total: 3000  
+        },
+        {
+            id: 4,
+            name: 'April',
+            total: 16000  
+        },
+        {
+            id: 5,
+            name: 'May',
+            total: 3000  
+        },
+        {
+            id: 6,
+            name: 'June',
+            total: 12000  
+        }
+    ],
     warehouse:[
 {
     id: 1,
@@ -96,6 +178,44 @@ export interface WarehouseItem {
 {
     id: 3,
     state: "PORT-HARCOURT",
+    type: 'Zonal',
+    months: [
+        {
+          id: 1,
+          name: 'January',
+          total: 12000  
+        },
+        {
+            id: 1,
+            name: 'January',
+            total: 10000  
+        },
+        {
+            id: 2,
+            name: 'February',
+            total: 5000  
+        },
+        {
+            id: 3,
+            name: 'March',
+            total: 7000  
+        },
+        {
+            id: 4,
+            name: 'April',
+            total: 16000  
+        },
+        {
+            id: 5,
+            name: 'May',
+            total: 3000  
+        },
+        {
+            id: 6,
+            name: 'June',
+            total: 9000  
+        }
+    ],
     warehouse:[
 {
     id: 1,

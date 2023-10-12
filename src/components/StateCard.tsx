@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Card, CardBody, List, ListItem, ListIcon, HStack, Text, Stack, } from '@chakra-ui/react';
+import { Box, Card, CardBody, List, ListItem, ListIcon, HStack, Text, Stack, Button, } from '@chakra-ui/react';
 import { MdCheckCircle } from 'react-icons/md';
 import PieChart from './PieChart';
 import  { BsFillArrowUpSquareFill } from 'react-icons/bs'
@@ -24,15 +24,17 @@ const StateCard: React.FC<StateCardProps> = ({ stateName, warehouseData }) => {
       );
     
   return (
-    <Box marginTop="10px">
-      <Card>
+      <Card marginTop="10px">
         <CardBody>
         <HStack justifyContent="space-around">
         <Stack justifyContent="space-around">
           <Text fontSize="md" color="gray">{stateName}</Text>
           <HStack justifyContent='space-around'>
-            <BsFillArrowUpSquareFill />
-            <Text fontSize="2xl" color="gray">{cumulativeTotal}</Text>  
+            <BsFillArrowUpSquareFill size={30} color='green'/>
+            <div>
+            <Text fontSize="3xl" color="black" marginBottom={0}>{cumulativeTotal}</Text> 
+            <Text fontSize="10px" color="gray">Total number of items</Text>
+            </div> 
           </HStack> 
           <List>
             {warehouseData.map((warehouseItem) => (
@@ -49,10 +51,11 @@ const StateCard: React.FC<StateCardProps> = ({ stateName, warehouseData }) => {
           <Stack>
           <PieChart warehouseData={warehouseData} />
           </Stack>
+          
           </HStack>
         </CardBody>
       </Card>
-    </Box>
+    
   );
 };
 

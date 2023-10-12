@@ -21,7 +21,7 @@ interface WarehouseItem {
 
 const StateList: React.FC<StateListProps> = ({ stateData }) => {
   return (
-    <SimpleGrid columns={{ base: 1, md: 1, lg: 3 }} spacing={2} >
+    <SimpleGrid columns={{ base: 1, md: 1, lg: 3 }} padding="10px" spacing={6}>
       {stateData.map((state) => (
         <StateCard key={state.id} stateName={state.state} warehouseData={state.warehouse} />
       ))}
