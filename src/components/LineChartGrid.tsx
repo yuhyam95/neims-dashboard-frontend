@@ -1,5 +1,5 @@
 
-import { Box, Flex, HStack, Spacer, Text, useMediaQuery } from '@chakra-ui/react';
+import { Box, Flex, HStack, Table, Tbody, Td, Text, Thead, Tr, useMediaQuery } from '@chakra-ui/react';
 import LineChart from './LineChart'; // Import your LineChart component
 import {MdOutlineEmail} from 'react-icons/md'
 
@@ -26,26 +26,29 @@ const LineChartGrid = ({data}: Props) => {
          <Box flex={isLargerThan768 ? 2 : 1} mr={isLargerThan768 ? 4 : 0}>
           <LineChart data={data} />
         </Box> 
-        {/* <Spacer /> */}
 
-        <Flex direction="column" flex={isLargerThan768 ? 0.5 : 2} ml={isLargerThan768 ? 4 : 0} bg="white" borderRadius="10px">
-        <Text fontWeight="bold" mb={2} ml={2}>
+        <Flex direction="column"
+              flex={isLargerThan768 ? 0.1 : 1} // Adjust the flex value for the desired size
+              ml={isLargerThan768 ? 2 : 0} // Adjust the left margin for spacing
+              bg="white"
+              borderRadius="10px">
+        <Text fontSize="lg" mb={1} ml={4}>
           Reports
         </Text>
-        {data.map((stateData, index) => (
-          <Flex
-            key={stateData.id}
-            alignItems="center"
-            justifyContent="center"
-            mb={2}
-            borderBottom={index !== data.length - 1 ? '0.5px solid gray' : 'none'}
-          >
-            <HStack spacing="50px">
-            <MdOutlineEmail size="20px" color="#85A3BB"/>
-            <Text fontSize="sm" color="black" noOfLines={1}>{stateData.state} Office</Text>
-            </HStack>
-          </Flex>
-        ))}
+          <Table variant="simple">
+          <Tbody>
+            {data.map((stateData, index) => (
+              <Tr key={stateData.id}>
+                <Td>
+                  <MdOutlineEmail size="25px" color="#85A3BB" />
+                </Td>
+                <Td fontSize="md" color="black" isTruncated marginLeft="-25px">
+                  {stateData.state} Office
+                </Td>
+              </Tr>
+            ))}
+          </Tbody>
+        </Table>
       </Flex>
       
       </Flex>
