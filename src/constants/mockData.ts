@@ -15,6 +15,7 @@ export interface MonthItem {
     warehouse: WarehouseItem[];
     type: string,
     months: MonthItem[];
+    change: string
   }
  
  const data: StateData[] =[
@@ -22,6 +23,7 @@ export interface MonthItem {
         id: 1,
         state: "KANO",
         type: 'Territorial',
+        change: 'increase',
         months: [
             {
               id: 1,
@@ -100,6 +102,7 @@ export interface MonthItem {
     id: 2,
     state: "LAGOS",
     type: 'Territorial',
+    change: 'decrease',
     months: [
         {
           id: 1,
@@ -179,6 +182,7 @@ export interface MonthItem {
     id: 3,
     state: "PORT-HARCOURT",
     type: 'Zonal',
+    change: 'increase',
     months: [
         {
           id: 1,

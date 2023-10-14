@@ -1,3 +1,4 @@
+import { Spinner } from '@chakra-ui/react';
 import React from 'react';
 import { Chart } from 'react-google-charts';
 
@@ -23,7 +24,7 @@ const PieChart: React.FC<PieChartProps> = ({ warehouseData }) => {
       width={'70%'}
       height={'150px'}
       chartType="PieChart"
-      loader={<div>Loading Chart</div>}
+      loader={<Spinner />}
       data={data}
       options={{
         colors: warehouseData.map((item) => item.color),
