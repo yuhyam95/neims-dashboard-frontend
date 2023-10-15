@@ -1,7 +1,7 @@
 
-import { Box, Flex, HStack, Table, Tbody, Td, Text, Thead, Tr, useMediaQuery } from '@chakra-ui/react';
-import LineChart from './LineChart'; // Import your LineChart component
-import {MdOutlineEmail} from 'react-icons/md'
+import { Box, Flex, Text, useMediaQuery } from '@chakra-ui/react';
+import LineChart from './LineChart'; 
+import Reports from './Reports';
 
 interface StateData {
     id: number;
@@ -28,29 +28,15 @@ const LineChartGrid = ({data}: Props) => {
         </Box> 
 
         <Flex direction="column"
-              flex={isLargerThan768 ? 0.1 : 1} // Adjust the flex value for the desired size
-              ml={isLargerThan768 ? 2 : 0} // Adjust the left margin for spacing
+              flex={isLargerThan768 ? 0.5 : 1}
+              ml={isLargerThan768 ? 2 : 0} 
               bg="white"
               borderRadius="10px">
         <Text fontSize="lg" mb={1} ml={4}>
           Reports
         </Text>
-          <Table variant="simple">
-          <Tbody>
-            {data.map((stateData, index) => (
-              <Tr key={stateData.id}>
-                <Td>
-                  <MdOutlineEmail size="25px" color="#85A3BB" />
-                </Td>
-                <Td fontSize="md" color="black" isTruncated marginLeft="-25px">
-                  {stateData.state} Office
-                </Td>
-              </Tr>
-            ))}
-          </Tbody>
-        </Table>
-      </Flex>
-      
+        <Reports data={data}/>  
+      </Flex>      
       </Flex>
   );
 };

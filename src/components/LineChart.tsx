@@ -1,4 +1,5 @@
 
+import { Spinner } from '@chakra-ui/react';
 import React from 'react';
 import { Chart } from 'react-google-charts';
 
@@ -45,7 +46,7 @@ const LineChart: React.FC<LineChartProps> = ({ data }) => {
       width={'100%'}
       height={'300px'}
       chartType="LineChart"
-      loader={<div>Loading Chart</div>}
+      loader={<Spinner />}
       data={chartData}
       options={chartOptions}
     />

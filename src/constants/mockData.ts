@@ -7,7 +7,12 @@ export interface WarehouseItem {
 export interface MonthItem {
     id: number,
     name: string,
-    total: number
+    total: number,
+    beneficiaries: {
+        men: number,
+        women: number,
+        children: number
+    }
 }
   export interface StateData {
     id: number;
@@ -28,37 +33,62 @@ export interface MonthItem {
             {
               id: 1,
               name: 'January',
-              total: 12000  
-            },
-            {
-                id: 1,
-                name: 'January',
-                total: 10000  
+              total: 12000,
+              beneficiaries: {
+                men: 100,
+                women: 250,
+                children: 320
+              }  
             },
             {
                 id: 2,
                 name: 'February',
-                total: 5000  
+                total: 5000,
+                beneficiaries: {
+                    men: 100,
+                    women: 250,
+                    children: 320
+                  }  
             },
             {
                 id: 3,
                 name: 'March',
-                total: 7000  
+                total: 7000,
+                beneficiaries: {
+                    men: 120,
+                    women: 240,
+                    children: 310
+                  }  
             },
             {
                 id: 4,
                 name: 'April',
-                total: 16000  
+                total: 16000,
+                beneficiaries: {
+                    men: 400,
+                    women: 250,
+                    children: 320
+                  }  
             },
             {
                 id: 5,
                 name: 'May',
-                total: 3000  
+                total: 3000,
+                beneficiaries: {
+                    men: 100,
+                    women: 250,
+                    children: 320
+                  }  
             },
             {
                 id: 6,
                 name: 'June',
-                total: 9000  
+                total: 9000,
+                beneficiaries: {
+                    men: 100,
+                    women: 350,
+                    children: 320
+                  }  
             }
         ],
         warehouse:[
@@ -107,37 +137,62 @@ export interface MonthItem {
         {
           id: 1,
           name: 'January',
-          total: 15000  
-        },
-        {
-            id: 1,
-            name: 'January',
-            total: 9000  
+          total: 15000,
+          beneficiaries: {
+            men: 100,
+            women: 250,
+            children: 220
+          }  
         },
         {
             id: 2,
             name: 'February',
-            total: 7500  
+            total: 7500,
+            beneficiaries: {
+                men: 130,
+                women: 250,
+                children: 300
+              }  
         },
         {
             id: 3,
             name: 'March',
-            total: 3000  
+            total: 3000,
+            beneficiaries: {
+                men: 100,
+                women: 250,
+                children: 120
+              }  
         },
         {
             id: 4,
             name: 'April',
-            total: 16000  
+            total: 16000,
+            beneficiaries: {
+                men: 150,
+                women: 250,
+                children: 160
+              }  
         },
         {
             id: 5,
             name: 'May',
-            total: 3000  
+            total: 3000,
+            beneficiaries: {
+                men: 100,
+                women: 250,
+                children: 320
+              }  
         },
         {
             id: 6,
             name: 'June',
-            total: 12000  
+            total: 12000,
+            beneficiaries: {
+                men: 300,
+                women: 250,
+                children: 320
+              }  
         }
     ],
     warehouse:[
@@ -187,37 +242,62 @@ export interface MonthItem {
         {
           id: 1,
           name: 'January',
-          total: 12000  
-        },
-        {
-            id: 1,
-            name: 'January',
-            total: 10000  
+          total: 12000,
+          beneficiaries: {
+            men: 100,
+            women: 250,
+            children: 520
+          }  
         },
         {
             id: 2,
             name: 'February',
-            total: 5000  
+            total: 5000,
+            beneficiaries: {
+                men: 100,
+                women: 250,
+                children: 320
+              }  
         },
         {
             id: 3,
             name: 'March',
-            total: 7000  
+            total: 7000, 
+            beneficiaries: {
+                men: 100,
+                women: 230,
+                children: 320
+              }  
         },
         {
             id: 4,
             name: 'April',
-            total: 16000  
+            total: 16000, 
+            beneficiaries: {
+                men: 160,
+                women: 250,
+                children: 320
+              }  
         },
         {
             id: 5,
             name: 'May',
-            total: 3000  
+            total: 3000,
+            beneficiaries: {
+                men: 100,
+                women: 250,
+                children: 300
+              }  
         },
         {
             id: 6,
             name: 'June',
-            total: 9000  
+            total: 9000,
+            beneficiaries: {
+                men: 120,
+                women: 350,
+                children: 320
+              }  
         }
     ],
     warehouse:[

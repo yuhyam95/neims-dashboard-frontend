@@ -3,7 +3,7 @@ import StateGrid from './StateGrid';
 import data from '../constants/mockData'
 import { Flex } from '@chakra-ui/react';
 import LineChartGrid from './LineChartGrid';
-import MyTable from './MyTable';
+import ProductsGrid from './ProductsGrid';
 
 
 
@@ -14,7 +14,9 @@ function Body() {
       <Flex> 
       <LineChartGrid data={data} />
       </Flex>
-      <MyTable />
+      <Flex>
+      <ProductsGrid />
+      </Flex>
     </div>
   );
 }
