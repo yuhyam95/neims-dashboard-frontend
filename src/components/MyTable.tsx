@@ -1,11 +1,13 @@
-import { Table, Thead, Tbody, Tr, Th, TableContainer } from "@chakra-ui/react";
-import data from '../constants/mockData'
+import { Table, Thead, Tbody, Tr, Th, TableContainer, TableCaption } from "@chakra-ui/react";
+import data from '../constants/mockData';
 import TableRows from "./TableRows";
 
 function MyTable() {
+  console.log(data[0].products)
   return (
   <TableContainer bg="white" borderRadius="10px">
   <Table size='lg'>
+  <TableCaption>Product List</TableCaption>
     <Thead>
       <Tr>
         <Th>Item</Th>
@@ -15,9 +17,8 @@ function MyTable() {
         <Th>Date</Th>
       </Tr>
     </Thead>
-    <Tbody>
-     
-        {/* {data.map((data, index) => (
+    <Tbody> 
+        {data[0].products.map((data, index) => (
           <TableRows
             key={index}
             name={data.name}
@@ -26,10 +27,11 @@ function MyTable() {
             quantity={data.quantity}
             date={data.date}
           />
-        ))} */}
+        ))}
     </Tbody>
   </Table>
 </TableContainer>
+
   )
 }
 

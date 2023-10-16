@@ -4,51 +4,47 @@ import {
   Flex,
   Text,
   useColorModeValue,
+  Box,
 } from "@chakra-ui/react";
+
 
 interface Props {
   name: string;
   quantity: number;
   reason: string;
   station: string;
-  date: boolean;
+  date: string;
 }
   
 
-function TableRows(data: Props) {
-  const {  name, quantity, reason, station, date } = data;
-  const textColor = useColorModeValue("gray.500", "white");
-  const titleColor = useColorModeValue("gray.700", "white");
-  const borderColor = useColorModeValue("gray.200", "gray.600");
-
+function TableRows(props: Props) {
+  const {  name, quantity, reason, station, date } = props;
+  
   return (
     <Tr>
-      <Td minWidth={{ sm: "250px" }} pl="0px" borderColor={borderColor} >
-        <Flex alignItems="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
-          <Text
-            fontSize="md"
-            color={titleColor}
-            fontWeight="bold"
-            minWidth="100%"
-          >
+      <Td >
+          <Text>
             {name}
           </Text>
-        </Flex>
       </Td>
-      <Td borderColor={borderColor}>
-        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
+      <Td>
+        <Box borderWidth="0.5px" borderRadius="10px" width="25%" display="flex" justifyContent="center" alignItems="center">
+        <Text>
           {quantity}
         </Text>
+        </Box>
       </Td>
-      <Td borderColor={borderColor}>
-        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
+      <Td>
+      <Box borderWidth="0.5px" borderRadius="10px" width="50%" bg={reason === 'restock' ? '#BAF2E0' : '#FBD8D8' } display="flex" justifyContent="center" alignItems="center">
+        <Text color={reason === 'restock' ? '#2FD197' : '#EB4547' }>
           {reason}
         </Text>
+        </Box>
       </Td>
-      <Td borderColor={borderColor}>
+      <Td>
        {station}
       </Td>
-      <Td borderColor={borderColor}>
+      <Td>
         {date}
       </Td>
     </Tr>
