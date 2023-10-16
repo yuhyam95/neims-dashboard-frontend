@@ -14,21 +14,50 @@ export interface MonthItem {
         children: number
     }
 }
-  export interface StateData {
+export interface ProductItem{
+    id: number,
+    name: string,
+    quantity: number,
+    reason: string,
+    station: string,
+    date: string,
+}
+
+export interface StateData {
     id: number;
     state: string;
     warehouse: WarehouseItem[];
     type: string,
     months: MonthItem[];
-    change: string
+    change: string;
+    products: ProductItem[];
   }
- 
+
+
  const data: StateData[] =[
     {
         id: 1,
         state: "KANO",
         type: 'Territorial',
         change: 'increase',
+        products:[
+            {
+            id: 1,
+            name: "Rice 25kg",
+            quantity: 100,
+            station: "Kano",
+            reason: "restock",
+            date: "16-10-2023"
+            },
+            {
+                id: 1,
+                name: "Maize 50kg",
+                quantity: 80,
+                station: "Kano",
+                reason: "restock",
+                date: "16-10-2023"
+            },
+        ],
         months: [
             {
               id: 1,
@@ -133,6 +162,24 @@ export interface MonthItem {
     state: "LAGOS",
     type: 'Territorial',
     change: 'decrease',
+    products:[
+        {
+        id: 1,
+        name: "BUA Cement",
+        quantity: 100,
+        station: "Lagos",
+        reason: "distribution",
+        date: "16-10-2023"
+        },
+        {
+            id: 1,
+            name: "Roofing Sheets",
+            quantity: 80,
+            station: "Lagos",
+            reason: "restock",
+            date: "16-10-2023"
+        },
+    ],
     months: [
         {
           id: 1,
@@ -235,9 +282,27 @@ export interface MonthItem {
 },
 {
     id: 3,
-    state: "PORT-HARCOURT",
+    state: "Port-Harcourt",
     type: 'Zonal',
     change: 'increase',
+    products:[
+        {
+        id: 1,
+        name: "Fertilizer",
+        quantity: 350,
+        station: "Port-Harcourt",
+        reason: "restock",
+        date: "16-10-2023"
+        },
+        {
+            id: 1,
+            name: "Mattress",
+            quantity: 80,
+            station: "Port-Harcourt",
+            reason: "restock",
+            date: "16-10-2023"
+        },
+    ],
     months: [
         {
           id: 1,
