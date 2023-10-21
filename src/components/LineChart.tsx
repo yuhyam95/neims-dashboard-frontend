@@ -32,13 +32,14 @@ const LineChart: React.FC<LineChartProps> = ({ data }) => {
 
   const chartOptions = {
     title: 'Station Stock Graph',
+    chartArea: {borderRadius: '10px'},
     hAxis: {
       title: 'Month',
     },
     vAxis: {
       title: 'Total',
     },
-    curveType: 'function', // Set this to 'function' for a smooth line
+    curveType: 'function', 
   };
 
   return (

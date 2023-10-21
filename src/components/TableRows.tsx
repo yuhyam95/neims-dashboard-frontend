@@ -1,9 +1,7 @@
 import {
   Tr,
   Td,
-  Flex,
   Text,
-  useColorModeValue,
   Box,
 } from "@chakra-ui/react";
 

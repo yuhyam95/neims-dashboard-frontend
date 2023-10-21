@@ -37,7 +37,7 @@ export interface StateData {
  const data: StateData[] =[
     {
         id: 1,
-        state: "KANO",
+        state: "Kano",
         type: 'Territorial',
         change: 'increase',
         products:[
@@ -159,7 +159,7 @@ export interface StateData {
 },
 {
     id: 2,
-    state: "LAGOS",
+    state: "Lagos",
     type: 'Territorial',
     change: 'decrease',
     products:[
