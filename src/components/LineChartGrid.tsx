@@ -9,7 +9,7 @@ interface StateData {
     months: {
       id: number;
       name: string;
-      total: number;
+      total: number; 
     }[];
   }
   

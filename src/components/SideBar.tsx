@@ -34,6 +34,8 @@ import {
 } from 'react-icons/fi'
 import { IconType } from 'react-icons'
 import Body from './Body'
+import data from '../constants/mockData'
+import Station from '../pages/Station'
 
 interface LinkItemProps {
   name: string
@@ -213,7 +215,8 @@ const Sidebar = () => {
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
-        <Body />
+        {/* <Body /> */}
+        <Station />
       </Box>
     </Box>
   )

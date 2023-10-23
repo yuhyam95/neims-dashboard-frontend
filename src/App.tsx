@@ -2,6 +2,7 @@ import { Grid, GridItem } from '@chakra-ui/react'
 import SideBar from './components/SideBar'
 import Header from './components/Header'
 import Body from './components/Body'
+import Login from './pages/Login'
 
 function App() {
     
@@ -32,7 +33,7 @@ function App() {
 // </Grid>
 
     <SideBar />
-
+    //  <Login />
   )
   
 }
