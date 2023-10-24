@@ -9,19 +9,44 @@ import {
   Stack,
   Badge,
   useColorModeValue,
+  HStack,
+  Flex,
+  StackDivider,
 } from '@chakra-ui/react'
+
+interface FeatureProps {
+  title: string
+  description: string
+}
+
+const Feature = ({ title, description }: FeatureProps) => {
+  return (
+      <Flex direction='row' alignItems='center' justifyContent='space-between'>
+      <Text fontWeight={600} fontSize='sm' color='white'>{title}</Text>
+      <Text fontWeight={600} fontSize='sm' color='white'>{description}</Text>
+      </Flex>
+  )
+}
+
 
 export default function UserCard() {
   return (
-    <Center py={6}>
+    <Center py={4}>
       <Box
         maxW={'320px'}
         w={'full'}
-        bg={useColorModeValue('white', 'gray.900')}
+        bg="#014B84"
         boxShadow={'2xl'}
         rounded={'lg'}
         p={6}
         textAlign={'center'}>
+      <Heading fontSize={'2xl'} fontFamily={'body'} color='white' mb={2}>
+          Office Information 
+        </Heading>
+        <Stack divider={
+              <StackDivider borderColor='white' />
+            }>
+        <HStack alignItems="center" justifyContent="space-between">
         <Avatar
           size={'xl'}
           src={
@@ -41,72 +66,45 @@ export default function UserCard() {
             right: 3,
           }}
         />
-        <Heading fontSize={'2xl'} fontFamily={'body'}>
-          Lindsey James
+        <Stack>
+        <Heading fontSize={'lg'} fontFamily={'body'} color='white'>
+          Ibrahim Farinloye
         </Heading>
-        <Text fontWeight={600} color={'gray.500'} mb={4}>
-          @lindsey_jam3s
+        <Text fontWeight={600} color='white' fontSize={'sm'}>
+          station chief
         </Text>
-        <Text
-          textAlign={'center'}
-          color={useColorModeValue('gray.700', 'gray.400')}
-          px={3}>
-          Actress, musician, songwriter and artist. PM for work inquires or{' '}
-          <Text color={'blue.400'}>#tag</Text> me in your posts
-        </Text>
+        </Stack>
+        </HStack>
+          
+          <Feature title="Mobile:" description='08064763531'/>
+          <Feature title="Location:" description='No 145 Mobolaji Bank Anthony way, ikeja, Lagos State.'/>
 
-        <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
+        <HStack justifyContent="space-between" alignItems='center'>
+        <Heading fontSize={'sm'} fontFamily={'body'} color='white'>
+          Area of coverage:
+        </Heading>
+        <Stack align={'left'} justify={'center'} direction={'row'}>
           <Badge
-            px={2}
-            py={1}
+            px={1}
             bg={useColorModeValue('gray.50', 'gray.800')}
             fontWeight={'400'}>
-            #art
+            Lagos
           </Badge>
           <Badge
-            px={2}
-            py={1}
+            px={1}
             bg={useColorModeValue('gray.50', 'gray.800')}
             fontWeight={'400'}>
-            #photography
+            Ondo
           </Badge>
           <Badge
-            px={2}
-            py={1}
+            px={1}
             bg={useColorModeValue('gray.50', 'gray.800')}
             fontWeight={'400'}>
-            #music
+            Oyo
           </Badge>
         </Stack>
-
-        {/* <Stack mt={8} direction={'row'} spacing={4}>
-          <Button
-            flex={1}
-            fontSize={'sm'}
-            rounded={'full'}
-            _focus={{
-              bg: 'gray.200',
-            }}>
-            Message
-          </Button>
-          <Button
-            flex={1}
-            fontSize={'sm'}
-            rounded={'full'}
-            bg={'blue.400'}
-            color={'white'}
-            boxShadow={
-              '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
-            }
-            _hover={{
-              bg: 'blue.500',
-            }}
-            _focus={{
-              bg: 'blue.500',
-            }}>
-            Follow
-          </Button>
-        </Stack> */}
+        </HStack>
+        </Stack>
       </Box>
     </Center>
   )

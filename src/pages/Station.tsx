@@ -10,9 +10,9 @@ import CategoryGrid from '../components/CategoryGrid';
 function Body() {
   return (
     <div>
-    <Flex>
+    {/* <Flex>
         <CategoryGrid />
-    </Flex>
+    </Flex> */}
       <Flex> 
       <UserGrid data={data} />
       </Flex>

@@ -5,7 +5,7 @@ import CategoryCard from "./CategoryCard";
 const CategoryGrid = () => {
   return (
     
-    <SimpleGrid columns={{ base: 1, md: 2, lg: 5 }} padding="10px" spacing={6} >
+    <SimpleGrid columns={{ base: 1, md: 2, lg: 5 }} padding="10px" spacing={8} >
         <CategoryCard name="Food Items" total={345000} color="#FFA523"/>
         <CategoryCard name=" Non Food Items" total={520000} color="#FE3169"/>
         <CategoryCard name="Agro-Chemical" total={97678} color="#9F48A6"/>
