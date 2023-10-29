@@ -1,5 +1,5 @@
 
-import { Spinner } from '@chakra-ui/react';
+import { Card, Spinner } from '@chakra-ui/react';
 import React from 'react';
 import { Chart } from 'react-google-charts';
 
@@ -32,7 +32,7 @@ const LineChart: React.FC<LineChartProps> = ({ data }) => {
 
   const chartOptions = {
     title: 'Station Stock Graph',
-    chartArea: {borderRadius: '10px'},
+    chartArea: {borderRadius: 20},
     hAxis: {
       title: 'Month',
     },

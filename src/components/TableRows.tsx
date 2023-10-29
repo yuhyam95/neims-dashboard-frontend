@@ -33,7 +33,7 @@ function TableRows(props: Props) {
         </Box>
       </Td>
       <Td>
-      <Box borderWidth="0.5px" borderRadius="10px" width="50%" bg={reason === 'restock' ? '#BAF2E0' : '#FBD8D8' } display="flex" justifyContent="center" alignItems="center">
+      <Box borderWidth="0.5px" borderRadius="10px" width="60%" bg={reason === 'restock' ? '#BAF2E0' : '#FBD8D8' } display="flex" justifyContent="center" alignItems="center">
         <Text color={reason === 'restock' ? '#2FD197' : '#EB4547' }>
           {reason}
         </Text>

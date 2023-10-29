@@ -50,13 +50,29 @@ export interface StateData {
             date: "16-10-2023"
             },
             {
-                id: 1,
+                id: 2,
                 name: "Maize 50kg",
                 quantity: 80,
                 station: "Kano",
-                reason: "restock",
+                reason: "distribution",
                 date: "16-10-2023"
             },
+            {
+                id: 3,
+                name: "BUA Cement",
+                quantity: 125,
+                station: "Kano",
+                reason: "restock",
+                date: "16-10-2023"
+                },
+                {
+                    id: 4,
+                    name: "Fertilizer",
+                    quantity: 900,
+                    station: "Kano",
+                    reason: "distribution",
+                    date: "16-10-2023"
+                },
         ],
         months: [
             {

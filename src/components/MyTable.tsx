@@ -3,7 +3,6 @@ import data from '../constants/mockData';
 import TableRows from "./TableRows";
 
 function MyTable() {
-  console.log(data[0].products)
   return (
   <TableContainer bg="white" borderRadius="10px">
   <Table size='lg'>
