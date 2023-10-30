@@ -6,22 +6,23 @@ import PieChart from './PieChart';
 
 interface StateCardProps {
   stateName: string;
-  warehouseData: WarehouseItem[];
+  //category: Category[];
   change: string;
-}
+}``
 
-interface WarehouseItem {
-  id: number;
-  category: string;
-  color: string;
-  total: number;
-}
+// interface Category {
+//   id: number;
+//   category: string;
+//   color: string;
+//   total: number;
+// }
 
-const StateCard: React.FC<StateCardProps> = ({ stateName, warehouseData, change }) => {
-    const cumulativeTotal = warehouseData.reduce(
-        (acc, item) => acc + item.total,
-        0
-      );
+const StateCard = ({ stateName, change }: StateCardProps) => {
+
+    // const cumulativeTotal = category.reduce(
+    //     (acc, item) => acc + item.total,
+    //     0
+    //   );
     
   return (
       <Card marginTop="10px">
@@ -34,14 +35,14 @@ const StateCard: React.FC<StateCardProps> = ({ stateName, warehouseData, change 
           <Stat>
           <HStack>  
           <StatArrow type={change == 'increase' ? 'increase' : 'decrease'} boxSize={10} />
-            <StatNumber>{cumulativeTotal}</StatNumber>
+            {/* <StatNumber>{cumulativeTotal}</StatNumber> */}
             </HStack>
             <StatHelpText>
                 Total Number of Items
             </StatHelpText>
             </Stat>
           </HStack> 
-          <List>
+          {/* <List>
             {warehouseData.map((warehouseItem) => (
               <ListItem key={warehouseItem.id} fontSize="xx-small" color="gray">
                 <ListIcon
@@ -54,7 +55,7 @@ const StateCard: React.FC<StateCardProps> = ({ stateName, warehouseData, change 
           </List>
           </Stack>
           <Stack>
-          <PieChart warehouseData={warehouseData} />
+          <PieChart warehouseData={warehouseData} /> */}
           </Stack>
           
           </HStack>

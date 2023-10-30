@@ -31,6 +31,6 @@ export interface Station {
     location: string
   }
 
-  const useGenres = () => useData<Station>('/station')
+  const useStation = () => useData<Station>('/station')
   
-  export default useGenres;
+  export default useStation;

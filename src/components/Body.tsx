@@ -1,5 +1,5 @@
 
-import StateGrid from './StateGrid';
+import StationGrid from './StationGrid';
 import data from '../constants/mockData'
 import { Flex } from '@chakra-ui/react';
 import LineChartGrid from './LineChartGrid';
@@ -8,9 +8,10 @@ import ProductsGrid from './ProductsGrid';
 
 
 function Body() {
+
   return (
     <div>
-      <StateGrid stateData={data} />
+      <StationGrid />
       <Flex> 
       <LineChartGrid data={data} />
       </Flex>
