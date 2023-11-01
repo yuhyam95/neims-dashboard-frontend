@@ -15,7 +15,8 @@ export interface Station {
   interface Category{
     id: number;
     name: string,
-    total: number
+    total: number,
+    color: string
   }
 
   interface ProductList{

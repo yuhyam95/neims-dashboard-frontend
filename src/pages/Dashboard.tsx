@@ -1,13 +1,13 @@
 
-import StationGrid from './StationGrid';
+import StationGrid from '../components/StationGrid';
 import data from '../constants/mockData'
 import { Flex } from '@chakra-ui/react';
-import LineChartGrid from './LineChartGrid';
-import ProductsGrid from './ProductsGrid';
+import LineChartGrid from '../components/LineChartGrid';
+import ProductsGrid from '../components/ProductsGrid';
 
 
 
-function Body() {
+function Dashboard() {
 
   return (
     <div>
@@ -22,4 +22,4 @@ function Body() {
   );
 }
 
-export default Body;
+export default Dashboard;

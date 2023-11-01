@@ -1,10 +1,11 @@
 import { extendTheme, ThemeConfig } from "@chakra-ui/react";
+import type {} from '@mui/x-data-grid/themeAugmentation';
 
 const config: ThemeConfig = {
   initialColorMode: 'light'
 };
 
-const theme = extendTheme({ 
+const chakraTheme = extendTheme({ 
   config,
   colors: {
     gray: {
@@ -19,7 +20,7 @@ const theme = extendTheme({
       800: '#121212',
       900: '#111'
     }
-  }
+  },
  });
 
-export default theme;
+export default chakraTheme;

@@ -6,23 +6,20 @@ import PieChart from './PieChart';
 
 interface StateCardProps {
   stateName: string;
-  //category: Category[];
+  category: Category[];
   change: string;
-}``
+  total: number
+}
 
-// interface Category {
-//   id: number;
-//   category: string;
-//   color: string;
-//   total: number;
-// }
+interface Category {
+  id: number;
+  name: string;
+  color: string;
+  total: number;
+}
 
-const StateCard = ({ stateName, change }: StateCardProps) => {
+const StationCard = ({ stateName, change, total, category }: StateCardProps) => {
 
-    // const cumulativeTotal = category.reduce(
-    //     (acc, item) => acc + item.total,
-    //     0
-    //   );
     
   return (
       <Card marginTop="10px">
@@ -35,28 +32,28 @@ const StateCard = ({ stateName, change }: StateCardProps) => {
           <Stat>
           <HStack>  
           <StatArrow type={change == 'increase' ? 'increase' : 'decrease'} boxSize={10} />
-            {/* <StatNumber>{cumulativeTotal}</StatNumber> */}
+            <StatNumber>{total}</StatNumber>
             </HStack>
             <StatHelpText>
                 Total Number of Items
             </StatHelpText>
             </Stat>
           </HStack> 
-          {/* <List>
-            {warehouseData.map((warehouseItem) => (
-              <ListItem key={warehouseItem.id} fontSize="xx-small" color="gray">
+          <List>
+            {category.map((categoryItem) => (
+              <ListItem key={categoryItem.id} fontSize="xx-small" color="gray">
                 <ListIcon
                   as={MdCheckCircle}
-                  color={warehouseItem.color}
+                  color={categoryItem.color}
                 />
-                {warehouseItem.category}
+                {categoryItem.name}
               </ListItem>
             ))}
           </List>
           </Stack>
           <Stack>
-          <PieChart warehouseData={warehouseData} /> */}
-          </Stack>
+          <PieChart categoryData={category} />
+          </Stack> 
           
           </HStack>
         </CardBody>
@@ -65,4 +62,4 @@ const StateCard = ({ stateName, change }: StateCardProps) => {
   );
 };
 
-export default StateCard;
+export default StationCard;

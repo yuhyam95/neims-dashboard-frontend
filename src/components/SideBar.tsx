@@ -33,7 +33,7 @@ import {
   FiChevronDown,
 } from 'react-icons/fi'
 import { IconType } from 'react-icons'
-import Body from './Body'
+import Body from '../pages/Dashboard'
 import data from '../constants/mockData'
 import Station from '../pages/Station'
 import StationGrid from './StationGrid'
@@ -216,9 +216,8 @@ const Sidebar = () => {
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
-        {/* <Body /> */}
-        {/* <Station /> */}
-        <StationGrid />
+        <Body />
+        {/* <StationGrid /> */}
       </Box>
     </Box>
   )

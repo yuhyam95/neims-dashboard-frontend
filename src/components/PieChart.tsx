@@ -3,20 +3,20 @@ import React from 'react';
 import { Chart } from 'react-google-charts';
 
 interface PieChartProps {
-  warehouseData: WarehouseItem[];
+  categoryData: CategoryItem[];
 }
 
-interface WarehouseItem {
+interface CategoryItem {
   id: number;
-  category: string;
+  name: string;
   color: string;
   total: number;
 }
 
-const PieChart: React.FC<PieChartProps> = ({ warehouseData }) => {
+const PieChart: React.FC<PieChartProps> = ({ categoryData }) => {
   const data = [['Category', 'Total']];
-  warehouseData.forEach((item) => {
-    data.push([item.category, item.total]);
+  categoryData.forEach((item) => {
+    data.push([item.name, item.total]);
   });
 
   return (
@@ -27,7 +27,7 @@ const PieChart: React.FC<PieChartProps> = ({ warehouseData }) => {
       loader={<Spinner />}
       data={data}
       options={{
-        colors: warehouseData.map((item) => item.color),
+        colors: categoryData.map((item) => item.color),
         legend: 'none',
         chartArea: {
           left: 0, // Adjust the left padding
