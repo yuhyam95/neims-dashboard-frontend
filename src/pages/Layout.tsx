@@ -33,10 +33,11 @@ import {
   FiChevronDown,
 } from 'react-icons/fi'
 import { IconType } from 'react-icons'
-import Body from '../pages/Dashboard'
+import Body from './Dashboard'
 import data from '../constants/mockData'
-import Station from '../pages/Station'
-import StationGrid from './StationGrid'
+import Station from './Station'
+import StationGrid from '../components/StationGrid'
+import ProductCategory from './ProductCategory'
 
 interface LinkItemProps {
   name: string
@@ -196,7 +197,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   )
 }
 
-const Sidebar = () => {
+const Layout = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -216,11 +217,12 @@ const Sidebar = () => {
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
-        <Body />
+        {/* <Body /> */}
         {/* <StationGrid /> */}
+        <ProductCategory />
       </Box>
     </Box>
   )
 }
 
-export default Sidebar
+export default Layout

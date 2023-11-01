@@ -1,5 +1,4 @@
 import { extendTheme, ThemeConfig } from "@chakra-ui/react";
-import type {} from '@mui/x-data-grid/themeAugmentation';
 
 const config: ThemeConfig = {
   initialColorMode: 'light'
