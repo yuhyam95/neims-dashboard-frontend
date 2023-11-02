@@ -76,11 +76,11 @@ const MyTable = () => {
           </Stack>
         </HStack>
         <HStack width="45%" ml={4}>
-          <Text color="#FFA523">
+          <Text color="#FFA523" as='b'>
             FOOD ITEMS
           </Text>
         <Box borderWidth="0.5px" borderRadius="10px" width="25%" bg="#FAFAFA" display="flex"  justifyContent="center" alignItems="center">
-        <Text color="#FFA523">
+        <Text color="#FFA523" as='b'>
           45,345
         </Text>
         </Box>
