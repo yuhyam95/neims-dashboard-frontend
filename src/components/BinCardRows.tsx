@@ -16,7 +16,7 @@ import {
   }
     
   
-  function TableRows(props: Props) {
+  function BinCardRows(props: Props) {
     const { date, number, movement, quantity, balance, signature } = props;
     
     return (
@@ -27,11 +27,9 @@ import {
             </Text>
         </Td>
         <Td>
-          <Box borderWidth="0.5px" borderRadius="10px" width="50%" display="flex" justifyContent="center" alignItems="center">
           <Text>
             {number}
           </Text>
-          </Box>
         </Td>
         <Td>
           <Text>
@@ -57,6 +55,6 @@ import {
     );
   }
   
-  export default TableRows;
+  export default BinCardRows;
   
   

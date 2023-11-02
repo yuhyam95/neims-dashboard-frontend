@@ -37,6 +37,7 @@ import data from '../constants/mockData'
 import Station from './Station'
 import StationGrid from '../components/StationGrid'
 import ProductCategory from './ProductCategory'
+import BinCardPage from './BinCardPage'
 
 interface LinkItemProps {
   name: string
@@ -218,7 +219,8 @@ const Layout = () => {
       <Box ml={{ base: 0, md: 60 }} p="4">
         {/* <Body /> */}
         {/* <StationGrid /> */}
-        <ProductCategory />
+        {/* <ProductCategory /> */}
+        <BinCardPage />
       </Box>
     </Box>
   )
