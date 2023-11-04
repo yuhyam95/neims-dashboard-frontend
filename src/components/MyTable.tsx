@@ -28,46 +28,8 @@ import { products } from '../constants/mockData';
 import TableRows from './TableRows';
 import { BiSearchAlt2, } from 'react-icons/bi';
 import {LiaDownloadSolid} from 'react-icons/lia'
-import { PDFDownloadLink, PDFViewer, Text as PdfText, Page, View, Document, StyleSheet } from '@react-pdf/renderer';
+import { PDFDownloadLink, Text as PdfText, Page, View, Document, StyleSheet } from '@react-pdf/renderer';
 import { CSVLink } from 'react-csv';
-
-
-const styles = StyleSheet.create({
-  page: {
-    flexDirection: 'row',
-    backgroundColor: 'white',
-  },
-  section: {
-    margin: 10,
-    padding: 10,
-    flexGrow: 1,
-  },
-  table: {
-    width: '100%',
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: '#000',
-  },
-  tableRow: {
-    flexDirection: 'row',
-    borderBottomWidth: 1,
-    borderBottomColor: '#000',
-  },
-  tableCell: {
-    flex: 1,
-    padding: 5,
-    textAlign: 'center',
-  },
-  tableHeader: {
-    backgroundColor: '#ccc',
-    fontWeight: 'bold',
-  },
-  text: {
-    fontSize: 12,
-    marginBottom: 5,
-  },
-});
-
 
 const itemsPerPage = 10;
 
@@ -257,8 +219,44 @@ const MyTable = () => {
 
 export default MyTable;
 
+const styles = StyleSheet.create({
+  page: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+  },
+  section: {
+    margin: 10,
+    padding: 10,
+    flexGrow: 1,
+  },
+  table: {
+    width: '100%',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#000',
+  },
+  tableRow: {
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderBottomColor: '#000',
+  },
+  tableCell: {
+    flex: 1,
+    padding: 5,
+    textAlign: 'center',
+  },
+  tableHeader: {
+    backgroundColor: '#ccc',
+    fontWeight: 'bold',
+  },
+  text: {
+    fontSize: 12,
+    marginBottom: 5,
+  },
+});
 
 const PDFDocument: React.FC<{ data: any[] }> = ({ data }) => (
+  
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.section}>
@@ -281,24 +279,22 @@ const PDFDocument: React.FC<{ data: any[] }> = ({ data }) => (
               <PdfText>Order Date</PdfText>
             </View>
           </View>
-
-          {/* Table Rows */}
-          {data.map((row, index) => (
+          {data.slice(1).map((row, index) => (
             <View key={index} style={styles.tableRow}>
               <View style={styles.tableCell}>
-                <PdfText>{row.name}</PdfText>
+                <PdfText>{row[0]}</PdfText>
               </View>
               <View style={styles.tableCell}>
-                <PdfText>{row.quantity}</PdfText>
+                <PdfText>{row[1]}</PdfText>
               </View>
               <View style={styles.tableCell}>
-                <PdfText>{row.station}</PdfText>
+                <PdfText>{row[2]}</PdfText>
               </View>
               <View style={styles.tableCell}>
-                <PdfText>{row.reason}</PdfText>
+                <PdfText>{row[3]}</PdfText>
               </View>
               <View style={styles.tableCell}>
-                <PdfText>{row.date}</PdfText>
+                <PdfText>{row[4]}</PdfText>
               </View>
             </View>
           ))}
