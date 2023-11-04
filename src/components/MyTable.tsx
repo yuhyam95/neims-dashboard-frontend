@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import {
   Table,
   Thead,
@@ -17,17 +17,66 @@ import {
   Stack,
   Text,
   Box,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverBody,
 } from '@chakra-ui/react';
 import { products } from '../constants/mockData';
 import TableRows from './TableRows';
 import { BiSearchAlt2, } from 'react-icons/bi';
 import {LiaDownloadSolid} from 'react-icons/lia'
+import { PDFDownloadLink, PDFViewer, Text as PdfText, Page, View, Document, StyleSheet } from '@react-pdf/renderer';
+import { CSVLink } from 'react-csv';
+
+
+const styles = StyleSheet.create({
+  page: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+  },
+  section: {
+    margin: 10,
+    padding: 10,
+    flexGrow: 1,
+  },
+  table: {
+    width: '100%',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#000',
+  },
+  tableRow: {
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderBottomColor: '#000',
+  },
+  tableCell: {
+    flex: 1,
+    padding: 5,
+    textAlign: 'center',
+  },
+  tableHeader: {
+    backgroundColor: '#ccc',
+    fontWeight: 'bold',
+  },
+  text: {
+    fontSize: 12,
+    marginBottom: 5,
+  },
+});
+
 
 const itemsPerPage = 10;
 
 const MyTable = () => {
   const [searchText, setSearchText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [pdfData, setPdfData] = useState<string[][]>([]);
+  const [csvData, setCsvData] = useState<string[][]>([]);
+
 
   const handleSearchTextChange = (event: any) => {
     setSearchText(event.target.value);
@@ -51,6 +100,47 @@ const MyTable = () => {
 
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
 
+  // const generatePDF = useCallback(() => {
+  //   const pdfContent: any[] = [];
+  //   pdfContent.push(['Name', 'Quantity', 'Station', 'Reason', 'Order Date']); // CSV header
+  //   currentProducts.forEach((product) => {
+  //     pdfContent.push([product.name, product.quantity, product.station, product.reason, product.date]);
+  //   });
+  //   setPdfData(pdfContent);
+  // }, [currentProducts]);
+
+  const generatePDF = () => {
+    const pdfContent: any[][] = [];
+    pdfContent.push(['Name', 'Quantity', 'Station', 'Reason', 'Order Date']);
+    currentProducts.forEach((product) => {
+      pdfContent.push([product.name, product.quantity, product.station, product.reason, product.date]);
+    });
+    setPdfData(pdfContent);
+  };
+  
+
+  const generateCSV = useCallback(() => {
+    const csvContent: any[] = [];
+    currentProducts.forEach((product) => {
+      csvContent.push({
+        Name: product.name,
+        Quantity: product.quantity,
+        Station: product.station,
+        Reason: product.reason,
+        'Order Date': product.date,
+      });
+    });
+    setCsvData(csvContent);
+  }, [currentProducts]);
+
+  const downloadPDF = () => {
+    generatePDF();
+  };
+
+  const downloadCSV = () => {
+    generateCSV();
+  };
+
   return (
     <div style={{ width: '90%', backgroundColor: 'white', borderRadius: '10px'}}>
       <Stack mb={4}>
@@ -67,12 +157,40 @@ const MyTable = () => {
             width='50%' />
         </InputGroup>
           <Stack direction='row' spacing={4} mr={4}>
-            <Button leftIcon={<LiaDownloadSolid />} colorScheme='teal' variant='solid' size='sm'>
+          <Popover isLazy>
+            <PopoverTrigger>
+            <Button leftIcon={<LiaDownloadSolid />} colorScheme='teal' variant='solid' size='sm' onClick={downloadCSV}>
               CSV
             </Button>
-            <Button leftIcon={<LiaDownloadSolid />} colorScheme='teal' variant='outline' size='sm'>
+            </PopoverTrigger>
+            <PopoverContent>
+              <PopoverArrow />
+              <PopoverCloseButton />
+              <PopoverBody>
+              {csvData.length > 0 && (
+              <CSVLink data={csvData} filename="table.csv">
+                Download CSV
+              </CSVLink>
+                )}
+              </PopoverBody>
+            </PopoverContent>
+          </Popover>
+          <Popover isLazy>
+            <PopoverTrigger>
+            <Button leftIcon={<LiaDownloadSolid />} colorScheme='teal' variant='outline' size='sm' onClick={downloadPDF}>
               PDF
             </Button>
+            </PopoverTrigger>
+            <PopoverContent>
+              <PopoverArrow />
+              <PopoverCloseButton />
+              <PopoverBody>
+              <PDFDownloadLink document={<PDFDocument data={pdfData} />} fileName="table.pdf">
+                {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download PDF')}
+              </PDFDownloadLink>
+              </PopoverBody>
+            </PopoverContent>
+          </Popover>
           </Stack>
         </HStack>
         <HStack width="45%" ml={4}>
@@ -139,4 +257,54 @@ const MyTable = () => {
 
 export default MyTable;
 
+
+const PDFDocument: React.FC<{ data: any[] }> = ({ data }) => (
+  <Document>
+    <Page size="A4" style={styles.page}>
+      <View style={styles.section}>
+        <View style={styles.table}>
+          {/* Table Header */}
+          <View style={styles.tableRow}>
+            <View style={[styles.tableCell, styles.tableHeader]}>
+              <PdfText>Name</PdfText>
+            </View>
+            <View style={[styles.tableCell, styles.tableHeader]}>
+              <PdfText>Quantity</PdfText>
+            </View>
+            <View style={[styles.tableCell, styles.tableHeader]}>
+              <PdfText>Station</PdfText>
+            </View>
+            <View style={[styles.tableCell, styles.tableHeader]}>
+              <PdfText>Reason</PdfText>
+            </View>
+            <View style={[styles.tableCell, styles.tableHeader]}>
+              <PdfText>Order Date</PdfText>
+            </View>
+          </View>
+
+          {/* Table Rows */}
+          {data.map((row, index) => (
+            <View key={index} style={styles.tableRow}>
+              <View style={styles.tableCell}>
+                <PdfText>{row.name}</PdfText>
+              </View>
+              <View style={styles.tableCell}>
+                <PdfText>{row.quantity}</PdfText>
+              </View>
+              <View style={styles.tableCell}>
+                <PdfText>{row.station}</PdfText>
+              </View>
+              <View style={styles.tableCell}>
+                <PdfText>{row.reason}</PdfText>
+              </View>
+              <View style={styles.tableCell}>
+                <PdfText>{row.date}</PdfText>
+              </View>
+            </View>
+          ))}
+        </View>
+      </View>
+    </Page>
+  </Document>
+);
 
