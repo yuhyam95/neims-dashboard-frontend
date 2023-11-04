@@ -33,11 +33,9 @@ import {
   FiChevronDown,
 } from 'react-icons/fi'
 import { IconType } from 'react-icons'
-import data from '../constants/mockData'
-import Station from './Station'
-import StationGrid from '../components/StationGrid'
 import ProductCategory from './ProductCategory'
 import BinCardPage from './BinCardPage'
+import Dashboard from './Dashboard'
 
 interface LinkItemProps {
   name: string
@@ -217,9 +215,9 @@ const Layout = () => {
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
-        {/* <Body /> */}
+        <Dashboard />
         {/* <StationGrid /> */}
-        <ProductCategory />
+        {/* <ProductCategory /> */}
         {/* <BinCardPage /> */}
       </Box>
     </Box>

@@ -11,7 +11,7 @@ const ProductsGrid = () => {
   return (
       <Flex flex="1" padding="10px" justify="space-around" direction={isLargerThan768 ? "row" : "column"}>
          <Box flex={isLargerThan768 ? 2 : 1} mr={isLargerThan768 ? 4 : 0}>
-          <MyTable />
+          <MyTable showHeader={false} items={5}/>
         </Box> 
 
         <Flex direction="column"

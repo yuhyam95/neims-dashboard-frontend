@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import {
   Table,
   Thead,
@@ -17,16 +17,28 @@ import {
   Stack,
   Text,
   Box,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverBody,
 } from '@chakra-ui/react';
 import { bincard } from '../constants/mockData';
 import BinCardRows from './BinCardRows'
 import { BiSearchAlt2, } from 'react-icons/bi';
 import {LiaDownloadSolid} from 'react-icons/lia'
+import { PDFDownloadLink, Text as PdfText, Page, View, Document, StyleSheet } from '@react-pdf/renderer';
+import { CSVLink } from 'react-csv';
+
+
 const itemsPerPage = 10;
 
 const BinCard = () => {
   const [searchText, setSearchText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [pdfData, setPdfData] = useState<string[][]>([]);
+  const [csvData, setCsvData] = useState<string[][]>([]);
 
   const handleSearchTextChange = (event: any) => {
     setSearchText(event.target.value);
@@ -50,9 +62,43 @@ const BinCard = () => {
 
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
 
+
+  const generatePDF = () => {
+    const pdfContent: any[][] = [];
+
+    currentProducts.forEach((product) => {
+      pdfContent.push([product.date,  product.number, product.movement, product.quantity, product.balance, product.signature]);
+    });
+    setPdfData(pdfContent);
+  };
+  
+  const generateCSV = useCallback(() => {
+    const csvContent: any[] = [];
+    currentProducts.forEach((product) => {
+      csvContent.push({
+        Date: product.date, 
+        Movement: product.movement,
+        'SIV/SRV #': product.number, 
+        Quantity: product.quantity, 
+        Balance: product.balance, 
+        Signature: product.signature
+      });
+    });
+    setCsvData(csvContent);
+  }, [currentProducts]);
+
+  const downloadPDF = () => {
+    generatePDF();
+  };
+
+  const downloadCSV = () => {
+    generateCSV();
+  };
+
+
   return (
     <div style={{ width: '90%', backgroundColor: 'white', borderRadius: '10px'}}>
-      <Stack mb={4}>
+    {  <Stack mb={4}>
       <HStack mb={4} mt={4} >
           <InputGroup ml={4}>
           <InputLeftElement pointerEvents='none'>
@@ -66,12 +112,40 @@ const BinCard = () => {
             width='50%' />
         </InputGroup>
           <Stack direction='row' spacing={4} mr={4}>
-            <Button leftIcon={<LiaDownloadSolid />} colorScheme='teal' variant='solid' size='sm'>
+          <Popover isLazy>
+            <PopoverTrigger>
+            <Button leftIcon={<LiaDownloadSolid />} colorScheme='teal' variant='solid' size='sm' onClick={downloadCSV}>
               CSV
             </Button>
-            <Button leftIcon={<LiaDownloadSolid />} colorScheme='teal' variant='outline' size='sm'>
+            </PopoverTrigger>
+            <PopoverContent>
+              <PopoverArrow />
+              <PopoverCloseButton />
+              <PopoverBody>
+              {csvData.length > 0 && (
+              <CSVLink data={csvData} filename="bincard.csv">
+                Download CSV
+              </CSVLink>
+                )}
+              </PopoverBody>
+            </PopoverContent>
+          </Popover>
+          <Popover isLazy>
+            <PopoverTrigger>
+            <Button leftIcon={<LiaDownloadSolid />} colorScheme='teal' variant='outline' size='sm' onClick={downloadPDF}>
               PDF
             </Button>
+            </PopoverTrigger>
+            <PopoverContent>
+              <PopoverArrow />
+              <PopoverCloseButton />
+              <PopoverBody>
+              <PDFDownloadLink document={<PDFDocument data={pdfData} />} fileName="bincard.pdf">
+                {({loading }) => (loading ? 'Loading document...' : 'Download PDF')}
+              </PDFDownloadLink>
+              </PopoverBody>
+            </PopoverContent>
+          </Popover>
           </Stack>
         </HStack>
         <HStack width="45%" ml={4}>
@@ -84,7 +158,7 @@ const BinCard = () => {
         </Text>
         </Box>
         </HStack>
-        </Stack>
+        </Stack>}
     <TableContainer bg="#FAFAFA" borderRadius="10px">
       <Table size='lg'>
       <TableCaption>Product List</TableCaption>
@@ -103,8 +177,8 @@ const BinCard = () => {
                 <BinCardRows
                 key={index}
                 date={product.date}
-                movement={product.movement}
                 number={product.number}
+                movement={product.movement}
                 quantity={product.quantity}
                 balance={product.balance}
                 signature={product.signature}
@@ -137,6 +211,108 @@ const BinCard = () => {
     </div> 
   );
 };
+
+const styles = StyleSheet.create({
+  page: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+  },
+  section: {
+    margin: 10,
+    padding: 10,
+    flexGrow: 1,
+  },
+  table: {
+    width: '100%',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#000',
+  },
+  tableRow: {
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderBottomColor: '#000',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  tableCell: {
+    flex: 1,
+    padding: 5,
+    textAlign: 'center',
+  },
+  tableHeader: {
+    backgroundColor: '#ccc',
+    fontWeight: 'bold',
+  },
+  text: {
+    fontSize: 6,
+    marginBottom: 5,
+  },
+});
+
+const PDFDocument: React.FC<{ data: any[] }> = ({ data }) => (
+  
+  <Document>
+    <Page size="A3" style={styles.page}>
+      <View style={styles.section}>
+      <View style={{marginBottom: 5}}>
+        <PdfText>RICE 25KG BIN CARD</PdfText>
+        <PdfText>Station: Lagos Territorial Office</PdfText>
+        <PdfText>Generated on 4th November 2023 at 8:39pm</PdfText>
+      </View>
+        <View style={styles.table}>
+          {/* Table Header */}
+          <View style={styles.tableRow}>
+            <View style={[styles.tableCell, styles.tableHeader]}>
+              <PdfText>Date</PdfText>
+            </View>
+            <View style={[styles.tableCell, styles.tableHeader]}>
+              <PdfText>Number</PdfText>
+            </View>
+            <View style={[styles.tableCell, styles.tableHeader]}>
+              <PdfText>Movement</PdfText>
+            </View>
+            <View style={[styles.tableCell, styles.tableHeader]}>
+              <PdfText>Quantity</PdfText>
+            </View>
+            <View style={[styles.tableCell, styles.tableHeader]}>
+              <PdfText>Balance</PdfText>
+            </View>
+            <View style={[styles.tableCell, styles.tableHeader]}>
+              <PdfText>Siganture</PdfText>
+            </View>
+          </View>
+
+          {data.map((row, index) => (
+            <View key={index} style={styles.tableRow}>
+              <View style={styles.tableCell}>
+                <PdfText>{row[0]}</PdfText>
+              </View>
+              <View style={styles.tableCell}>
+                <PdfText>{row[1]}</PdfText>
+              </View>
+              <View style={styles.tableCell}>
+                <PdfText>{row[2]}</PdfText>
+              </View>
+              <View style={styles.tableCell}>
+                <PdfText>{row[3]}</PdfText>
+              </View>
+              <View style={styles.tableCell}>
+                <PdfText>{row[4]}</PdfText>
+              </View>
+              <View style={styles.tableCell}>
+                <PdfText>{row[5]}</PdfText>
+              </View>
+              <View style={styles.tableCell}>
+                <PdfText style={{marginLeft: 10}}>{row[6]}</PdfText>
+              </View>
+            </View>
+          ))}
+        </View>
+      </View>
+    </Page>
+  </Document>
+);
 
 export default BinCard;
 

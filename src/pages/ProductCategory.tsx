@@ -12,7 +12,7 @@ const ProductCategory = () => {
         Store Invetory
     </Text>
     </Stack>
-    <MyTable />
+    <MyTable showHeader={true} items={10}/>
     </>
   )
 }

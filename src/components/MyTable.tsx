@@ -31,14 +31,18 @@ import {LiaDownloadSolid} from 'react-icons/lia'
 import { PDFDownloadLink, Text as PdfText, Page, View, Document, StyleSheet } from '@react-pdf/renderer';
 import { CSVLink } from 'react-csv';
 
-const itemsPerPage = 10;
+interface Props {
+  showHeader: boolean,
+  items: number
+}
 
-const MyTable = () => {
+const MyTable = ({showHeader, items}: Props) => {
   const [searchText, setSearchText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [pdfData, setPdfData] = useState<string[][]>([]);
   const [csvData, setCsvData] = useState<string[][]>([]);
-
+  
+  const itemsPerPage = items;
 
   const handleSearchTextChange = (event: any) => {
     setSearchText(event.target.value);
@@ -61,15 +65,6 @@ const MyTable = () => {
   );
 
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
-
-  // const generatePDF = useCallback(() => {
-  //   const pdfContent: any[] = [];
-  //   pdfContent.push(['Name', 'Quantity', 'Station', 'Reason', 'Order Date']); // CSV header
-  //   currentProducts.forEach((product) => {
-  //     pdfContent.push([product.name, product.quantity, product.station, product.reason, product.date]);
-  //   });
-  //   setPdfData(pdfContent);
-  // }, [currentProducts]);
 
   const generatePDF = () => {
     const pdfContent: any[][] = [];
@@ -105,7 +100,8 @@ const MyTable = () => {
 
   return (
     <div style={{ width: '90%', backgroundColor: 'white', borderRadius: '10px'}}>
-      <Stack mb={4}>
+     {showHeader && 
+     <Stack mb={4}>
       <HStack mb={4} mt={4} >
           <InputGroup ml={4}>
           <InputLeftElement pointerEvents='none'>
@@ -165,8 +161,9 @@ const MyTable = () => {
         </Text>
         </Box>
         </HStack>
-        </Stack>
-    <TableContainer bg="#FAFAFA" borderRadius="10px">
+        </Stack>}   
+        
+        <TableContainer bg="#FAFAFA" borderRadius="10px">
       <Table size='lg'>
       <TableCaption>Product List</TableCaption>
         <Thead>
