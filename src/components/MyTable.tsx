@@ -33,10 +33,11 @@ import { CSVLink } from 'react-csv';
 
 interface Props {
   showHeader: boolean,
-  items: number
+  items: number, 
+  width: string
 }
 
-const MyTable = ({showHeader, items}: Props) => {
+const MyTable = ({showHeader, items, width}: Props) => {
   const [searchText, setSearchText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [pdfData, setPdfData] = useState<string[][]>([]);
@@ -99,7 +100,7 @@ const MyTable = ({showHeader, items}: Props) => {
   };
 
   return (
-    <div style={{ width: '90%', backgroundColor: 'white', borderRadius: '10px'}}>
+    <div style={{ width: width, backgroundColor: 'white', borderRadius: '10px'}}>
      {showHeader && 
      <Stack mb={4}>
       <HStack mb={4} mt={4} >
