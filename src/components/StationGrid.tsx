@@ -1,10 +1,6 @@
 
 import { SimpleGrid } from '@chakra-ui/react';
-
-import useStation, { Station } from '../hooks/useStation';
 import StationCard from './StationCard';
-import StationTabs from './StationTabs';
-import { useState } from 'react';
 
 
 interface Props{

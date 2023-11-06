@@ -4,7 +4,7 @@ import { Flex } from '@chakra-ui/react';
 import UserGrid from '../components/UserGrid';
 import ProductsGrid from '../components/ProductsGrid';
 
-function Body() {
+function Station() {
   return (
     <div>
       <Flex> 
@@ -17,4 +17,4 @@ function Body() {
   );
 }
 
-export default Body;
+export default Station;

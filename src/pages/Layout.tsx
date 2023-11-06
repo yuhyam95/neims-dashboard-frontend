@@ -36,6 +36,7 @@ import { IconType } from 'react-icons'
 import ProductCategory from './ProductCategory'
 import BinCardPage from './BinCardPage'
 import Dashboard from './Dashboard'
+import Station from './Station'
 
 interface LinkItemProps {
   name: string
@@ -219,6 +220,7 @@ const Layout = () => {
         {/* <StationGrid /> */}
         {/* <ProductCategory /> */}
         {/* <BinCardPage /> */}
+        {/* <Station /> */}
       </Box>
     </Box>
   )

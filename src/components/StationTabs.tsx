@@ -32,6 +32,7 @@
 
 import { Tab, TabList, Tabs } from '@chakra-ui/react';
 
+
 const StationTabs = ({ selectedTab, setSelectedTab }) => {
   return (
     <Tabs variant='unstyled' align="center" bg="white" borderRadius="10px" width="50%" defaultIndex={0}>
