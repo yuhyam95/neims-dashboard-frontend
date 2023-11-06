@@ -1,10 +1,10 @@
-import React from 'react';
-import { Card, CardBody, List, ListItem, ListIcon, HStack, Text, Stack, Stat, StatNumber, StatHelpText, StatArrow, } from '@chakra-ui/react';
+import { Card, CardBody, List, ListItem, ListIcon, HStack, Text, Stack, Stat, StatNumber, StatHelpText, StatArrow, Button, } from '@chakra-ui/react';
 import { MdCheckCircle } from 'react-icons/md';
 import PieChart from './PieChart';
-
+import { Link, useNavigate } from 'react-router-dom';
 
 interface StateCardProps {
+  stationId: string,
   stateName: string;
   category: Category[];
   change: string;
@@ -18,9 +18,15 @@ interface Category {
   total: number;
 }
 
-const StationCard = ({ stateName, change, total, category }: StateCardProps) => {
+const StationCard = ({ stationId, stateName, change, total, category }: StateCardProps) => {
 
-    
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/station');
+  };
+
+  
   return (
       <Card marginTop="10px">
         <CardBody>
@@ -28,7 +34,6 @@ const StationCard = ({ stateName, change, total, category }: StateCardProps) => 
         <Stack justifyContent="space-around">
           <Text fontSize="md" color="gray">{stateName}</Text>
           <HStack justifyContent='space-around'>
-  
           <Stat>
           <HStack>  
           <StatArrow type={change == 'increase' ? 'increase' : 'decrease'} boxSize={10} />
@@ -49,10 +54,13 @@ const StationCard = ({ stateName, change, total, category }: StateCardProps) => 
                 {categoryItem.name}
               </ListItem>
             ))}
-          </List>
+          </List>  
           </Stack>
           <Stack>
           <PieChart categoryData={category} />
+          <Button variant="link" colorScheme='blue' alignSelf='flex-end' onClick={handleClick}>
+            Details
+          </Button>
           </Stack> 
           
           </HStack>

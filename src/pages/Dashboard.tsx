@@ -29,7 +29,7 @@ function Dashboard() {
       <StationTabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
       <StationGrid data={filteredStateData}/>
       <Flex> 
-      {/* <LineChartGrid data={data} /> */}
+      {/* <LineChartGrid data={filteredStateData} /> */}
       </Flex>
       <Flex>
       <ProductsGrid />

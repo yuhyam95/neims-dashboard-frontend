@@ -37,6 +37,7 @@ import ProductCategory from './ProductCategory'
 import BinCardPage from './BinCardPage'
 import Dashboard from './Dashboard'
 import Station from './Station'
+import { Route, Routes } from 'react-router-dom';
 
 interface LinkItemProps {
   name: string
@@ -216,11 +217,13 @@ const Layout = () => {
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
-        <Dashboard />
-        {/* <StationGrid /> */}
-        {/* <ProductCategory /> */}
-        {/* <BinCardPage /> */}
-        {/* <Station /> */}
+        <Routes>
+        <Route path="/"  element={<Dashboard /> } />
+        <Route path="/station" element={<Station />} />
+        <Route path="/productcategory" element={<ProductCategory />} />
+        <Route path="/bincardpage" element={<BinCardPage />} />
+        <Route path="/station" element={<Station />} />
+        </Routes>
       </Box>
     </Box>
   )
