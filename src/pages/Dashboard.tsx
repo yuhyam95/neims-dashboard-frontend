@@ -11,7 +11,7 @@ import useStations from '../hooks/useStation';
 
 function Dashboard() {
   const [selectedTab, setSelectedTab] = useState('Territorial');
-  const { stations, error, isLoading, setStations, setError } = useStations();
+  const { stations } = useStations();
 
   const filteredStateData = stations.filter((station: any) => {
     if (selectedTab === 'Territorial') {
@@ -34,7 +34,7 @@ function Dashboard() {
       <Flex>
       <ProductsGrid />
       </Flex>
-    </div>
+    </div> 
   );
 }
 

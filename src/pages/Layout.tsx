@@ -36,7 +36,7 @@ import { IconType } from 'react-icons'
 import ProductCategory from './ProductCategory'
 import BinCardPage from './BinCardPage'
 import Dashboard from './Dashboard'
-import Station from './Station'
+import StationPage from './StationPage'
 import { Route, Routes } from 'react-router-dom';
 
 interface LinkItemProps {
@@ -219,10 +219,9 @@ const Layout = () => {
       <Box ml={{ base: 0, md: 60 }} p="4">
         <Routes>
         <Route path="/"  element={<Dashboard /> } />
-        <Route path="/station" element={<Station />} />
+        <Route path="/station" element={<StationPage />} />
         <Route path="/productcategory" element={<ProductCategory />} />
         <Route path="/bincardpage" element={<BinCardPage />} />
-        <Route path="/station" element={<Station />} />
         </Routes>
       </Box>
     </Box>

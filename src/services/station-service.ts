@@ -5,15 +5,15 @@ export interface Station {
     name: string;
     type: string;
     total: number;
-    category: Category[];
+    category: CategoryItem[];
     change: string;
     productList: ProductList[];
     beneficiaries: Beneficiaries[];
     areaofcoverage: string[]
   }
   
-  interface Category{
-    id: number;
+  interface CategoryItem{
+    id: string;
     name: string,
     total: number,
     color: string

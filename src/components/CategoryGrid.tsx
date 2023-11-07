@@ -1,19 +1,27 @@
 import { SimpleGrid } from "@chakra-ui/react"
 import CategoryCard from "./CategoryCard";
 
+interface Props{
+  data: CategoryItem[]
+}
 
-const CategoryGrid = () => {
+interface CategoryItem {
+  id: string,
+  name: string,
+  total: number,
+  color: string
+}
+
+const CategoryGrid = ({data}: Props) => {
   return (
-    
     <SimpleGrid columns={{ base: 1, md: 2, lg: 5 }} padding="10px" spacing={8} >
-        <CategoryCard name="Food Items" total={345000} color="#FFA523"/>
-        <CategoryCard name=" Non Food Items" total={520000} color="#FE3169"/>
-        <CategoryCard name="Agro-Chemical" total={97678} color="#9F48A6"/>
-        <CategoryCard name="Building Materials" total={10000} color="#049FCB"/>
-        <CategoryCard name="Livelihood " total={25200} color="#00B5B0"/>
+      {data?.map((category) => (
+        <CategoryCard name={category.name} total={category.total} color={category.color}/>
+      ))}
+        
     </SimpleGrid>
     
   )
 }
 
-export default CategoryGrid
+export default CategoryGrid 

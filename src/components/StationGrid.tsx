@@ -16,7 +16,7 @@ const StationGrid = ({data}: Props) => {
         <StationCard key={station._id} stateName={station.name} change={station.change}
                      total={station.total} category={station.category} stationId={station._id}/>
       ))}
-    </SimpleGrid>
+    </SimpleGrid> 
   </>
   );
 

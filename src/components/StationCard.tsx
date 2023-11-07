@@ -1,7 +1,7 @@
 import { Card, CardBody, List, ListItem, ListIcon, HStack, Text, Stack, Stat, StatNumber, StatHelpText, StatArrow, Button, } from '@chakra-ui/react';
 import { MdCheckCircle } from 'react-icons/md';
 import PieChart from './PieChart';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface StateCardProps {
   stationId: string,
@@ -24,7 +24,6 @@ const StationCard = ({ stationId, stateName, change, total, category }: StateCar
   const handleClick = () => {
     navigate('/station', {state: {stationId}});
   };
-  console.log(stationId)
   
   return (
       <Card marginTop="10px">

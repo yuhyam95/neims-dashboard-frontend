@@ -1,5 +1,3 @@
-
-
 import { Flex } from '@chakra-ui/react';
 import UserGrid from '../components/UserGrid';
 import ProductsGrid from '../components/ProductsGrid';
@@ -9,7 +7,7 @@ import stationService, { Station } from '../services/station-service';
 
 
 
-function Station() {
+function StationPage() {
 
 const location = useLocation()
 const stationId = location.state.stationId
@@ -19,7 +17,7 @@ useEffect(() => {
   const getById = (stationId: any) => {
     stationService.getById(stationId)
       .then((response) => {
-        setSelectedStation(response)
+        setSelectedStation(response.data)
       })
       .catch((error) => {
         console.error("Error getting station:", error);
@@ -27,7 +25,7 @@ useEffect(() => {
     }
     getById(stationId);
 
-}, [])
+},[])
 
   return (
     <div>
@@ -41,4 +39,4 @@ useEffect(() => {
   );
 }
 
-export default Station;
+export default StationPage;
