@@ -5,21 +5,21 @@ import LineChartGrid from '../components/LineChartGrid';
 import ProductsGrid from '../components/ProductsGrid';
 import StationTabs from '../components/StationTabs';
 import { useState } from 'react';
-import useStation, { Station } from '../hooks/useStation';
+import useStations from '../hooks/useStation';
 
 
 
 function Dashboard() {
   const [selectedTab, setSelectedTab] = useState('Territorial');
-  const {data} = useStation();
+  const { stations, error, isLoading, setStations, setError } = useStations();
 
-  const filteredStateData = data?.filter((state) => {
+  const filteredStateData = stations.filter((station: any) => {
     if (selectedTab === 'Territorial') {
-      return state.type === 'Territorial Office';
+      return station.type === 'Territorial Office';
     } else if (selectedTab === 'Zonal') {
-      return state.type === 'Zonal Office';
+      return station.type === 'Zonal Office';
     } else if (selectedTab === 'Operational Office') {
-      return state.type === 'Operational';
+      return station.type === 'Operational';
     }
     return true; 
   });

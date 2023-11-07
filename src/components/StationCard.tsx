@@ -21,11 +21,10 @@ interface Category {
 const StationCard = ({ stationId, stateName, change, total, category }: StateCardProps) => {
 
   const navigate = useNavigate();
-
   const handleClick = () => {
-    navigate('/station');
+    navigate('/station', {state: {stationId}});
   };
-
+  console.log(stationId)
   
   return (
       <Card marginTop="10px">
@@ -46,7 +45,7 @@ const StationCard = ({ stationId, stateName, change, total, category }: StateCar
           </HStack> 
           <List>
             {category.map((categoryItem) => (
-              <ListItem key={categoryItem.id} fontSize="xx-small" color="gray">
+              <ListItem key={categoryItem.id} fontSize="x-small" color="gray">
                 <ListIcon
                   as={MdCheckCircle}
                   color={categoryItem.color}
