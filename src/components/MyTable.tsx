@@ -35,9 +35,19 @@ interface Props {
   showHeader: boolean,
   items: number, 
   width: string
+  productData: ProductItem[]
 }
 
-const MyTable = ({showHeader, items, width}: Props) => {
+interface ProductItem {
+  _id: string,
+  name: string,
+  quantity: number,
+  tag: string,
+  station: string,
+  date: string
+}
+
+const MyTable = ({showHeader, items, width, productData}: Props) => {
   const [searchText, setSearchText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [pdfData, setPdfData] = useState<string[][]>([]);
@@ -51,8 +61,8 @@ const MyTable = ({showHeader, items, width}: Props) => {
   };
 
   const filteredProducts = searchText === ''
-    ? products
-    : products.filter((product) => {
+    ? productData
+    : productData?.filter((product) => {
         return Object.values(product).some((value) =>
           String(value).toLowerCase().includes(searchText.toLowerCase())
         );
@@ -60,18 +70,18 @@ const MyTable = ({showHeader, items, width}: Props) => {
 
   const indexOfLastProduct = currentPage * itemsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
-  const currentProducts = filteredProducts.slice(
+  const currentProducts = filteredProducts?.slice(
     indexOfFirstProduct,
     indexOfLastProduct
   );
 
-  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredProducts?.length / itemsPerPage);
 
   const generatePDF = () => {
     const pdfContent: any[][] = [];
     pdfContent.push(['Name', 'Quantity', 'Station', 'Reason', 'Order Date']);
-    currentProducts.forEach((product) => {
-      pdfContent.push([product.name, product.quantity, product.station, product.reason, product.date]);
+    currentProducts?.forEach((product) => {
+      pdfContent.push([product.name, product.quantity, product.station, product.tag, product.date]);
     });
     setPdfData(pdfContent);
   };
@@ -79,12 +89,12 @@ const MyTable = ({showHeader, items, width}: Props) => {
 
   const generateCSV = useCallback(() => {
     const csvContent: any[] = [];
-    currentProducts.forEach((product) => {
+    currentProducts?.forEach((product) => {
       csvContent.push({
         Name: product.name,
         Quantity: product.quantity,
         Station: product.station,
-        Reason: product.reason,
+        Reason: product.tag,
         'Order Date': product.date,
       });
     });
@@ -177,12 +187,12 @@ const MyTable = ({showHeader, items, width}: Props) => {
           </Tr>
         </Thead>
             <Tbody>
-              {currentProducts.map((product, index) => (
+              {currentProducts?.map((product, index) => (
                 <TableRows
                 key={index}
                 name={product.name}
                 station={product.station}
-                reason={product.reason}
+                reason={product.tag}
                 quantity={product.quantity}
                 date={product.date}
               />
@@ -277,7 +287,7 @@ const PDFDocument: React.FC<{ data: any[] }> = ({ data }) => (
               <PdfText>Order Date</PdfText>
             </View>
           </View>
-          {data.slice(1).map((row, index) => (
+          {data?.slice(1).map((row, index) => (
             <View key={index} style={styles.tableRow}>
               <View style={styles.tableCell}>
                 <PdfText>{row[0]}</PdfText>

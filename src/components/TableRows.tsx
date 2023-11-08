@@ -9,7 +9,7 @@ import {
 interface Props {
   name: string;
   quantity: number;
-  reason: boolean;
+  reason: string;
   station: string;
   date: string;
 }
@@ -33,9 +33,9 @@ function TableRows(props: Props) {
         </Box>
       </Td>
       <Td>
-      <Box borderWidth="0.5px" borderRadius="10px" width="80%" bg={reason == true ? '#BAF2E0' : '#FBD8D8' } display="flex" justifyContent="center" alignItems="center">
-        <Text color={reason === true ? '#2FD197' : '#EB4547' }>
-          {reason === true ? "RESTOCK" : "DISTRIBUTION"}
+      <Box borderWidth="0.5px" borderRadius="10px" width="80%" bg={reason == 'restock' ? '#BAF2E0' : '#FBD8D8' } display="flex" justifyContent="center" alignItems="center">
+        <Text color={reason === 'restock' ? '#2FD197' : '#EB4547' }>
+          {reason === 'restock' ? "RESTOCK" : "DISTRIBUTION"}
         </Text>
         </Box>
       </Td>

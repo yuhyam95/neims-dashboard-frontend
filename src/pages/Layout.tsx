@@ -171,7 +171,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                   alignItems="flex-start"
                   spacing="1px"
                   ml="2">
-                  <Text fontSize="sm">Justina Clark</Text>
+                  <Text fontSize="sm">Yusuf Habu</Text>
                   <Text fontSize="xs" color="gray.600">
                     Admin
                   </Text>

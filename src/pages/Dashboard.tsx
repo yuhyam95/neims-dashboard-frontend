@@ -11,14 +11,21 @@ import useStations from '../hooks/useStation';
 
 function Dashboard() {
   const [selectedTab, setSelectedTab] = useState('Territorial');
-  const { stations } = useStations();
+  const [queryParams, setQueryParams] = useState({});
+  const { stations } = useStations(queryParams);
+  
+  const handleQueryParamChange = (newParams: any) => {
+    setQueryParams(newParams);
+  }
+  console.log(stations)
+    
 
   const filteredStateData = stations.filter((station: any) => {
     if (selectedTab === 'Territorial') {
-      return station.type === 'Territorial Office';
+      return station.type === 'Territorial';
     } else if (selectedTab === 'Zonal') {
-      return station.type === 'Zonal Office';
-    } else if (selectedTab === 'Operational Office') {
+      return station.type === 'Zonal';
+    } else if (selectedTab === 'Operational') {
       return station.type === 'Operational';
     }
     return true; 
@@ -27,12 +34,12 @@ function Dashboard() {
   return (
     <div>
       <StationTabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
-      <StationGrid data={filteredStateData}/>
+      <StationGrid data={filteredStateData} selectedTab={selectedTab} />
       <Flex> 
       {/* <LineChartGrid data={filteredStateData} /> */}
       </Flex>
       <Flex>
-      <ProductsGrid />
+      <ProductsGrid productData={filteredStateData}/>
       </Flex>
     </div> 
   );

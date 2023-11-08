@@ -4,14 +4,20 @@ import MyTable from './MyTable';
 import MonthlyBeneficiariesChart from './MonthlyBeneficiariesChart';
 import data from '../constants/mockData';
 
-const ProductsGrid = () => {
+
+
+interface Props {
+  productData: any[]
+}
+
+const ProductsGrid = ({productData}: Props) => {
     const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
 
 
   return (
       <Flex flex="1" padding="10px" justify="space-around" direction={isLargerThan768 ? "row" : "column"}>
          <Box flex={isLargerThan768 ? 2 : 1} mr={isLargerThan768 ? 4 : 0}>
-          <MyTable showHeader={false} items={5} width="100%"/>
+          <MyTable showHeader={false} items={5} width="100%" productData={productData}/>
         </Box> 
 
         <Flex direction="column"

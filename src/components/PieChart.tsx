@@ -51,7 +51,7 @@ interface PieChartProps {
 }
 
 interface CategoryItem {
-  id: number;
+  _id: string;
   name: string;
   color: string;
   total: number;

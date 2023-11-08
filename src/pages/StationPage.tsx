@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, Heading } from '@chakra-ui/react';
 import UserGrid from '../components/UserGrid';
 import ProductsGrid from '../components/ProductsGrid';
 import { useLocation } from 'react-router-dom';
@@ -11,6 +11,7 @@ function StationPage() {
 
 const location = useLocation()
 const stationId = location.state.stationId
+const stateName = location.state.stateName
 const [selectedStation, setSelectedStation] = useState<Station | any>(null)
 
 useEffect(() => {
@@ -18,6 +19,7 @@ useEffect(() => {
     stationService.getById(stationId)
       .then((response) => {
         setSelectedStation(response.data)
+        console.log(response.data)
       })
       .catch((error) => {
         console.error("Error getting station:", error);
@@ -29,11 +31,14 @@ useEffect(() => {
 
   return (
     <div>
+    <Heading>
+        {stateName} Territorial Office
+    </Heading>
       <Flex> 
       <UserGrid data={selectedStation} />
       </Flex>
       <Flex>
-      <ProductsGrid />
+      <ProductsGrid productData={selectedStation?.product}/>
       </Flex>
     </div>
   );
