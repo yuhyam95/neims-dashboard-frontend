@@ -12,12 +12,15 @@ interface Props {
   reason: string;
   station: string;
   date: string;
+  category: string,
   showStation: boolean
+  showCategory: boolean
+  
 }
   
 
 function TableRows(props: Props) {
-  const {  name, quantity, reason, station, date, showStation } = props;
+  const {  name, quantity, reason, station, date, category, showStation, showCategory } = props;
   
   return (
     <Tr>
@@ -43,6 +46,10 @@ function TableRows(props: Props) {
       {showStation &&
       <Td>
        {station}
+      </Td>}
+      {showCategory &&
+      <Td>
+       {category}
       </Td>}
       <Td>
         {date}

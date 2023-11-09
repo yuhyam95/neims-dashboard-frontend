@@ -31,6 +31,9 @@ import {
   FiMenu,
   FiBell,
   FiChevronDown,
+  FiUser,
+  FiUsers,
+  FiFile,
 } from 'react-icons/fi'
 import { IconType } from 'react-icons'
 import ProductCategory from './ProductCategory'
@@ -59,9 +62,9 @@ interface SidebarProps extends BoxProps {
 
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', icon: FiHome },
-  { name: 'Territorial Offices', icon: FiTrendingUp },
-  { name: 'Zonal Offices', icon: FiCompass },
-  { name: 'Operational Offices', icon: FiStar },
+  { name: 'Reports', icon: FiFile},
+  { name: 'Beneficiaries', icon: FiUsers },
+  { name: 'User Management', icon: FiUser },
   { name: 'Settings', icon: FiSettings },
 ]
 

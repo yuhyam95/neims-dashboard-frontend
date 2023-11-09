@@ -8,7 +8,8 @@ import data from '../constants/mockData';
 
 interface Props {
   productData: ProductItem[],
-  showStation: boolean
+  showStation: boolean,
+  showCategory: boolean
 }
 
 interface ProductItem {
@@ -19,6 +20,7 @@ interface ProductItem {
   station: StationItem,
   tag: string,
   createdAt: string
+  category: CategoryItem
 }
 
 interface StationItem {
@@ -26,19 +28,24 @@ interface StationItem {
   name: string
 }
 
-const ProductsGrid = ({productData, showStation}: Props) => {
+interface CategoryItem {
+  _id: string,
+  name: string
+}
+
+const ProductsGrid = ({productData, showStation, showCategory}: Props) => {
     const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
 
 
   return (
       <Flex flex="1" padding="10px" justify="space-around" direction={isLargerThan768 ? "row" : "column"}>
          <Box flex={isLargerThan768 ? 2 : 1} mr={isLargerThan768 ? 4 : 0}>
-          <MyTable showHeader={false} items={5} width="100%" productData={productData} showStation={showStation}/>
+          <MyTable showHeader={false} items={5} width="100%" productData={productData} showStation={showStation} showCategory={showCategory}/>
         </Box> 
 
         <Flex direction="column"
-              flex={isLargerThan768 ? 0.5 : 0.5} // Adjust the flex value for the desired size
-              ml={isLargerThan768 ? 1 : 0} // Adjust the left margin for spacing
+              flex={isLargerThan768 ? 0.5 : 0.5} 
+              ml={isLargerThan768 ? 1 : 0} 
               bg="white"
               borderRadius="10px"
               height={10}

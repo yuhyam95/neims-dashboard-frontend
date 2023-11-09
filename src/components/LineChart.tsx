@@ -2,6 +2,7 @@
 import { Card, Spinner } from '@chakra-ui/react';
 import React from 'react';
 import { Chart } from 'react-google-charts';
+import data from '../constants/mockData';
 
 interface StateData {
   id: number;
@@ -17,7 +18,7 @@ interface LineChartProps {
   data: StateData[];
 }
 
-const LineChart: React.FC<LineChartProps> = ({ data }) => {
+const LineChart: React.FC<LineChartProps> = () => {
   const chartData = [['Month', ...data.map((stateData) => stateData.state)]];
 
   // Create rows for each month with the total values

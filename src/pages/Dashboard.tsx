@@ -19,7 +19,6 @@ function Dashboard() {
   const handleQueryParamChange = (newParams: any) => {
     setQueryParams(newParams);
   }
-  console.log(products)
     
 
   const filteredStateData = stations.filter((station: any) => {
@@ -41,7 +40,7 @@ function Dashboard() {
       {/* <LineChartGrid data={filteredStateData} /> */}
       </Flex>
       <Flex>
-      <ProductsGrid productData={products} showStation={true}/>
+      <ProductsGrid productData={products} showStation={true} showCategory={true}/>
       </Flex>
     </div> 
   );

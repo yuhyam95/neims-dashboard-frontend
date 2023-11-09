@@ -24,7 +24,6 @@ import {
   PopoverCloseButton,
   PopoverBody,
 } from '@chakra-ui/react';
-import { products } from '../constants/mockData';
 import TableRows from './TableRows';
 import { BiSearchAlt2, } from 'react-icons/bi';
 import {LiaDownloadSolid} from 'react-icons/lia'
@@ -38,6 +37,7 @@ interface Props {
   width: string
   productData: ProductItem[],
   showStation: boolean
+  showCategory: boolean
 }
 
 interface ProductItem {
@@ -45,6 +45,7 @@ interface ProductItem {
   name: string,
   quantity: number,
   tag: string,
+  category: CategoryItem,
   station: StationItem,
   date: string
   createdAt: string
@@ -54,9 +55,13 @@ interface StationItem {
   _id: string,
   name: string
 }
+interface CategoryItem {
+  _id: string,
+  name: string
+}
 
 
-const MyTable = ({showHeader, items, width, productData, showStation}: Props) => {
+const MyTable = ({showHeader, items, width, productData, showStation, showCategory}: Props) => {
   const [searchText, setSearchText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [pdfData, setPdfData] = useState<string[][]>([]);
@@ -164,7 +169,7 @@ const MyTable = ({showHeader, items, width, productData, showStation}: Props) =>
               <PopoverCloseButton />
               <PopoverBody>
               <PDFDownloadLink document={<PDFDocument data={pdfData} />} fileName="table.pdf">
-                {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download PDF')}
+                {({ loading, }) => (loading ? 'Loading document...' : 'Download PDF')}
               </PDFDownloadLink>
               </PopoverBody>
             </PopoverContent>
@@ -192,16 +197,19 @@ const MyTable = ({showHeader, items, width, productData, showStation}: Props) =>
             <Th>Quantity</Th>
             <Th>Reason</Th>
             {showStation && <Th>Station</Th>} 
+            {showCategory && <Th>Category</Th>}
             <Th>Date</Th>
           </Tr>
         </Thead>
             <Tbody>
               {currentProducts?.map((product, index) => (
                 <TableRows
+                showCategory={showCategory}
                 showStation={showStation}
                 key={index}
                 name={product.name}
                 station={showStation ? product.station.name : "null"}
+                category={showCategory ? product?.category.name : "null"}
                 reason={product.tag}
                 quantity={product.quantity}
                 date={moment(product.createdAt).format("MMMM Do YYYY")}

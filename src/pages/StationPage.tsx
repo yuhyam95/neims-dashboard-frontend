@@ -38,7 +38,7 @@ useEffect(() => {
       <UserGrid data={selectedStation} />
       </Flex>
       <Flex>
-      <ProductsGrid productData={selectedStation?.product}/>
+      <ProductsGrid productData={selectedStation?.product} showStation={false} showCategory={false}/>
       </Flex>
     </div>
   );
