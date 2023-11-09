@@ -37,7 +37,10 @@ interface Props {
   width: string
   productData: ProductItem[],
   showStation: boolean
-  showCategory: boolean
+  showCategory: boolean,
+  categoryName?: string,
+  categoryTotal?: number,
+  categoryColor?: string
 }
 
 interface ProductItem {
@@ -61,7 +64,7 @@ interface CategoryItem {
 }
 
 
-const MyTable = ({showHeader, items, width, productData, showStation, showCategory}: Props) => {
+const MyTable = ({showHeader, items, width, productData, showStation, showCategory, categoryName, categoryTotal, categoryColor}: Props) => {
   const [searchText, setSearchText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [pdfData, setPdfData] = useState<string[][]>([]);
@@ -93,9 +96,9 @@ const MyTable = ({showHeader, items, width, productData, showStation, showCatego
 
   const generatePDF = () => {
     const pdfContent: any[][] = [];
-    pdfContent.push(['Name', 'Quantity', 'Station', 'Reason', 'Order Date']);
+    pdfContent.push(['Name', 'Quantity', 'Station', 'Reason', 'Date']);
     currentProducts?.forEach((product) => {
-      pdfContent.push([product.name, product.quantity, product.station, product.tag, product.date]);
+      pdfContent.push([product.name, product.quantity, product.station.name, product.tag, moment(product.createdAt).format("MMMM Do YYYY")]);
     });
     setPdfData(pdfContent);
   };
@@ -107,9 +110,9 @@ const MyTable = ({showHeader, items, width, productData, showStation, showCatego
       csvContent.push({
         Name: product.name,
         Quantity: product.quantity,
-        Station: product.station,
+        Station: product.station.name,
         Reason: product.tag,
-        'Order Date': product.date,
+        Date: moment(product.createdAt).format("MMMM Do YYYY"),
       });
     });
     setCsvData(csvContent);
@@ -177,12 +180,12 @@ const MyTable = ({showHeader, items, width, productData, showStation, showCatego
           </Stack>
         </HStack>
         <HStack width="45%" ml={4}>
-          <Text color="#FFA523" as='b'>
-            FOOD ITEMS
+          <Text color={categoryColor} as='b'>
+            {categoryName}
           </Text>
         <Box borderWidth="0.5px" borderRadius="10px" width="25%" bg="#FAFAFA" display="flex"  justifyContent="center" alignItems="center">
-        <Text color="#FFA523" as='b'>
-          45,345
+        <Text color={categoryColor} as='b'>
+          {categoryTotal}
         </Text>
         </Box>
         </HStack>
