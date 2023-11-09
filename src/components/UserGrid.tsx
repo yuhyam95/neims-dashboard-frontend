@@ -7,6 +7,7 @@ import CategoryGrid from "./CategoryGrid";
   
   interface Props {
     data: StationData;
+    stateName: string
   }
 
 
@@ -33,14 +34,14 @@ interface ProductItem{
   tag: Boolean
 }
 
-const UserGrid = ({data}: Props) => {
+const UserGrid = ({data, stateName}: Props) => {
     const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
     const category = data?.category;
     
     return (
     <Flex flex="1" padding="10px" justify="space-around" direction={isLargerThan768 ? "row" : "column"}>
          <Box flex={isLargerThan768 ? 2 : 1} mr={isLargerThan768 ? 4 : 0}>
-          <CategoryGrid data={category}/>
+          <CategoryGrid data={category} stateName={stateName}/>
           <LineChart />
         </Box> 
   

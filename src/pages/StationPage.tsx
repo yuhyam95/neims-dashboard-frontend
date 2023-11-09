@@ -35,7 +35,7 @@ useEffect(() => {
         {stateName} Territorial Office
     </Heading>
       <Flex> 
-      <UserGrid data={selectedStation} />
+      <UserGrid data={selectedStation} stateName={stateName}/>
       </Flex>
       <Flex>
       <ProductsGrid productData={selectedStation?.product} showStation={false} showCategory={false}/>

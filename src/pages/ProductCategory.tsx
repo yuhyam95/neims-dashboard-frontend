@@ -2,17 +2,20 @@ import { Heading, Stack, Text } from "@chakra-ui/react"
 import MyTable from "../components/MyTable"
 import useProducts from "../hooks/useProducts";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 
 const ProductCategory = () => {
   const [queryParams, setQueryParams] = useState({});
   const { products } = useProducts(queryParams);
+  const location = useLocation()
+  const {name, stateName, color, total} = location.state
 
   return (
     <>
     <Stack margin={4}>
     <Heading>
-        Lagos Territorial Office
+        {stateName} Territorial Office
     </Heading>
     <Text fontSize='lg'>
         Store Invetory
