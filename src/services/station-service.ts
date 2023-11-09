@@ -7,7 +7,7 @@ export interface Station {
     total: number;
     category: CategoryItem[];
     change: string;
-    productList: ProductList[];
+    product: ProductList[];
     beneficiaries: Beneficiaries[];
     areaofcoverage: string[]
   }

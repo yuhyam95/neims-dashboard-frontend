@@ -30,12 +30,14 @@ import { BiSearchAlt2, } from 'react-icons/bi';
 import {LiaDownloadSolid} from 'react-icons/lia'
 import { PDFDownloadLink, Text as PdfText, Page, View, Document, StyleSheet } from '@react-pdf/renderer';
 import { CSVLink } from 'react-csv';
+import moment from 'moment';
 
 interface Props {
   showHeader: boolean,
   items: number, 
   width: string
-  productData: ProductItem[]
+  productData: ProductItem[],
+  showStation: boolean
 }
 
 interface ProductItem {
@@ -43,11 +45,18 @@ interface ProductItem {
   name: string,
   quantity: number,
   tag: string,
-  station: string,
+  station: StationItem,
   date: string
+  createdAt: string
 }
 
-const MyTable = ({showHeader, items, width, productData}: Props) => {
+interface StationItem {
+  _id: string,
+  name: string
+}
+
+
+const MyTable = ({showHeader, items, width, productData, showStation}: Props) => {
   const [searchText, setSearchText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [pdfData, setPdfData] = useState<string[][]>([]);
@@ -182,19 +191,20 @@ const MyTable = ({showHeader, items, width, productData}: Props) => {
             <Th>Item</Th>
             <Th>Quantity</Th>
             <Th>Reason</Th>
-            <Th>Station</Th>
+            {showStation && <Th>Station</Th>} 
             <Th>Date</Th>
           </Tr>
         </Thead>
             <Tbody>
               {currentProducts?.map((product, index) => (
                 <TableRows
+                showStation={showStation}
                 key={index}
                 name={product.name}
-                station={product.station}
+                station={showStation ? product.station.name : "null"}
                 reason={product.tag}
                 quantity={product.quantity}
-                date={product.date}
+                date={moment(product.createdAt).format("MMMM Do YYYY")}
               />
               ))}
             </Tbody>

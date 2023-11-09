@@ -2,19 +2,19 @@
 
 import { useEffect, useState } from "react";
 import { CanceledError } from "../services/api-client";
-import stationService, { Station } from "../services/station-service";
+import productService, { Product } from "../services/product-service";
 
-const useStations = (queryParams = {}) => {
-  const [stations, setStations] = useState<Station[]>([]);
+const useProducts = (queryParams = {}) => {
+  const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    const { request, cancel } = stationService.getAll<Station>(queryParams);
+    const { request, cancel } = productService.getAll<Product>(queryParams);
     request
       .then((res) => {
-        setStations(res.data);
+        setProducts(res.data);
         setLoading(false);
       })
       .catch((err) => {
@@ -26,7 +26,7 @@ const useStations = (queryParams = {}) => {
     return () => cancel();
   }, [queryParams]);
 
-  return { stations, error, isLoading, setStations, setError };
+  return { products, error, isLoading, setProducts, setError };
 }
 
-export default useStations;
+export default useProducts;

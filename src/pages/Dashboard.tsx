@@ -6,6 +6,7 @@ import ProductsGrid from '../components/ProductsGrid';
 import StationTabs from '../components/StationTabs';
 import { useState } from 'react';
 import useStations from '../hooks/useStation';
+import useProducts from '../hooks/useProducts';
 
 
 
@@ -13,11 +14,12 @@ function Dashboard() {
   const [selectedTab, setSelectedTab] = useState('Territorial');
   const [queryParams, setQueryParams] = useState({});
   const { stations } = useStations(queryParams);
-  
+  const { products } = useProducts(queryParams);
+
   const handleQueryParamChange = (newParams: any) => {
     setQueryParams(newParams);
   }
-  console.log(stations)
+  console.log(products)
     
 
   const filteredStateData = stations.filter((station: any) => {
@@ -39,7 +41,7 @@ function Dashboard() {
       {/* <LineChartGrid data={filteredStateData} /> */}
       </Flex>
       <Flex>
-      <ProductsGrid productData={filteredStateData}/>
+      <ProductsGrid productData={products} showStation={true}/>
       </Flex>
     </div> 
   );

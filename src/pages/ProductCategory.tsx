@@ -1,7 +1,13 @@
 import { Heading, Stack, Text } from "@chakra-ui/react"
 import MyTable from "../components/MyTable"
+import useProducts from "../hooks/useProducts";
+import { useState } from "react";
+
 
 const ProductCategory = () => {
+  const [queryParams, setQueryParams] = useState({});
+  const { products } = useProducts(queryParams);
+
   return (
     <>
     <Stack margin={4}>
@@ -12,7 +18,7 @@ const ProductCategory = () => {
         Store Invetory
     </Text>
     </Stack>
-    <MyTable showHeader={true} items={10} width="90%"/>
+    <MyTable showHeader={true} items={10} width="90%" showStation={false} productData={products}/>
     </>
   )
 }
