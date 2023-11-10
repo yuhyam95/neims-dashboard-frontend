@@ -3,6 +3,8 @@ import apiClient from "./api-client";
 
 type QueryParameters = {
   type?: string;
+  category?: string,
+  station?: string
 };
 
 interface Entity {

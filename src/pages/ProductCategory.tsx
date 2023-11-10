@@ -7,9 +7,11 @@ import { useLocation } from "react-router-dom";
 
 const ProductCategory = () => {
   const [queryParams, setQueryParams] = useState({});
-  const { products } = useProducts(queryParams);
   const location = useLocation()
   const {name, stateName, color, total} = location.state
+  
+  const { products } = useProducts({station: stateName, category: name});
+  console.log(products)
 
   return (
     <>
