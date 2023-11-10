@@ -22,7 +22,7 @@ const ProductCategory = () => {
     </Text>
     </Stack>
     <MyTable showHeader={true} items={10} width="90%" showStation={false} 
-              productData={products} showCategory={false} categoryName={name} categoryTotal={total} categoryColor={color}/>
+              productData={products} showCategory={false} categoryName={name} categoryTotal={total} categoryColor={color} showBinCard/>
     </>
   )
 }

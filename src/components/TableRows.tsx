@@ -3,6 +3,7 @@ import {
   Td,
   Text,
   Box,
+  Button,
 } from "@chakra-ui/react";
 
 
@@ -14,14 +15,20 @@ interface Props {
   date: string;
   category: string,
   showStation: boolean
-  showCategory: boolean
+  showCategory: boolean,
+  showBinCard?: boolean 
   
 }
   
 
 function TableRows(props: Props) {
-  const {  name, quantity, reason, station, date, category, showStation, showCategory } = props;
+  const {  name, quantity, reason, station, date, category, showStation, showCategory, showBinCard } = props;
   
+  const handleClick = () => {
+    console.log()
+  }
+
+
   return (
     <Tr>
       <Td >
@@ -54,6 +61,11 @@ function TableRows(props: Props) {
       <Td>
         {date}
       </Td>
+      {showBinCard && <Td>
+      <Button colorScheme='teal' variant='solid' size='sm' onClick={handleClick}>
+          BIN CARD
+      </Button>
+      </Td>}
     </Tr>
   );
 }

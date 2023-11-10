@@ -40,7 +40,8 @@ interface Props {
   showCategory: boolean,
   categoryName?: string,
   categoryTotal?: number,
-  categoryColor?: string
+  categoryColor?: string,
+  showBinCard?: boolean
 }
 
 interface ProductItem {
@@ -64,7 +65,7 @@ interface CategoryItem {
 }
 
 
-const MyTable = ({showHeader, items, width, productData, showStation, showCategory, categoryName, categoryTotal, categoryColor}: Props) => {
+const MyTable = ({showHeader, items, width, productData, showStation, showCategory, categoryName, categoryTotal, categoryColor, showBinCard}: Props) => {
   const [searchText, setSearchText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [pdfData, setPdfData] = useState<string[][]>([]);
@@ -207,6 +208,7 @@ const MyTable = ({showHeader, items, width, productData, showStation, showCatego
             <Tbody>
               {currentProducts?.map((product, index) => (
                 <TableRows
+                showBinCard={showBinCard}
                 showCategory={showCategory}
                 showStation={showStation}
                 key={index}
