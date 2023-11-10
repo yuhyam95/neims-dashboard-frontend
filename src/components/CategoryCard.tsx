@@ -5,16 +5,17 @@ interface Props {
     name: string;
     total: number;
     color: string;
-    stateName: string
+    stateName: string,
+    type?: string
   }
 
-const CategoryCard = ({name, total, color, stateName}: Props) => {
+const CategoryCard = ({name, total, color, stateName, type}: Props) => {
 
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate('/productcategory', {state: {name, stateName, color, total}});
+    navigate('/productcategory', {state: {name, stateName, color, total, type}});
   };
-
+  const formattedTotal = total.toLocaleString("en-US")
   return (
 <Card  bg={color} size='sm' onClick={handleClick}>
   <CardBody>
@@ -23,7 +24,7 @@ const CategoryCard = ({name, total, color, stateName}: Props) => {
     <StatArrow type='increase' color="white"/>
     <StatLabel color="white">{name}</StatLabel>
     </HStack>
-    <StatNumber color="white" fontSize='42px'>{total}</StatNumber>
+    <StatNumber color="white" fontSize='42px'>{formattedTotal}</StatNumber>
     </Stat>
   </CardBody>
 </Card>    

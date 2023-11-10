@@ -21,12 +21,10 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
+  Heading,
 } from '@chakra-ui/react'
 import {
   FiHome,
-  FiTrendingUp,
-  FiCompass,
-  FiStar,
   FiSettings,
   FiMenu,
   FiBell,
@@ -40,11 +38,12 @@ import ProductCategory from './ProductCategory'
 import BinCardPage from './BinCardPage'
 import Dashboard from './Dashboard'
 import StationPage from './StationPage'
-import { Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 
 interface LinkItemProps {
   name: string
-  icon: IconType
+  icon: IconType,
+  route?: string
 }
 
 interface NavItemProps extends FlexProps {
@@ -61,14 +60,16 @@ interface SidebarProps extends BoxProps {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome },
+  { name: 'Home', icon: FiHome, route: '/' },
   { name: 'Reports', icon: FiFile},
   { name: 'Beneficiaries', icon: FiUsers },
   { name: 'User Management', icon: FiUser },
   { name: 'Settings', icon: FiSettings },
 ]
 
+
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+
   return (
     <Box
       transition="3s ease"
@@ -86,9 +87,9 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
-          {link.name}
-        </NavItem>
+        <Link key={link.name} to={link.route || '#'}>
+        <NavItem icon={link.icon}>{link.name}</NavItem>
+      </Link>
       ))}
     </Box>
   )
@@ -157,7 +158,8 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         Logo
       </Text>
 
-      <HStack spacing={{ base: '0', md: '6' }}>
+      <HStack spacing={{ base: '0', md: '6' }} style={{justifyContent:'space-between'}}>
+        <Heading>NEMA Inventory Management System</Heading>
         <IconButton size="lg" variant="ghost" aria-label="open menu" icon={<FiBell />} />
         <Flex alignItems={'center'}>
           <Menu>
@@ -202,7 +204,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
 
 const Layout = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-
+   
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
       <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />

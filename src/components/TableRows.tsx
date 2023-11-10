@@ -5,6 +5,7 @@ import {
   Box,
   Button,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 
 interface Props {
@@ -24,9 +25,12 @@ interface Props {
 function TableRows(props: Props) {
   const {  name, quantity, reason, station, date, category, showStation, showCategory, showBinCard } = props;
   
-  const handleClick = () => {
-    console.log()
-  }
+  const navigate = useNavigate()
+
+    const handleClick = () => {
+      navigate('/bincardpage');
+    };  
+  
 
 
   return (

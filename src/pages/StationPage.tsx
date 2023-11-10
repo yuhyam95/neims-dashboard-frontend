@@ -4,15 +4,18 @@ import ProductsGrid from '../components/ProductsGrid';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import stationService, { Station } from '../services/station-service';
+import useProducts from '../hooks/useProducts';
 
 
 
 function StationPage() {
-
 const location = useLocation()
-const stationId = location.state.stationId
-const stateName = location.state.stateName
+const {stationId, stateName, type} = location.state
 const [selectedStation, setSelectedStation] = useState<Station | any>(null)
+
+const [queryParams, setQueryParams] = useState({station: stateName})
+const { products } = useProducts(queryParams);
+  
 
 useEffect(() => {
   const getById = (stationId: any) => {
@@ -32,13 +35,13 @@ useEffect(() => {
   return (
     <div>
     <Heading>
-        {stateName} Territorial Office
+        {stateName} {type} Office
     </Heading>
       <Flex> 
-      <UserGrid data={selectedStation} stateName={stateName}/>
+      <UserGrid data={selectedStation} stateName={stateName} type={type}/>
       </Flex>
       <Flex>
-      <ProductsGrid productData={selectedStation?.product} showStation={false} showCategory={false}/>
+      <ProductsGrid productData={products} showStation={false} showCategory={true}/>
       </Flex>
     </div>
   );

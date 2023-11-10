@@ -8,7 +8,8 @@ interface StateCardProps {
   stateName: string;
   category: Category[];
   change: string;
-  total: number
+  total: number,
+  type?: string
 }
 
 interface Category {
@@ -18,13 +19,14 @@ interface Category {
   total: number;
 }
 
-const StationCard = ({ stationId, stateName, change, total, category }: StateCardProps) => {
+const StationCard = ({ stationId, stateName, change, total, category, type }: StateCardProps) => {
 
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate('/station', {state: {stationId, stateName}});
+    navigate('/station', {state: {stationId, stateName, type}});
   };
   
+  const formattedTotal = total.toLocaleString("en-US")
   return (
       <Card marginTop="10px">
         <CardBody>
@@ -35,7 +37,7 @@ const StationCard = ({ stationId, stateName, change, total, category }: StateCar
           <Stat>
           <HStack>  
           <StatArrow type={change == 'increase' ? 'increase' : 'decrease'} boxSize={10} />
-            <StatNumber>{total}</StatNumber>
+            <StatNumber>{formattedTotal}</StatNumber>
             </HStack>
             <StatHelpText>
                 Total Number of Items
