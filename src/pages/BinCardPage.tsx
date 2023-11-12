@@ -1,8 +1,13 @@
+import { useLocation } from "react-router-dom"
 import BinCard from "../components/BinCard"
 
 const BinCardPage = () => {
+
+  const location = useLocation()
+  const {BinCardData, name, quantity} = location.state
+   
   return (
-    <BinCard />
+    <BinCard bincard={BinCardData} name={name} quantity={quantity}/>
   )
 }
 

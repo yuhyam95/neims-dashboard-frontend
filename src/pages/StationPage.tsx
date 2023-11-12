@@ -12,8 +12,7 @@ function StationPage() {
 const location = useLocation()
 const {stationId, stateName, type} = location.state
 const [selectedStation, setSelectedStation] = useState<Station | any>(null)
-
-const [queryParams, setQueryParams] = useState({station: stateName})
+const [queryParams, setQueryParams] = useState({stationName: stateName})
 const { products } = useProducts(queryParams);
   
 

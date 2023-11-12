@@ -32,4 +32,7 @@ export interface Station {
     location: string
   }
 
+  
+    
+
 export default create('/station');

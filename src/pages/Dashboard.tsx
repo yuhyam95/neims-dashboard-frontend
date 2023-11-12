@@ -30,7 +30,9 @@ function Dashboard() {
       return station.type === 'Operational';
     }
     return true; 
-  });
+  }); 
+
+  
 
   return (
     <div>

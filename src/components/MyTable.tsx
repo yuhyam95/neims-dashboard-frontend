@@ -35,13 +35,19 @@ interface Props {
   showHeader: boolean,
   items: number, 
   width: string
-  productData: ProductItem[],
+  productData: Product,
   showStation: boolean
   showCategory: boolean,
   categoryName?: string,
   categoryTotal?: number,
   categoryColor?: string,
-  showBinCard?: boolean
+  showBinCard?: boolean,
+  
+}
+
+interface Product {
+  products: ProductItem[]
+  total: number
 }
 
 interface ProductItem {
@@ -52,7 +58,8 @@ interface ProductItem {
   category: CategoryItem,
   station: StationItem,
   date: string
-  createdAt: string
+  createdAt: string,
+  bincard?: BinCardItem[]
 }
 
 interface StationItem {
@@ -63,6 +70,16 @@ interface CategoryItem {
   _id: string,
   name: string
 }
+
+interface BinCardItem { 
+  date: string;
+  number: string;
+  movement: string;
+  quantity: number,
+  balance: number,
+  signature: string
+}
+  
 
 
 const MyTable = ({showHeader, items, width, productData, showStation, showCategory, categoryName, categoryTotal, categoryColor, showBinCard}: Props) => {
@@ -79,8 +96,8 @@ const MyTable = ({showHeader, items, width, productData, showStation, showCatego
   };
 
   const filteredProducts = searchText === ''
-    ? productData
-    : productData?.filter((product) => {
+    ? productData.products
+    : productData.products?.filter((product) => {
         return Object.values(product).some((value) =>
           String(value).toLowerCase().includes(searchText.toLowerCase())
         );
@@ -192,7 +209,7 @@ const MyTable = ({showHeader, items, width, productData, showStation, showCatego
         </HStack>
         </Stack>}   
         
-        <TableContainer bg="#FAFAFA" borderRadius="10px">
+      <TableContainer bg="#FAFAFA" borderRadius="10px">
       <Table size='lg'>
       <TableCaption>Product List</TableCaption>
         <Thead>
@@ -218,6 +235,7 @@ const MyTable = ({showHeader, items, width, productData, showStation, showCatego
                 reason={product.tag}
                 quantity={product.quantity}
                 date={moment(product.createdAt).format("MMMM Do YYYY")}
+                BinCardData={product?.bincard}
               />
               ))}
             </Tbody>

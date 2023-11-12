@@ -24,17 +24,37 @@ import {
   PopoverCloseButton,
   PopoverBody,
 } from '@chakra-ui/react';
-import { bincard } from '../constants/mockData';
+
 import BinCardRows from './BinCardRows'
 import { BiSearchAlt2, } from 'react-icons/bi';
 import {LiaDownloadSolid} from 'react-icons/lia'
 import { PDFDownloadLink, Text as PdfText, Page, View, Document, StyleSheet } from '@react-pdf/renderer';
 import { CSVLink } from 'react-csv';
+import moment from 'moment';
 
+
+interface Props {
+  name: string,
+  quantity: number,
+  bincard: BinCardItem[],
+
+}
+
+ interface BinCardItem {
+  date: string;
+  number: string;
+  movement: string;
+  quantity: number,
+  balance: number,
+  signature: string,
+  createdAt: string,
+  srvnumber: string,
+  sivnumber: string
+}
 
 const itemsPerPage = 10;
 
-const BinCard = () => {
+const BinCard = ({bincard, name, quantity}: Props) => {
   const [searchText, setSearchText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [pdfData, setPdfData] = useState<string[][]>([]);
@@ -47,7 +67,7 @@ const BinCard = () => {
 
   const filteredProducts = searchText === ''
     ? bincard
-    : bincard.filter((bincard) => {
+    : bincard?.filter((bincard) => {
         return Object.values(bincard).some((value) =>
           String(value).toLowerCase().includes(searchText.toLowerCase())
         );
@@ -55,33 +75,33 @@ const BinCard = () => {
 
   const indexOfLastProduct = currentPage * itemsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
-  const currentProducts = filteredProducts.slice(
+  const currentProducts = filteredProducts?.slice(
     indexOfFirstProduct,
     indexOfLastProduct
   );
 
-  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredProducts?.length / itemsPerPage);
 
 
   const generatePDF = () => {
     const pdfContent: any[][] = [];
 
     currentProducts.forEach((product) => {
-      pdfContent.push([product.date,  product.number, product.movement, product.quantity, product.balance, product.signature]);
+      pdfContent.push([moment(product?.createdAt).format("MMMM Do YYYY"),  product?.srvnumber || product?.sivnumber, product?.movement, product?.quantity, product?.balance, product?.signature]);
     });
     setPdfData(pdfContent);
   };
   
   const generateCSV = useCallback(() => {
     const csvContent: any[] = [];
-    currentProducts.forEach((product) => {
+    currentProducts?.forEach((product) => {
       csvContent.push({
-        Date: product.date, 
-        Movement: product.movement,
-        'SIV/SRV #': product.number, 
-        Quantity: product.quantity, 
-        Balance: product.balance, 
-        Signature: product.signature
+        Date: moment(product?.createdAt).format("MMMM Do YYYY"), 
+        Movement: product?.movement,
+        'SIV/SRV #': product?.srvnumber || product?.sivnumber, 
+        Quantity: product?.quantity, 
+        Balance: product?.balance, 
+        Signature: product?.signature
       });
     });
     setCsvData(csvContent);
@@ -154,7 +174,7 @@ const BinCard = () => {
           </Text>
         <Box borderWidth="0.5px" borderRadius="10px" width="25%" bg="#FAFAFA" display="flex"  justifyContent="center" alignItems="center">
         <Text color="#FFA523" as='b'>
-          RICE 25KG
+          {name}
         </Text>
         </Box>
         </HStack>
@@ -176,12 +196,12 @@ const BinCard = () => {
               {currentProducts.map((product, index) => (
                 <BinCardRows
                 key={index}
-                date={product.date}
-                number={product.number}
-                movement={product.movement}
-                quantity={product.quantity}
-                balance={product.balance}
-                signature={product.signature}
+                date={moment(product?.createdAt).format("MMMM Do YYYY")}
+                number={product?.srvnumber || product?.sivnumber} 
+                movement={product?.movement}
+                quantity={product?.quantity}
+                balance={product?.balance}
+                signature={product?.signature}
               />
               ))}
             </Tbody>

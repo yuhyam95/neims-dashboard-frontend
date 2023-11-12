@@ -8,9 +8,10 @@ import { useState } from "react";
 const ProductCategory = () => {
   const location = useLocation()
   const {name, stateName, color, total, type} = location.state
-  const [queryParams, setQueryParams] = useState({station: stateName, category: name})
+  const [queryParams, setQueryParams] = useState({stationName: stateName, category: name})
   const { products } = useProducts(queryParams);
   
+  console.log(products)
 
   return (
     <>
@@ -23,7 +24,8 @@ const ProductCategory = () => {
     </Text>
     </Stack>
     <MyTable showHeader={true} items={10} width="90%" showStation={false} 
-              productData={products} showCategory={false} categoryName={name} categoryTotal={total} categoryColor={color} showBinCard/>
+              productData={products} showCategory={false} categoryName={name} 
+              categoryTotal={total} categoryColor={color} showBinCard />
     </>
   )
 }

@@ -18,17 +18,27 @@ interface Props {
   showStation: boolean
   showCategory: boolean,
   showBinCard?: boolean 
-  
+  BinCardData?: BinCardItem[]
 }
+
+interface BinCardItem {
+  date: string;
+  number: string;
+  movement: string;
+  quantity: number,
+  balance: number,
+  signature: string
+}
+  
   
 
 function TableRows(props: Props) {
-  const {  name, quantity, reason, station, date, category, showStation, showCategory, showBinCard } = props;
+  const {  name, quantity, reason, station, date, category, showStation, showCategory, showBinCard, BinCardData } = props;
   
   const navigate = useNavigate()
 
     const handleClick = () => {
-      navigate('/bincardpage');
+      navigate('/bincardpage', {state: {BinCardData, name, quantity}});
     };  
   
 
