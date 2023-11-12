@@ -1,11 +1,6 @@
 import create from "./http-service";
 
 export interface Product {
-    products: ProductData[],
-    total: number
-}
-
- interface ProductData {
     _id: string,
     name: string,
     quantity: number,

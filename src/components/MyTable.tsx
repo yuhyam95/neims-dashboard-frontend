@@ -35,7 +35,7 @@ interface Props {
   showHeader: boolean,
   items: number, 
   width: string
-  productData: Product,
+  productData: ProductItem[],
   showStation: boolean
   showCategory: boolean,
   categoryName?: string,
@@ -43,11 +43,6 @@ interface Props {
   categoryColor?: string,
   showBinCard?: boolean,
   
-}
-
-interface Product {
-  products: ProductItem[]
-  total: number
 }
 
 interface ProductItem {
@@ -71,7 +66,7 @@ interface CategoryItem {
   name: string
 }
 
-interface BinCardItem { 
+interface BinCardItem {
   date: string;
   number: string;
   movement: string;
@@ -96,8 +91,8 @@ const MyTable = ({showHeader, items, width, productData, showStation, showCatego
   };
 
   const filteredProducts = searchText === ''
-    ? productData.products
-    : productData.products?.filter((product) => {
+    ? productData
+    : productData?.filter((product) => {
         return Object.values(product).some((value) =>
           String(value).toLowerCase().includes(searchText.toLowerCase())
         );

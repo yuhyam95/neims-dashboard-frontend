@@ -16,6 +16,7 @@ function Dashboard() {
   const { stations } = useStations(queryParams);
   const { products } = useProducts(queryParams);
 
+  //console.log(products)
   const handleQueryParamChange = (newParams: any) => {
     setQueryParams(newParams);
   }
