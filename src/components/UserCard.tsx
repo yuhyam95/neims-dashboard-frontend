@@ -17,8 +17,18 @@ import {
 interface FeatureProps {
   title: string
   description: string
+
 }
 
+interface UserProps {
+  data: DataProps
+}
+
+interface DataProps {
+  head: string,
+  mobile: number,
+  address: string
+}
 const Feature = ({ title, description }: FeatureProps) => {
   return (
       <Flex direction='row' alignItems='center' justifyContent='space-between'>
@@ -29,7 +39,10 @@ const Feature = ({ title, description }: FeatureProps) => {
 }
 
 
-export default function UserCard() {
+export default function UserCard({ data}: UserProps) {
+    //console.log(data)
+    // const {head, mobile, address} = data;
+
   return (
     <Center py={4}>
       <Box
@@ -50,7 +63,7 @@ export default function UserCard() {
         <Avatar
           size={'xl'}
           src={
-            'https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
+            'https://www.freepik.com/free-vector/illustration-businessman_2606517.htm#query=user%20avatar&position=6&from_view=search&track=ais'
           }
           mb={4}
           pos={'relative'}
@@ -68,16 +81,27 @@ export default function UserCard() {
         />
         <Stack>
         <Heading fontSize={'lg'} fontFamily={'body'} color='white'>
-          Ibrahim Farinloye
+          Yusuf Habu
         </Heading>
         <Text fontWeight={600} color='white' fontSize={'sm'}>
-          station chief
+          Head of Station
         </Text>
         </Stack>
         </HStack>
-          
-          <Feature title="Mobile:" description='08064763531'/>
-          <Feature title="Location:" description='No 145 Mobolaji Bank Anthony way, ikeja, Lagos State.'/>
+        
+      <Flex direction='row' alignItems='center' justifyContent='space-between'>
+      <Text fontWeight={600} fontSize='sm' color='white'>Mobile: </Text>
+      <Text fontWeight={600} fontSize='sm' color='white'>08064763531</Text>
+      </Flex>
+      <Flex direction='row' alignItems='center' justifyContent='space-between'>
+      <Text fontWeight={600} fontSize='sm' color='white'>Location:</Text>
+      <Text fontWeight={600} fontSize='sm' color='white'>19, 21 road, 2nd Avenue Gwarinpa, FCT</Text>
+      </Flex>
+        
+        
+        {/*           
+          <Feature title="Mobile:" description={mobile}/>
+          <Feature title="Location:" description={address}/> */}
 
         <HStack justifyContent="space-between" alignItems='center'>
         <Heading fontSize={'sm'} fontFamily={'body'} color='white'>

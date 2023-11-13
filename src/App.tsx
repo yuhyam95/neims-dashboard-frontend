@@ -1,12 +1,13 @@
 import Layout from './pages/Layout'
-import { BrowserRouter as Router } from 'react-router-dom'
-import StationTest from './pages/StationTest'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import Login from './pages/Login'
 function App() {
   return (
     <Router>
-    <Layout />
-    {/* <Login /> */}
-    {/* <StationTest /> */}
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/*" element={<Layout />} />
+      </Routes>
     </Router>
   )
   

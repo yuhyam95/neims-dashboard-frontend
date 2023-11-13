@@ -7,6 +7,7 @@ import StationTabs from '../components/StationTabs';
 import { useState } from 'react';
 import useStations from '../hooks/useStation';
 import useProducts from '../hooks/useProducts';
+import mockData from '../constants/mockData';
 
 
 
@@ -40,7 +41,7 @@ function Dashboard() {
       <StationTabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
       <StationGrid data={filteredStateData} selectedTab={selectedTab} />
       <Flex> 
-      {/* <LineChartGrid data={filteredStateData} /> */}
+      <LineChartGrid data={mockData} />
       </Flex>
       <Flex>
       <ProductsGrid productData={products} showStation={true} showCategory={true}/>

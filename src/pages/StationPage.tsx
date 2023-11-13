@@ -31,6 +31,8 @@ useEffect(() => {
 
 },[])
 
+console.log(selectedStation)
+
   return (
     <div>
     <Heading>
