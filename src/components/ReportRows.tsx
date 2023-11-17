@@ -2,7 +2,9 @@ import {
     Tr,
     Td,
     Text,
+    Stack,
   } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
   
   
   interface Props {
@@ -15,25 +17,32 @@ import {
   
   function ReportRows(props: Props) {
     const { station, title, body, date } = props;
+    
+    const maxChars = 120;
+    const truncatedBody = body.length > maxChars ? `${body.slice(0, maxChars)}...` : body;
 
-    const truncatedBody = body.length > 50 ? `${body.slice(0, 50)}...` : body;
+    const navigate = useNavigate();
 
+    const handleClick = () => {
+      navigate('/singlereport', {state: {station, title, body, date}});
+    };
+    
     return (
-      <Tr>
+      <Tr onClick={handleClick}>
         <Td >
-            <Text>
+            <Text as='b'>
               {station}
             </Text>
         </Td>
         <Td>
-          <Text>
+        <Stack justifyContent='space-around'> 
+          <Text as='b'>
             {title}
           </Text>
-        </Td>
-        <Td>
           <Text>
             {truncatedBody}
           </Text>
+        </Stack>
         </Td>
         <Td>
         <Text>

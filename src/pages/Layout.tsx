@@ -40,6 +40,7 @@ import Dashboard from './Dashboard'
 import StationPage from './StationPage'
 import { Link, Route, Routes } from 'react-router-dom';
 import ReportsPage from './ReportsPage'
+import SingleReport from './SingleReport'
 
 interface LinkItemProps {
   name: string
@@ -207,7 +208,7 @@ const Layout = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
    
   return (
-    <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
+    <Box minH="100vh" bg={useColorModeValue('#f6f8fc', '#f6f8fc')}>
       <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
       <Drawer
         isOpen={isOpen}
@@ -229,6 +230,7 @@ const Layout = () => {
         <Route path="/productcategory" element={<ProductCategory />} />
         <Route path="/bincardpage" element={<BinCardPage />} />
         <Route path="/reports" element={<ReportsPage />} />
+        <Route path="/singlereport" element={<SingleReport />} />
         </Routes>
       </Box>
     </Box>

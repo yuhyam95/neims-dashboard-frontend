@@ -204,7 +204,7 @@ const MyTable = ({showHeader, items, width, productData, showStation, showCatego
         </HStack>
         </Stack>}   
         
-      <TableContainer bg="#FAFAFA" borderRadius="10px">
+      <TableContainer bg="white" borderRadius="10px">
       <Table size='lg'>
       <TableCaption>Product List</TableCaption>
         <Thead>

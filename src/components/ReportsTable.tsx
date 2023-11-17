@@ -19,6 +19,7 @@ import {
 
 import { BiSearchAlt2, } from 'react-icons/bi';
 import ReportRows from './ReportRows';
+import moment from 'moment';
 
 interface Props {
   reports: ReportItem[],
@@ -61,7 +62,7 @@ const ReportsTable = ({reports}: Props) => {
 
 
   return (
-    <div style={{ width: '90%', backgroundColor: 'white', borderRadius: '10px'}}>
+    <div style={{ width: '100%', backgroundColor: 'white', borderRadius: '10px'}}>
       <Stack mb={4}>
       <HStack mb={4} mt={4} >
           <InputGroup ml={4}>
@@ -76,35 +77,23 @@ const ReportsTable = ({reports}: Props) => {
             width='50%' />
         </InputGroup>
         </HStack>
-        {/* <HStack width="45%" ml={4}>
-          <Text color="#FFA523" as='b'>
-            BIN CARD
-          </Text>
-        <Box borderWidth="0.5px" borderRadius="10px" width="25%" bg="#FAFAFA" display="flex"  justifyContent="center" alignItems="center">
-        <Text color="#FFA523" as='b'>
-          {name}
-        </Text>
-        </Box>
-        </HStack> */}
         </Stack>
     <TableContainer bg="#FAFAFA" borderRadius="10px">
       <Table size='lg'>
       <TableCaption>Reports</TableCaption>
-        <Thead>
+        {/* <Thead>
           <Tr>
             <Th>Station</Th>
-            <Th>Title</Th>
-            <Th>Body</Th>
-            <Th>Date</Th>
+            <Th>Report</Th>
           </Tr>
-        </Thead>
+        </Thead> */}
             <Tbody>
               {currentReports.map((report, index) => (
                 <ReportRows
                     station={report.station}
                     title={report.title}
                     body={report.body}
-                    date={report.date}
+                    date={moment(report.date).format('MMMM Do YYYY')}
                 />
               ))}
             </Tbody>
