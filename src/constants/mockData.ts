@@ -31,6 +31,7 @@ export interface StateData {
     months: MonthItem[];
     change: string;
     products: ProductItem[];
+
   }
 
   export interface Products{
@@ -50,6 +51,13 @@ export interface BinCard{
     quantity: number,
     balance: number,
     signature: string
+}
+export interface Reports {
+    id: number,
+    station: string,
+    title: string,
+    body: string,
+    date: string
 }
 
  const mockData: StateData[] =[
@@ -419,6 +427,18 @@ export const bincard: BinCard[] = [
 {id:49,date:"2/12/2023",number:"67296-0683",movement:"Yangiobod",quantity:5211,balance:7639,signature:"Emmalee Darycott"},
 {id:50,date:"9/2/2023",number:"13668-103",movement:"Duas Igrejas",quantity:9691,balance:7783,signature:"Celine O' Scallan"}]
 
-
+export const reports: Reports[] = 
+[{id:1,station:"Cinyumput",title:"General Manager",body:`Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, 
+                                                        nascetur ridiculus mus. Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem. 
+                                                        Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio. 
+                                                        Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo.`, date:"9/22/2023"},
+{id:2,station:"São Gabriel",title:"Software Engineer IV",body:`Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus. 
+                                                                Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. 
+                                                                Curabitur convallis. Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo,
+                                                                rhoncus sed, vestibulum sit amet, cursus id, turpis.`,date:"11/13/2023"},
+{id:3,station:"Oyonnax",title:"Account Coordinator",body:"Praesent blandit. Nam nulla.",date:"6/20/2023"},
+{id:4,station:"Foumbouni",title:"Staff Scientist",body:"Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus. Phasellus in felis. Donec semper sapien a libero. Nam dui.",date:"10/2/2023"},
+{id:5,station:"Lyozna",title:"Senior Quality Engineer",body:"Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.",date:"2/1/2023"},
+{id:6,station:"Sōja",title:"Assistant Professor",body:"Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.",date:"12/14/2022"},] 
 
 export default mockData;

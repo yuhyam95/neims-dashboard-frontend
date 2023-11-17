@@ -2,7 +2,6 @@ import {
     Tr,
     Td,
     Text,
-    Box,
   } from "@chakra-ui/react";
   
   

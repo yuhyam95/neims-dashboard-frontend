@@ -38,7 +38,8 @@ import ProductCategory from './ProductCategory'
 import BinCardPage from './BinCardPage'
 import Dashboard from './Dashboard'
 import StationPage from './StationPage'
-import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
+import ReportsPage from './ReportsPage'
 
 interface LinkItemProps {
   name: string
@@ -60,8 +61,8 @@ interface SidebarProps extends BoxProps {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome, route: '/dashboard' },
-  { name: 'Reports', icon: FiFile},
+  { name: 'Home', icon: FiHome, route: '/' },
+  { name: 'Reports', icon: FiFile, route: '/reports'},
   { name: 'Beneficiaries', icon: FiUsers },
   { name: 'User Management', icon: FiUser },
   { name: 'Settings', icon: FiSettings },
@@ -227,6 +228,7 @@ const Layout = () => {
         <Route path="/station" element={<StationPage />} />
         <Route path="/productcategory" element={<ProductCategory />} />
         <Route path="/bincardpage" element={<BinCardPage />} />
+        <Route path="/reports" element={<ReportsPage />} />
         </Routes>
       </Box>
     </Box>
