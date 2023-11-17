@@ -28,7 +28,7 @@ import { useNavigate } from "react-router-dom";
     };
     
     return (
-      <Tr onClick={handleClick}>
+      <Tr onClick={handleClick} backgroundColor='white'>
         <Td >
             <Text as='b'>
               {station}

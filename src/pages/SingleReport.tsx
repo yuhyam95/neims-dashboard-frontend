@@ -1,4 +1,4 @@
-import { Box, Button, HStack, Heading, Text, VStack } from "@chakra-ui/react"
+import { Box, Button, HStack, Heading, Input, Text, Textarea, VStack } from "@chakra-ui/react"
 import { useLocation } from "react-router-dom"
 
 const SingleReport = () => {
@@ -9,7 +9,8 @@ return (
     <>
 
     <Heading mb={4} ml={4}> Report </Heading>
-    <Box p={4} backgroundColor='white' borderRadius='10px' >
+    <HStack justify='space-around'>
+    <Box p={4} backgroundColor='white' borderRadius='10px' width="60%">
       {/* Header */}
       <VStack align="start" spacing={2}>
         <Text fontSize="xl" fontWeight="bold">{station} Station</Text>
@@ -20,13 +21,15 @@ return (
       <Box mt={4} >
         <Text>{body}</Text>
       </Box>
+    </Box>
 
-      {/* Actions */}
-      <HStack mt={4}>
+    <Box p={8} backgroundColor='white' borderRadius='10px' width="30%">
+    <Textarea placeholder='Leave a Comment' />
+    <HStack mt={4}>
         <Button colorScheme="teal">Comment</Button>
-        {/* <Button colorScheme="red" variant="outline">Delete</Button> */}
       </HStack>
     </Box>
+    </HStack>
     </>
     )
 }
