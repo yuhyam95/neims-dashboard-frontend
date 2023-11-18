@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { CanceledError } from "../services/api-client";
 import userService, { User } from "../services/user-service";
 
-const useUsers = (queryParams = {}) => {
+
+const useUser = (queryParams = {}) => {
   const [users, setUsers] = useState<User[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
@@ -27,4 +28,4 @@ const useUsers = (queryParams = {}) => {
   return { users, error, isLoading, setUsers, setError };
 }
 
-export default useUsers;
+export default useUser;
