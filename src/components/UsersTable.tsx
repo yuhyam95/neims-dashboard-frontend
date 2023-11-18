@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import {
   Table,
-  Thead,
   Tbody,
   Tr,
-  Th,
   Td,
   Input,
   TableCaption,
@@ -15,27 +13,38 @@ import {
   InputLeftElement,
   HStack,
   Stack,
+  Thead,
+  Th,
 } from '@chakra-ui/react';
 
 import { BiSearchAlt2, } from 'react-icons/bi';
-import ReportRows from './ReportRows';
-import moment from 'moment';
+import UserRows from './UserRows';
 
-interface Props {
-  reports: ReportItem[],
+
+interface UserProps {
+  users: UserItem[],
 }
 
- interface ReportItem {
-    station: string,
-    title: string,
-    body: string,
-    date: string,
+ interface UserItem {
+    _id: string,
+    firstname: string,
+    surname: string,
+    email: string
+    role: Role,
+    station: Station
 }
 
+interface Role {
+    name: string
+}
+
+interface Station {
+    name: string
+}
 
 const itemsPerPage = 10;
 
-const ReportsTable = ({reports}: Props) => {
+const UsersTable = ({users}: UserProps) => {
   const [searchText, setSearchText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -44,22 +53,22 @@ const ReportsTable = ({reports}: Props) => {
     setCurrentPage(1);   
   };
 
-  const filteredReports = searchText === ''
-    ? reports
-    : reports?.filter((reports) => {
-        return Object.values(reports).some((value) =>
+  const filteredUsers = searchText === ''
+    ? users
+    : users?.filter((users) => {
+        return Object.values(users).some((value) =>
           String(value).toLowerCase().includes(searchText.toLowerCase())
         );
       });
 
-  const indexOfLastReport = currentPage * itemsPerPage;
-  const indexOfFirstReport = indexOfLastReport - itemsPerPage;
-  const currentReports = filteredReports?.slice(
-    indexOfFirstReport,
-    indexOfLastReport
+  const indexOfLastUser = currentPage * itemsPerPage;
+  const indexOfFirstUser = indexOfLastUser - itemsPerPage;
+  const currentUsers = filteredUsers?.slice(
+    indexOfFirstUser,
+    indexOfLastUser
   );
 
-  const totalPages = Math.ceil(filteredReports?.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredUsers?.length / itemsPerPage);
 
 
   return (
@@ -72,7 +81,7 @@ const ReportsTable = ({reports}: Props) => {
           </InputLeftElement>
           <Input        
             type="text"
-            placeholder="Search Reports"
+            placeholder="Search Users..."
             value={searchText}
             onChange={handleSearchTextChange}
             width='50%' />
@@ -81,20 +90,24 @@ const ReportsTable = ({reports}: Props) => {
         </Stack>
     <TableContainer bg="#FAFAFA" borderRadius="10px">
       <Table size='lg'>
-      <TableCaption>Reports</TableCaption>
-        {/* <Thead>
+      <Thead>
           <Tr>
+            <Th>Name</Th>
+            <Th>Role</Th>
+            <Th>E-mail</Th>
             <Th>Station</Th>
-            <Th>Report</Th>
+            <Th>Action</Th>
           </Tr>
-        </Thead> */}
+        </Thead>
+      <TableCaption>Users</TableCaption>
             <Tbody>
-              {currentReports.map((report, index) => (
-                <ReportRows
-                    station={report.station}
-                    title={report.title}
-                    body={report.body}
-                    date={moment(report.date).format('MMMM Do YYYY')}
+              {currentUsers.map((user, index) => (
+                <UserRows
+                    firstname={user?.firstname}
+                    surname={user?.surname}
+                    role={user?.role.name}
+                    email={user?.email}
+                    station={user?.station.name}
                 />
               ))}
             </Tbody>
@@ -125,6 +138,6 @@ const ReportsTable = ({reports}: Props) => {
   );
 };
 
-export default ReportsTable;
+export default UsersTable;
 
 

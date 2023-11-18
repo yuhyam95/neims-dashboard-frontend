@@ -41,6 +41,7 @@ import StationPage from './StationPage'
 import { Link, Route, Routes } from 'react-router-dom';
 import ReportsPage from './ReportsPage'
 import SingleReport from './SingleReport'
+import UserManagement from './UserManagement'
 
 interface LinkItemProps {
   name: string
@@ -65,7 +66,7 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', icon: FiHome, route: '/' },
   { name: 'Reports', icon: FiFile, route: '/reports'},
   { name: 'Beneficiaries', icon: FiUsers },
-  { name: 'User Management', icon: FiUser },
+  { name: 'User Management', icon: FiUser, route: '/usermanagement' },
   { name: 'Settings', icon: FiSettings },
 ]
 
@@ -231,6 +232,7 @@ const Layout = () => {
         <Route path="/bincardpage" element={<BinCardPage />} />
         <Route path="/reports" element={<ReportsPage />} />
         <Route path="/singlereport" element={<SingleReport />} />
+        <Route path="/usermanagement" element={<UserManagement />} />
         </Routes>
       </Box>
     </Box>
