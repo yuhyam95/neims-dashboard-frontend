@@ -32,6 +32,7 @@ interface Props {
     date: string,
 }
 
+
 const itemsPerPage = 10;
 
 const ReportsTable = ({reports}: Props) => {

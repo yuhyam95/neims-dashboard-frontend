@@ -11,12 +11,11 @@ import { useNavigate } from "react-router-dom";
     station: string;
     title: string;
     body: string;
-    date: string
+    date: string,
   }
-    
   
   function ReportRows(props: Props) {
-    const { station, title, body, date } = props;
+    const { station, title, body, date, } = props;
     
     const maxChars = 120;
     const truncatedBody = body.length > maxChars ? `${body.slice(0, maxChars)}...` : body;

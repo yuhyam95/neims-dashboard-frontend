@@ -57,7 +57,7 @@ export interface Reports {
     station: string,
     title: string,
     body: string,
-    date: string
+    date: string,
 }
 
  const mockData: StateData[] =[
@@ -431,7 +431,8 @@ export const reports: Reports[] =
 [{id:1,station:"Cinyumput",title:"General Manager",body:`Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, 
                                                         nascetur ridiculus mus. Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem. 
                                                         Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio. 
-                                                        Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo.`, date:"9/22/2023"},
+                                                        Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo.`, date:"9/22/2023",
+                                                        },
 {id:2,station:"São Gabriel",title:"Software Engineer IV",body:`Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus. 
                                                                 Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. 
                                                                 Curabitur convallis. Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo,
