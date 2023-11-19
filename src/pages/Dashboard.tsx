@@ -44,7 +44,7 @@ function Dashboard() {
       <LineChartGrid data={mockData} />
       </Flex>
       <Flex>
-      <ProductsGrid productData={products} showStation={true} showCategory={true}/>
+      {/* <ProductsGrid productData={products} showStation={true} showCategory={true}/> */}
       </Flex>
     </div> 
   );

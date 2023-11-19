@@ -31,6 +31,7 @@ import { RiAddLine } from "react-icons/ri";
 import { BiSearchAlt2, } from 'react-icons/bi';
 import UserRows from './UserRows';
 import useStations from '../hooks/useStation';
+import useUser from '../hooks/useUser';
 
 
 interface User {
@@ -122,10 +123,12 @@ const itemsPerPage = 10;
 
 
 
-const UsersTable = ({users}: User) => {
+const UsersTable = () => {
   const [searchText, setSearchText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-
+  const [queryParams, setQueryParams] = useState({});
+  const {users} = useUser(queryParams)
+  
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const handleSearchTextChange = (event: any) => {

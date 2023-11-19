@@ -25,7 +25,20 @@ const useUser = (queryParams = {}) => {
     return () => cancel();
   }, [queryParams]);
 
-  return { users, error, isLoading, setUsers, setError };
+  const createUser = async (newUserData: User) => {
+    try {
+      setLoading(true);
+      const response = await userService.create<User>(newUserData);
+      setUsers((prevUsers) => [...prevUsers, response.data]);
+      setLoading(false);
+    } catch (err: any) {
+      if (err instanceof CanceledError) return;
+      setError(err.message);
+      setLoading(false);
+    }
+  };
+
+  return { users, error, isLoading, setUsers, setError, createUser };
 }
 
 export default useUser;

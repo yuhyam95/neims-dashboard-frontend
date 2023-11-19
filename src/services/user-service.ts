@@ -1,10 +1,8 @@
 import create from "./http-service";
 
-export interface User {
-    users: UserItem[]
-  }
+
   
-   interface UserItem {
+ export interface User {
       _id: string,
       firstname: string,
       surname: string,
