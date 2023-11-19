@@ -1,9 +1,7 @@
 import create from "./http-service";
-
-
   
  export interface User {
-      _id: string,
+      _id?: string,
       firstname: string,
       surname: string,
       email: string
@@ -19,5 +17,13 @@ import create from "./http-service";
       name: string
   }
   
+  export interface createUser {
+    _id?: string,
+      firstname: string,
+      surname: string,
+      email: string
+      role: string,
+      station: string
+  }
 
 export default create('/user');
