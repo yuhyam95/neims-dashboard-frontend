@@ -42,11 +42,31 @@ const useUser = (queryParams = {}) => {
     }
   };
 
+  const updateUser = async (updatedUserData: createUser) => {
+    try {
+      setLoading(true);
+      const response = await userService.update<createUser>(updatedUserData);
+      const updatedUser = response.data;
+
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user._id === updatedUser._id ? updatedUser : user
+        )
+      );
+      setSuccess(true);
+      setLoading(false);
+    } catch (err: any) {
+      if (err instanceof CanceledError) return;
+      setError(err.message);
+      setLoading(false);
+    }
+  };
+  
   const resetSuccess = () => {
     setSuccess(false);
   };
 
-  return { users, error, createError, isLoading, setUsers, setError, createUser, success, resetSuccess };
+  return { users, error, createError, isLoading, setUsers, setError, createUser, success, resetSuccess, updateUser };
 }
 
 export default useUser;

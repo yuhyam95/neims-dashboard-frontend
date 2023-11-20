@@ -99,6 +99,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 }
 
 const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+  
   return (
     <Box
       as="a"
@@ -113,7 +114,7 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
         role="group"
         cursor="pointer"
         _hover={{
-          bg: 'cyan.400',
+          bg: 'teal',
           color: 'white',
         }}
         {...rest}>

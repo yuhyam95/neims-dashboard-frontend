@@ -37,8 +37,8 @@ const UsersTable = () => {
   const [searchText, setSearchText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [showForm, setShowForm] = useState(true);
-  const {users} = useUser()
   
+  const {users} = useUser()
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const handleSearchTextChange = (event: any) => {
@@ -104,6 +104,7 @@ const UsersTable = () => {
                     role={user?.role.name}
                     email={user?.email}
                     station={user?.station.name}
+                    status={user?.status}
                 />
               ))}
             </Tbody>
