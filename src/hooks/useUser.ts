@@ -6,7 +6,9 @@ import userService, { User, createUser } from "../services/user-service";
 const useUser = (queryParams = {}) => {
   const [users, setUsers] = useState<User[]>([]);
   const [error, setError] = useState("");
+  const [createError, setCreateError] = useState("")
   const [isLoading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -20,25 +22,31 @@ const useUser = (queryParams = {}) => {
         if (err instanceof CanceledError) return;
         setError(err.message);
         setLoading(false);
+
       });
 
     return () => cancel();
-  }, [queryParams]);
+  }, []);
 
   const createUser = async (newUserData: createUser) => {
     try {
       setLoading(true);
       const response = await userService.create<createUser>(newUserData);
       setUsers((prevUsers) => [...prevUsers, response.data]);
+      setSuccess(true);
       setLoading(false);
     } catch (err: any) {
       if (err instanceof CanceledError) return;
-      setError(err.message);
+      setCreateError(err.message);
       setLoading(false);
     }
   };
 
-  return { users, error, isLoading, setUsers, setError, createUser };
+  const resetSuccess = () => {
+    setSuccess(false);
+  };
+
+  return { users, error, createError, isLoading, setUsers, setError, createUser, success, resetSuccess };
 }
 
 export default useUser;

@@ -23,7 +23,7 @@ const useRole = (queryParams = {}) => {
       });
 
     return () => cancel();
-  }, [queryParams]);
+  }, []);
 
   const createRole = async (newRoleData: Role) => {
     try {

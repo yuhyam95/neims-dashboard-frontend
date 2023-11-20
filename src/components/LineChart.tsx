@@ -1,7 +1,7 @@
 
-import { Card, Spinner } from '@chakra-ui/react';
+
 import React from 'react';
-import { Chart } from 'react-google-charts';
+import Chart from 'react-apexcharts';
 import data from '../constants/mockData';
 
 interface StateData {
@@ -19,40 +19,45 @@ interface LineChartProps {
 }
 
 const LineChart: React.FC<LineChartProps> = () => {
-  const chartData = [['Month', ...data.map((stateData) => stateData.state)]];
-
-  // Create rows for each month with the total values
-  data[0].months.forEach((monthData) => {
-    const rowData = [monthData.name];
-    data.forEach((stateData) => {
-      const stateMonth = stateData.months.find((month) => month.name === monthData.name);
-      rowData.push(stateMonth ? stateMonth.total : 0);
-    });
-    chartData.push(rowData);
-  });
-
-  const chartOptions = {
-    title: 'Station Stock Graph',
-    chartArea: {borderRadius: 20},
-    hAxis: {
-      title: 'Month',
+  const chartData = {
+    options: {
+      chart: {
+        stacked: false,
+        background: '#fff',
+        borderRadius: 8, // Set border radius
+        toolbar: {
+          show: false, // Hide the chart toolbar if needed
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      xaxis: {
+        type: 'category' as const, // Explicitly set the type
+        categories: data[0].months.map(monthData => monthData.name),
+      },
+      yaxis: {
+        title: {
+          text: 'Total',
+        },
+      },
+      title: {
+        text: 'Station Stock Graph',
+        align: 'left' as const,
+      },
     },
-    vAxis: {
-      title: 'Total',
-    },
-    curveType: 'function', 
+    series: data.map(stateData => ({
+      name: stateData.state,
+      data: stateData.months.map(month => month.total),
+    })),
   };
 
-  return (
-    <Chart
-      width={'100%'}
-      height={'300px'}
-      chartType="LineChart"
-      loader={<Spinner />}
-      data={chartData}
-      options={chartOptions}
-    />
-  );
+  const chartStyle = {
+    borderRadius: '8px',
+    //boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Set box shadow
+  };
+
+  return <Chart options={chartData.options} series={chartData.series} type="area" height={350} style={chartStyle}/>;
 };
 
 export default LineChart;

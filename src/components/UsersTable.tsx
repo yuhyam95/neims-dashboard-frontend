@@ -15,9 +15,6 @@ import {
   Stack,
   Thead,
   Th,
-  Box,
-  FormControl,
-  FormLabel,
   useDisclosure,
   Modal,
   ModalOverlay,
@@ -25,182 +22,22 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-  Select,
-  Text,
+ 
 } from '@chakra-ui/react';
 import { RiAddLine } from "react-icons/ri";
 import { BiSearchAlt2, } from 'react-icons/bi';
 import UserRows from './UserRows';
-import useStations from '../hooks/useStation';
 import useUser from '../hooks/useUser';
-import useRole from '../hooks/useRole';
-
-
-interface User {
-  users: UserItem[]
-}
-
- interface UserItem {
-    _id: string,
-    firstname: string,
-    surname: string,
-    email: string
-    role: Role,
-    station: Station
-}
-
-interface Role {
-    name: string
-}
-
-interface Station {
-    name: string
-}
+import UserForm from './userForm';
 
 const itemsPerPage = 10;
-
-
-    const userForm = () => {
-      const {stations} = useStations();
-      const {roles} = useRole();
-      const {createUser} = useUser()
-      const [passwordError, setPasswordError] = useState("");
-
-      const [formData, setFormData] = useState({
-        firstname: "",
-        lastname: "",
-        role: "",
-        station: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
-
-      const handleChange = (e: any) => {
-        const { id, value } = e.target;
-        setFormData((prevData) => ({ ...prevData, [id]: value }));
-      };
-
-      const handleRoleChange = (e: any) => {
-        const { value } = e.target;
-        setFormData((prevData) => ({ ...prevData, role: value }));
-      };
-    
-      const handleStationChange = (e: any) => {
-        const { value } = e.target;
-        setFormData((prevData) => ({ ...prevData, station: value }));
-      };
-    
-      const handleSubmit = () => {
-        
-        if (formData.password !== formData.confirmPassword) {
-          setPasswordError("Passwords do not match");
-          return;
-        }
-    
-        const newUser = {
-          firstname: formData.firstname,
-          surname: formData.lastname,
-          role:formData.role, 
-          station: formData.station, 
-          email: formData.email,
-          password: formData.password
-        };
-
-        //console.log(newUser)
-        createUser(newUser);
-      };
-
-      return (
-        <Stack spacing={4}>
-          <HStack>
-            <Box>
-              <FormControl id="firstname" isRequired>
-                <FormLabel>First Name</FormLabel>
-                <Input type="text" size='md' onChange={handleChange} value={formData.firstname}/>
-              </FormControl>
-            </Box>
-            <Box>
-              <FormControl id="lastname">
-                <FormLabel>Last Name</FormLabel>
-                <Input type="text" size='md' onChange={handleChange} value={formData.lastname}/>
-              </FormControl>
-            </Box>
-          </HStack>
-          <Stack justify='space-around'>
-            <Box>
-              <FormControl id="role" isRequired>
-              <Select placeholder='Role' size='md' onChange={handleRoleChange}>
-              {roles?.map(role => (
-                <option key={role?._id} value={role._id}>
-                  {role?.name}
-                </option>
-              ))}
-              </Select>
-              </FormControl>
-            </Box>
-            <Box>
-              <FormControl id="station">
-              <Select placeholder='Station' size='md' onChange={handleStationChange}>
-                {stations?.map(station => (
-                <option key={station?._id} value={station._id} >
-                  {station?.name}
-                </option>
-              ))}              
-              </Select>
-              </FormControl>
-            </Box>
-          </Stack>
-          <FormControl id="email" isRequired>
-            <FormLabel>Email address</FormLabel>
-            <Input type="email" size='md' onChange={handleChange} value={formData.email}/>
-          </FormControl>
-          <HStack>
-            <Box>
-              <FormControl id="password" isRequired>
-                <FormLabel>Password</FormLabel>
-                <Input type="password" size='md' onChange={handleChange} value={formData.password}/>
-              </FormControl>
-            </Box>
-            <Box>
-              <FormControl id="confirmPassword" isRequired>
-                <FormLabel>Confirm Password</FormLabel>
-                <Input type="password" size='md'onChange={handleChange} value={formData.confirmPassword}/>
-              </FormControl>
-            </Box>
-            {passwordError && (
-            <Text color="red.500" fontSize="sm">
-              {passwordError}
-            </Text>
-          )}
-
-          </HStack>
-          <Stack spacing={10} pt={2}>
-            <Button
-              onClick={handleSubmit}
-              loadingText="Submitting"
-              size="lg"
-              bg={'blue.400'}
-              color={'white'}
-              _hover={{
-                bg: 'blue.500',
-              }}>
-              Sign up
-            </Button>
-          </Stack>
-        </Stack>
-      
-      )
-    }
-
-
 
 
 const UsersTable = () => {
   const [searchText, setSearchText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [queryParams, setQueryParams] = useState({});
-  const {users} = useUser(queryParams)
+  const [showForm, setShowForm] = useState(true);
+  const {users} = useUser()
   
   const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -299,7 +136,7 @@ const UsersTable = () => {
           <ModalHeader>Create a new User</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            {userForm()}
+          <UserForm showForm={showForm} setShowForm={setShowForm} />
           </ModalBody>
         </ModalContent>
       </Modal>
