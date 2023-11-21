@@ -42,6 +42,7 @@ import { Link, Route, Routes } from 'react-router-dom';
 import ReportsPage from './ReportsPage'
 import SingleReport from './SingleReport'
 import UserManagement from './UserManagement'
+import BeneficiariesPage from './BeneficiariesPage'
 
 interface LinkItemProps {
   name: string
@@ -65,7 +66,7 @@ interface SidebarProps extends BoxProps {
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', icon: FiHome, route: '/' },
   { name: 'Reports', icon: FiFile, route: '/reports'},
-  { name: 'Beneficiaries', icon: FiUsers },
+  { name: 'Beneficiaries', icon: FiUsers, route: '/beneficiaries' },
   { name: 'User Management', icon: FiUser, route: '/usermanagement' },
   { name: 'Settings', icon: FiSettings },
 ]
@@ -234,6 +235,7 @@ const Layout = () => {
         <Route path="/reports" element={<ReportsPage />} />
         <Route path="/singlereport" element={<SingleReport />} />
         <Route path="/usermanagement" element={<UserManagement />} />
+        <Route path="/beneficiaries" element={<BeneficiariesPage />} />
         </Routes>
       </Box>
     </Box>
