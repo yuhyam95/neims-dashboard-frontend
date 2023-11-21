@@ -28,7 +28,7 @@ import { RiAddLine } from "react-icons/ri";
 import { BiSearchAlt2, } from 'react-icons/bi';
 import UserRows from './UserRows';
 import useUser from '../hooks/useUser';
-import UserForm from './userForm';
+import UserForm from './UserForm';
 
 const itemsPerPage = 10;
 

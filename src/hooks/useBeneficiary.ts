@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import { CanceledError } from "../services/api-client";
-import stationService, { Station } from "../services/station-service";
+import beneficiariesService, { Beneficiaries } from "../services/beneficiary-service";
 
-const useStations = (queryParams = {}) => {
-  const [stations, setStations] = useState<Station[]>([]);
+const useBeneficiaries = (queryParams = {}) => {
+  
+  const [beneficiaries, setBeneficiaries] = useState<Beneficiaries[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    const { request, cancel } = stationService.getAll<Station>(queryParams);
+    const { request, cancel } = beneficiariesService.getAll<Beneficiaries>(queryParams);
     request
       .then((res) => {
-        setStations(res.data);
+        setBeneficiaries(res.data);
         setLoading(false);
       })
       .catch((err) => {
@@ -24,7 +25,7 @@ const useStations = (queryParams = {}) => {
     return () => cancel();
   }, [queryParams]);
 
-  return { stations, error, isLoading, setStations, setError };
+  return { beneficiaries, error, isLoading, setBeneficiaries, setError };
 }
 
-export default useStations;
+export default useBeneficiaries;
