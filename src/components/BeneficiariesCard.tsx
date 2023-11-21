@@ -1,4 +1,4 @@
-import { Card, CardBody, HStack, Icon, Stat, StatArrow, StatLabel, StatNumber } from "@chakra-ui/react"
+import { Card, CardBody, HStack, Icon, Stat, StatLabel, StatNumber } from "@chakra-ui/react"
 import { IconType } from "react-icons"
 
 interface Props {
@@ -19,7 +19,7 @@ const BeneficiariesCard = ({name, color, total, icon, size, height}: Props) => {
    <HStack justify='space-around'> 
     <Stat>
     <HStack>
-    <StatLabel color="white">Total {name}</StatLabel>
+    <StatLabel color="white" >Total {name}</StatLabel>
     </HStack>
     <StatNumber color="white" fontSize='42px'>{formattedTotal}</StatNumber>
     </Stat>

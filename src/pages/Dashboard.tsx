@@ -15,13 +15,7 @@ function Dashboard() {
   const [selectedTab, setSelectedTab] = useState('Territorial');
   const [queryParams, setQueryParams] = useState({});
   const { stations } = useStations(queryParams);
-  const { products } = useProducts(queryParams);
-
-  //console.log(products)
-  const handleQueryParamChange = (newParams: any) => {
-    setQueryParams(newParams);
-  }
-    
+  const { products } = useProducts(queryParams);    
 
   const filteredStateData = stations.filter((station: any) => {
     if (selectedTab === 'Territorial') {
@@ -44,7 +38,7 @@ function Dashboard() {
       <LineChartGrid data={mockData} />
       </Flex>
       <Flex>
-      {/* <ProductsGrid productData={products} showStation={true} showCategory={true}/> */}
+      <ProductsGrid productData={products} showStation={true} showCategory={true}/>
       </Flex>
     </div> 
   );

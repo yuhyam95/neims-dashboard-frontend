@@ -1,22 +1,43 @@
-import { Box, Divider, HStack, List, ListIcon, ListItem, Stack, Text, UnorderedList } from "@chakra-ui/react"
-import useBeneficiaries from "../hooks/useBeneficiaries"
+import { Box, Divider, HStack, List, ListIcon, ListItem, Stack, Text } from "@chakra-ui/react"
 import { GoDotFill } from "react-icons/go";
-
+import { IoLocationOutline } from "react-icons/io5";
+import { useEffect, useState } from "react";
+import { Beneficiary } from "../services/beneficiary-service";
+import apiClient from "../services/api-client";
 
 interface Props {
     state: string
 }
 
-
 const StateBeneficiaries = ({state}: Props) => {
     
-    const queryParams = ''
-    const {beneficiariesData} = useBeneficiaries(queryParams)
+const [beneficiariesData, setBeneficiariesData] = useState<Beneficiary | null>(null)
+
+const fetchData = async () => {
+    try {
+      const response = await apiClient.get('/beneficiary', {
+        params:{
+            state: state
+        }
+      });
+      setBeneficiariesData(response.data);
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
+    useEffect(() => {
+        fetchData()
+    }, [])
 
     const menCount = beneficiariesData?.men;
     const womenCount = beneficiariesData?.women;
     const childrenCount = beneficiariesData?.children;
     const householdCount = beneficiariesData?.children;
+    const totalbeneficiaries = 
+            (beneficiariesData?.men || 0) +
+            (beneficiariesData?.women || 0) +
+            (beneficiariesData?.children || 0);
 
     const data = [
         {
@@ -44,12 +65,15 @@ const StateBeneficiaries = ({state}: Props) => {
 
     return (
     <Box bg="white" paddingBottom={5} borderRadius="20px">
-        <HStack mb={6} justify="space-between">
-            <Text as='b' alignSelf='flex-start' ml={4} fontSize="lg" mt={2}>
+        <HStack mb={6} justify="space-between" mt={2}>
+            <HStack ml={4}>
+            <IoLocationOutline />
+            <Text as='b' alignSelf='flex-start' fontSize="lg">
                 {state}
             </Text>
-            <Text as='b' alignSelf='flex-start' mr={4} fontSize="lg" mt={2}>
-                10678
+            </HStack>
+            <Text as='b' alignSelf='flex-start' mr={4} fontSize="lg">
+                {totalbeneficiaries}
             </Text>
         </HStack>
         {data.map((item, index) => (
