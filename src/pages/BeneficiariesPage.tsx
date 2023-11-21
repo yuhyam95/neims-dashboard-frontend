@@ -1,4 +1,4 @@
-import { Box, HStack, SimpleGrid, Stack } from "@chakra-ui/react";
+import { Box, Button, HStack, Heading, SimpleGrid, Stack } from "@chakra-ui/react";
 import useBeneficiaries from "../hooks/useBeneficiaries"
 import BeneficiariesCard from "../components/BeneficiariesCard";
 import { IoManSharp, IoWomanSharp } from "react-icons/io5";
@@ -18,7 +18,10 @@ const totalbeneficiaries =
 
 return (
     <>
-    <Box mb={200}>
+    <Box mb={180}>
+      <HStack>
+      <Heading margin={4}>Beneficiaries</Heading>    
+      </HStack>
     <SimpleGrid minChildWidth='120px' spacing='40px'>
     <Box height='160px'>
       <Stack spacing={3}>
@@ -37,6 +40,7 @@ return (
     </Box>
     </SimpleGrid>
     </Box>
+    <Heading margin={5} size='md'>Beneficiaries by States</Heading>
     <BeneficiariesGrid />
     </>
   )

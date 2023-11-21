@@ -6,7 +6,9 @@ import { Beneficiary } from "../services/beneficiary-service";
 import apiClient from "../services/api-client";
 
 interface Props {
-    state: string
+    state?: string,
+    station?: string
+    zone?: string
 }
 
 const StateBeneficiaries = ({state}: Props) => {

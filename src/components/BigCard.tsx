@@ -26,9 +26,9 @@ const BigCard = ({name, color, total, icon, size, height}: Props) => {
     }
     <Stat>
     <HStack>
-    <StatLabel color="white" fontSize='20px'>Total {name}</StatLabel>
+    <StatLabel color="white" fontSize='20px'>{name}</StatLabel>
     </HStack>
-    <StatNumber color="white" fontSize='55px'>{formattedTotal}</StatNumber>
+    <StatNumber color="white" fontSize='55px' alignSelf='center'>{formattedTotal}</StatNumber>
     </Stat>
     </Stack>
   </CardBody>
