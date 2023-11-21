@@ -29,9 +29,9 @@ class HttpService {
     };
  
   const request = apiClient.get<T[]>(this.endpoint, config);
-
+  const objrequest = apiClient.get<T | null>(this.endpoint, config)  
   
-   return { request, cancel: () => controller.abort() };
+   return { objrequest, request, cancel: () => controller.abort() };
   
   }
 

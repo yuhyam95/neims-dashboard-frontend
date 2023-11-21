@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import { CanceledError } from "../services/api-client";
-import beneficiariesService, { Beneficiaries } from "../services/beneficiary-service";
+import beneficiariesService, { Beneficiary } from "../services/beneficiary-service";
 
 const useBeneficiaries = (queryParams = {}) => {
   
-  const [beneficiaries, setBeneficiaries] = useState<Beneficiaries[]>([]);
+  const [beneficiariesData, setBeneficiariesData] = useState<Beneficiary | null>(null);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    const { request, cancel } = beneficiariesService.getAll<Beneficiaries>(queryParams);
-    request
+    const { objrequest, cancel } = beneficiariesService.getAll<Beneficiary>(queryParams);
+    objrequest
       .then((res) => {
-        setBeneficiaries(res.data);
-        setLoading(false);
+        setBeneficiariesData(res.data);
+        setLoading(false); 
       })
       .catch((err) => {
         if (err instanceof CanceledError) return;
@@ -25,7 +25,7 @@ const useBeneficiaries = (queryParams = {}) => {
     return () => cancel();
   }, [queryParams]);
 
-  return { beneficiaries, error, isLoading, setBeneficiaries, setError };
+  return { beneficiariesData, error, isLoading, setBeneficiariesData, setError };
 }
 
 export default useBeneficiaries;

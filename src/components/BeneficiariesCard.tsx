@@ -4,7 +4,7 @@ import { IconType } from "react-icons"
 interface Props {
     name: string,
     color: string,
-    total: number,
+    total?: number,
     icon?: IconType,
     size?: string,
     height?: number

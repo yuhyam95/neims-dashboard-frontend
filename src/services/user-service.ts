@@ -25,7 +25,7 @@ import create from "./http-service";
       email: string
       role: string,
       station: string,
-      status?: string
+      status?: string 
   }
 
 export default create('/user');

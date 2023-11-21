@@ -3,15 +3,20 @@ import useBeneficiaries from "../hooks/useBeneficiaries"
 import { GoDotFill } from "react-icons/go";
 
 
-const StateBeneficiaries = () => {
+interface Props {
+    state: string
+}
+
+
+const StateBeneficiaries = ({state}: Props) => {
     
     const queryParams = ''
-    const {beneficiaries} = useBeneficiaries(queryParams)
+    const {beneficiariesData} = useBeneficiaries(queryParams)
 
-    const menCount = beneficiaries?.men;
-    const womenCount = beneficiaries?.women;
-    const childrenCount = beneficiaries?.children;
-    const householdCount = beneficiaries?.children;
+    const menCount = beneficiariesData?.men;
+    const womenCount = beneficiariesData?.women;
+    const childrenCount = beneficiariesData?.children;
+    const householdCount = beneficiariesData?.children;
 
     const data = [
         {
@@ -38,10 +43,10 @@ const StateBeneficiaries = () => {
     ]
 
     return (
-    <Box bg="white" width="20%" paddingBottom={5} borderRadius="20px">
+    <Box bg="white" paddingBottom={5} borderRadius="20px">
         <HStack mb={6} justify="space-between">
             <Text as='b' alignSelf='flex-start' ml={4} fontSize="lg" mt={2}>
-                Bauchi
+                {state}
             </Text>
             <Text as='b' alignSelf='flex-start' mr={4} fontSize="lg" mt={2}>
                 10678
