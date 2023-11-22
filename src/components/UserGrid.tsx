@@ -3,6 +3,7 @@ import LineChart from "./LineChart";
 import UserCard from "../components/UserCard";
 import CategoryGrid from "./CategoryGrid";
 import mockData from "../constants/mockData";
+import CategoryColumnChart from "./CategoryColumnChart";
 
 
   
@@ -14,7 +15,7 @@ import mockData from "../constants/mockData";
 
 
 interface StationData {
-  id: string,
+  _id: string,
   name: string,
   total: number,
   change: string,
@@ -22,11 +23,12 @@ interface StationData {
   productList: ProductItem[],
   head: string,
   mobile: number,
-  address: string
+  address: string,
+  type: string
 } 
 
 interface CategoryItem {
-  id: string,
+  _id: string,
   name: string,
   total: number,
   color: string
@@ -42,12 +44,12 @@ interface ProductItem{
 const UserGrid = ({data, stateName, type }: Props) => {
     const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
     const category = data?.category;
-    console.log(data)
+    // console.log(data.category)
     return (
     <Flex flex="1" padding="10px" justify="space-around" direction={isLargerThan768 ? "row" : "column"}>
          <Box flex={isLargerThan768 ? 2 : 1} mr={isLargerThan768 ? 4 : 0}>
-          <CategoryGrid data={category} stateName={stateName} type={type}/>
-          <LineChart data={mockData}/>
+          <CategoryGrid key={data?._id} data={category} stateName={stateName} type={type}/>
+          <CategoryColumnChart station={data}/>
         </Box> 
   
         <Flex direction="column"

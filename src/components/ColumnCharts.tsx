@@ -36,6 +36,8 @@ const ColumnChart: React.FC<ChartProps> = ({ productData }) => {
     chart: {
       type: 'bar',
       height: 350,
+      background: 'white',
+      width: "80%"
     },
     xaxis: {
       categories: chartData.map(dataPoint => dataPoint.x),
@@ -47,12 +49,7 @@ const ColumnChart: React.FC<ChartProps> = ({ productData }) => {
     },
     plotOptions: {
         bar: {
-          borderRadius: 10, // Set the borderRadius for columns
-          colors: {
-            ranges: [{
-              color: '#ffffff', // Set the background color to white
-            }],
-          },
+          borderRadius: 10,
         },
       },
   };

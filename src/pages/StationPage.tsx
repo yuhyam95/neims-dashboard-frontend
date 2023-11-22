@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import stationService, { Station } from '../services/station-service';
 import useProducts from '../hooks/useProducts';
+import apiClient from '../services/api-client';
 
 
 
@@ -12,13 +13,13 @@ function StationPage() {
 const location = useLocation()
 const {stationId, stateName, type} = location.state
 const [selectedStation, setSelectedStation] = useState<Station | any>(null)
-const [queryParams, setQueryParams] = useState({stationName: stateName})
+const [queryParams, setQueryParams] = useState({});
 const { products } = useProducts(queryParams);
   
 
 useEffect(() => {
   const getById = (stationId: any) => {
-    stationService.getById(stationId)
+    apiClient.get(`/station/${stationId}`)
       .then((response) => {
         setSelectedStation(response.data)
         console.log(response.data)
@@ -29,9 +30,8 @@ useEffect(() => {
     }
     getById(stationId);
 
-},[])
+},[stationId])
 
-console.log(selectedStation)
 
   return (
     <div>

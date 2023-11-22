@@ -18,14 +18,13 @@ interface StackedColumnChartProps {
   productData: Product[];
 }
 
-const LineChartGrid = ({productData}: StackedColumnChartProps) => {
+const ChartGrid = ({productData}: StackedColumnChartProps) => {
     const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
 
 
   return (
       <Flex flex="1" padding="10px" justify="space-around" direction={isLargerThan768 ? "row" : "column"}>
          <Box flex={isLargerThan768 ? 2 : 1} mr={isLargerThan768 ? 4 : 0}>
-          {/* <LineChart data={data} /> */}
           <ColumnChart productData={productData} />
         </Box> 
 
@@ -43,7 +42,7 @@ const LineChartGrid = ({productData}: StackedColumnChartProps) => {
   );
 };
 
-export default LineChartGrid;
+export default ChartGrid;
 
 
 
