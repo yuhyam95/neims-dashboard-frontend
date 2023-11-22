@@ -54,7 +54,8 @@ interface ProductItem {
   station: StationItem,
   date: string
   createdAt: string,
-  bincard?: BinCardItem[]
+  bincard?: BinCardItem[],
+  updatedAt: string
 }
 
 interface StationItem {
@@ -229,7 +230,7 @@ const MyTable = ({showHeader, items, width, productData, showStation, showCatego
                 category={showCategory ? product?.category.name : "null"}
                 reason={product.tag}
                 quantity={product.quantity}
-                date={moment(product.createdAt).format("MMMM Do YYYY")}
+                date={moment(product.updatedAt).format("MMMM Do YYYY")}
                 BinCardData={product?.bincard}
               />
               ))}

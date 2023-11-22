@@ -12,7 +12,8 @@ export interface Product {
     category: CategoryItem
     storeofficer: StoreOfficer,
     verificationofficer: VerificationOfficer,
-    createdAt: string
+    createdAt: string,
+    updatedAt: string
 }
 
 interface StationItem {
