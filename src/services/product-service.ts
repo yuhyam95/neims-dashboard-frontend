@@ -18,7 +18,8 @@ export interface Product {
 
 interface StationItem {
     _id: string,
-    name: string
+    name: string,
+    type: string
 }
 
 interface CategoryItem {
