@@ -1,8 +1,6 @@
 import { Box, Flex, useMediaQuery } from "@chakra-ui/react"
-import LineChart from "./LineChart";
 import UserCard from "../components/UserCard";
 import CategoryGrid from "./CategoryGrid";
-import mockData from "../constants/mockData";
 import CategoryColumnChart from "./CategoryColumnChart";
 
 

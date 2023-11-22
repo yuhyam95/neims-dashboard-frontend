@@ -3,7 +3,7 @@ import UserGrid from '../components/UserGrid';
 import ProductsGrid from '../components/ProductsGrid';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import stationService, { Station } from '../services/station-service';
+import { Station } from '../services/station-service';
 import useProducts from '../hooks/useProducts';
 import apiClient from '../services/api-client';
 

@@ -17,21 +17,6 @@ function Dashboard() {
   const [queryParams, setQueryParams] = useState({});
   const { stations } = useStations(queryParams);
   const { products } = useProducts(queryParams);    
-  const [categories, setCategories] = useState([])
-  
-  const fetchCategories = async () => {
-    try {
-      const response = await apiClient.get('/category', {
-      });
-      setCategories(response.data);
-
-    } catch (error) {
-      console.error(error);
-    }
-  };
-    useEffect(() => {
-        fetchCategories()
-    }, [])
 
   const filteredStateData = stations.filter((station: any) => {
     if (selectedTab === 'Territorial') {
@@ -43,8 +28,6 @@ function Dashboard() {
     }
     return true; 
   }); 
-
-  
 
   return (
     <div>

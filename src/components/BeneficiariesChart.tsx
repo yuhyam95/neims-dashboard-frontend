@@ -1,0 +1,97 @@
+import React, { useEffect, useState } from 'react';
+import ReactApexChart from 'react-apexcharts';
+import { ApexOptions } from 'apexcharts';
+import apiClient from '../services/api-client';
+import { Beneficiary } from '../services/beneficiary-service';
+
+
+interface RadialBarChartProps {
+  state?: string
+}
+
+const BeneficiariesChart: React.FC<RadialBarChartProps> = ({ state }) => {
+ 
+    
+const [beneficiariesData, setBeneficiariesData] = useState<Beneficiary>()
+const fetchData = async () => {
+        try {
+          const response = await apiClient.get('/beneficiary', {
+            params:{
+                state: state
+            }
+          });
+          setBeneficiariesData(response.data);
+    
+        } catch (error) {
+          console.error(error);
+        }
+      };
+        useEffect(() => {
+            fetchData()
+        }, [])
+ 
+    const men = beneficiariesData?.men || 0;
+    const women = beneficiariesData?.women || 0;
+    const children = beneficiariesData?.children || 0;
+    const total = men + women + children;
+
+  const series = [men, women, children];
+
+  const chartOptions: ApexOptions = {
+    chart: {
+      type: 'radialBar',
+      height: 350,
+      background: 'white'
+    },
+    plotOptions: {
+      radialBar: {
+        hollow: {
+          margin: 15,
+          size: '50%',
+        },
+        dataLabels: {
+          name: {
+            offsetY: -10,
+            show: true,
+            color: '#888',
+            fontSize: '13px',
+          },
+          value: {
+            color: '#111',
+            fontSize: '30px',
+            show: true,
+          },
+          total: {
+            show: true,
+            label: 'Total',
+            formatter: function () {
+                return total
+            }
+          }
+        },
+      },
+
+    },
+    labels: ['Men', 'Women', 'Children',],
+    title: {
+        text: 'Beneficiaries Breakdown',
+        align: 'center',
+        style: {
+          fontSize: '16px',
+        },
+      },
+      legend: {
+        show: true,
+        floating: true,
+        position: 'bottom',
+      },
+  };
+
+  return (
+    <div>
+      <ReactApexChart options={chartOptions} series={series} type="radialBar" height={350} />
+    </div>
+  );
+};
+
+export default BeneficiariesChart;
