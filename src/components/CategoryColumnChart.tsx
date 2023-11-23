@@ -32,24 +32,27 @@ const CategoryHorizontalBarChart: React.FC<ChartProps> = ({ station }) => {
   const chartOptions: ApexOptions = {
     chart: {
       type: 'bar',
-      height: 350,
+      height: 300,
       background: 'white',
       width: '25%',
     },
     yaxis: {
       title: {
-        text: 'Categories', // Adjust title as needed
+        text: 'Categories', 
       },
     },
     xaxis: {
-      type: 'category', // Specify the type as 'category'
+      title: {
+        text: 'Total Quantities', 
+      },
+      type: 'category', 
       categories: chartData?.map(dataPoint => dataPoint.y),
     },
     plotOptions: {
       bar: {
-        horizontal: true, // Set to true for horizontal bar chart
-        columnWidth: '50%', // Adjust column width as needed
-        borderRadius: 10,
+        horizontal: true, 
+        columnWidth: '50%', 
+        //borderRadius: 10,
         colors: {
           ranges: chartData?.map(dataPoint => ({
             color: dataPoint.color,

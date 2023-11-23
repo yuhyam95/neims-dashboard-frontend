@@ -16,7 +16,7 @@ interface CategoryItem {
 
 const CategoryGrid = ({data, stateName, type}: Props) => {
   return (
-    <SimpleGrid columns={{ base: 1, md: 2, lg: 5 }} padding="10px" spacing={8} >
+    <SimpleGrid columns={{ base: 1, md: 5, lg: 5 }} spacing={6} >
       {data?.map((category) => (
         <CategoryCard key={category._id} name={category.name} total={category.total} color={category.color} stateName={stateName} type={type}/>
       ))}

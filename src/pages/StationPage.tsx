@@ -1,4 +1,4 @@
-import { Flex, Heading } from '@chakra-ui/react';
+import { Box, Flex, Heading } from '@chakra-ui/react';
 import UserGrid from '../components/UserGrid';
 import ProductsGrid from '../components/ProductsGrid';
 import { useLocation } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { Station } from '../services/station-service';
 import useProducts from '../hooks/useProducts';
 import apiClient from '../services/api-client';
 import BeneficiariesChart from '../components/BeneficiariesChart';
+import MyTable from '../components/MyTable';
 
 
 
@@ -42,9 +43,11 @@ useEffect(() => {
       <Flex> 
       <UserGrid data={selectedStation} stateName={stateName} type={type}/>
       </Flex>
-      <Flex>
-      <ProductsGrid productData={products} showStation={false} showCategory={true}/>
+      <Flex justifyContent="space-between">
+      <MyTable showHeader={false} items={5} width="78.5%" productData={products} showStation={false} showCategory={true}/>
+      <Box>
       <BeneficiariesChart />
+      </Box>
       </Flex>
     </div>
   );

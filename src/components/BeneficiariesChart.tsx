@@ -41,13 +41,13 @@ const fetchData = async () => {
     chart: {
       type: 'radialBar',
       height: 350,
-      background: 'white'
+      background: 'white',
     },
     plotOptions: {
       radialBar: {
         hollow: {
           margin: 15,
-          size: '50%',
+          size: '70%',
         },
         dataLabels: {
           name: {
@@ -89,7 +89,7 @@ const fetchData = async () => {
   };
 
   return (
-    <div>
+    <div style={{ borderRadius: '10px', overflow: 'hidden' }}>
       <ReactApexChart options={chartOptions} series={series} type="radialBar" height={350} />
     </div>
   );

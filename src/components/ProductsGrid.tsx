@@ -34,7 +34,7 @@ const ProductsGrid = ({productData, showStation, showCategory}: Props) => {
 
 
   return (
-      <Flex flex="1" padding="10px" justify="space-around" direction={isLargerThan768 ? "row" : "column"}>
+      <Flex flex="1" padding="10px" direction={isLargerThan768 ? "row" : "column"}>
          <Box flex={isLargerThan768 ? 2 : 1} mr={isLargerThan768 ? 4 : 0}>
           <MyTable showHeader={false} items={5} width="100%" productData={productData} showStation={showStation} showCategory={showCategory}/>
         </Box>       

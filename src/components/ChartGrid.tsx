@@ -24,15 +24,9 @@ const ChartGrid = ({productData}: StackedColumnChartProps) => {
          <Box flex={isLargerThan768 ? 2 : 1} mr={isLargerThan768 ? 4 : 0}>
           <ColumnChart productData={productData} />
         </Box> 
-        <Flex direction="column"
-              flex={isLargerThan768 ? 0.5 : 0.5} 
-              ml={isLargerThan768 ? 1 : 0} 
-              bg="white"
-              borderRadius="10px"
-              height={15}
-              >
+            <Box>    
            <BeneficiariesChart />
-      </Flex>
+           </Box>
       </Flex>
   );
 };

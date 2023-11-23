@@ -14,12 +14,6 @@ import {
   StackDivider,
 } from '@chakra-ui/react'
 
-interface FeatureProps {
-  title: string
-  description: string
-
-}
-
 interface UserProps {
   data: DataProps
 }
@@ -27,12 +21,13 @@ interface UserProps {
 interface DataProps {
   head: string,
   mobile: number,
-  address: string
+  location: string,
+  areaofcoverage: string[]
 }
 
 export default function UserCard({ data}: UserProps) {
-    //console.log(data)
-    // const {head, mobile, address} = data;
+    console.log(data)
+  //const {head, mobile, location} = data;
 
   return (
     <Center py={4}>
@@ -72,7 +67,7 @@ export default function UserCard({ data}: UserProps) {
         />
         <Stack>
         <Heading fontSize={'lg'} fontFamily={'body'} color='white'>
-          Yusuf Habu
+          {data?.head}
         </Heading>
         <Text fontWeight={600} color='white' fontSize={'sm'}>
           Head of Station
@@ -82,11 +77,11 @@ export default function UserCard({ data}: UserProps) {
         
       <Flex direction='row' alignItems='center' justifyContent='space-between'>
       <Text fontWeight={600} fontSize='sm' color='white'>Mobile: </Text>
-      <Text fontWeight={600} fontSize='sm' color='white'>08064763531</Text>
+      <Text fontWeight={600} fontSize='sm' color='white'>0{data?.mobile}</Text>
       </Flex>
       <Flex direction='row' alignItems='center' justifyContent='space-between'>
       <Text fontWeight={600} fontSize='sm' color='white'>Location:</Text>
-      <Text fontWeight={600} fontSize='sm' color='white'>19, 21 road, 2nd Avenue Gwarinpa, FCT</Text>
+      <Text fontWeight={600} fontSize='sm' color='white'>{data?.location}</Text>
       </Flex>
         
         
@@ -99,24 +94,16 @@ export default function UserCard({ data}: UserProps) {
           Area of coverage:
         </Heading>
         <Stack align={'left'} justify={'center'} direction={'row'}>
-          <Badge
-            px={1}
-            bg={useColorModeValue('gray.50', 'gray.800')}
-            fontWeight={'400'}>
-            Lagos
-          </Badge>
-          <Badge
-            px={1}
-            bg={useColorModeValue('gray.50', 'gray.800')}
-            fontWeight={'400'}>
-            Ondo
-          </Badge>
-          <Badge
-            px={1}
-            bg={useColorModeValue('gray.50', 'gray.800')}
-            fontWeight={'400'}>
-            Oyo
-          </Badge>
+        {data?.areaofcoverage.map((item, index) => (
+              <Badge
+                key={index} 
+                px={1}
+                bg={useColorModeValue('gray.50', 'gray.800')}
+                fontWeight={'400'}
+              >
+                {item}
+              </Badge>
+            ))}        
         </Stack>
         </HStack>
         </Stack>

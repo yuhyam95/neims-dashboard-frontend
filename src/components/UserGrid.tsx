@@ -21,8 +21,9 @@ interface StationData {
   productList: ProductItem[],
   head: string,
   mobile: number,
-  address: string,
-  type: string
+  location: string,
+  type: string,
+  areaofcoverage: string[]
 } 
 
 interface CategoryItem {

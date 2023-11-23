@@ -16,8 +16,9 @@ const CategoryCard = ({name, total, color, stateName, type}: Props) => {
     navigate('/productcategory', {state: {name, stateName, color, total, type}});
   };
   const formattedTotal = total.toLocaleString("en-US")
+  
   return (
-<Card  bg={color} size='sm' onClick={handleClick}>
+<Card  bg={color} size='md' onClick={handleClick}>
   <CardBody>
   <Stat>
     <HStack>
