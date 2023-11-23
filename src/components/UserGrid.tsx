@@ -45,16 +45,11 @@ const UserGrid = ({data, stateName, type }: Props) => {
     const category = data?.category;
     return (
     <Flex flex="1" padding="10px" justify="space-around" direction={isLargerThan768 ? "row" : "column"}>
-         <Box flex={isLargerThan768 ? 2 : 1} mr={isLargerThan768 ? 4 : 0}>
-          <CategoryGrid key={data?._id} data={category} stateName={stateName} type={type}/>
+         <Box flex={isLargerThan768 ? 2 : 1} >
+          <Box mt={4}>
           <CategoryColumnChart station={data}/>
-        </Box> 
-  
-        <Flex direction="column"
-              flex={isLargerThan768 ? 0.5 : 1}
-              ml={isLargerThan768 ? 2 : 0} >
-          <UserCard data={data}/>
-      </Flex>      
+          </Box>
+        </Box>       
       </Flex>
   )
 }

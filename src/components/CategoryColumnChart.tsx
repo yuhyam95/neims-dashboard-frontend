@@ -34,7 +34,7 @@ const CategoryHorizontalBarChart: React.FC<ChartProps> = ({ station }) => {
       type: 'bar',
       height: 300,
       background: 'white',
-      width: '25%',
+      width: '100%',
     },
     yaxis: {
       title: {

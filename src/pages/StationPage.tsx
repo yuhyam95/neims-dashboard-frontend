@@ -1,4 +1,4 @@
-import { Box, Flex, Heading } from '@chakra-ui/react';
+import { Box, Flex, HStack, Heading } from '@chakra-ui/react';
 import UserGrid from '../components/UserGrid';
 import ProductsGrid from '../components/ProductsGrid';
 import { useLocation } from 'react-router-dom';
@@ -8,7 +8,9 @@ import useProducts from '../hooks/useProducts';
 import apiClient from '../services/api-client';
 import BeneficiariesChart from '../components/BeneficiariesChart';
 import MyTable from '../components/MyTable';
-
+import CategoryGrid from '../components/CategoryGrid';
+import CategoryColumnChart from "../components/CategoryColumnChart";
+import UserCard from '../components/UserCard';
 
 
 function StationPage() {
@@ -34,21 +36,30 @@ useEffect(() => {
 
 },[stationId])
 
+const category = selectedStation?.category;
 
   return (
     <div>
-    <Heading>
+    <Heading mb={2}>
         {stateName} {type} Office
     </Heading>
-      <Flex> 
-      <UserGrid data={selectedStation} stateName={stateName} type={type}/>
-      </Flex>
-      <Flex justifyContent="space-between">
-      <MyTable showHeader={false} items={5} width="78.5%" productData={products} showStation={false} showCategory={true}/>
+      <CategoryGrid key={selectedStation?._id} data={category} stateName={stateName} type={type}/>
+      <HStack mt={4}>
+       <Box flex={2}>   
+      <CategoryColumnChart station={selectedStation}/>
+       </Box>
+       <Box>
+        <UserCard data={selectedStation}/>
+       </Box>
+      </HStack>
+      <HStack>
+       <Box flex={2}> 
+      <MyTable showHeader={false} items={5} width="100%" productData={products} showStation={false} showCategory={true}/>
+      </Box>
       <Box>
       <BeneficiariesChart />
       </Box>
-      </Flex>
+      </HStack>
     </div>
   );
 }
