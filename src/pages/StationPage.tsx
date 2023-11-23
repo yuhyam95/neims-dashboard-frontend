@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { Station } from '../services/station-service';
 import useProducts from '../hooks/useProducts';
 import apiClient from '../services/api-client';
+import BeneficiariesChart from '../components/BeneficiariesChart';
 
 
 
@@ -43,6 +44,7 @@ useEffect(() => {
       </Flex>
       <Flex>
       <ProductsGrid productData={products} showStation={false} showCategory={true}/>
+      <BeneficiariesChart />
       </Flex>
     </div>
   );

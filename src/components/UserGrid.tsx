@@ -42,7 +42,6 @@ interface ProductItem{
 const UserGrid = ({data, stateName, type }: Props) => {
     const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
     const category = data?.category;
-    // console.log(data.category)
     return (
     <Flex flex="1" padding="10px" justify="space-around" direction={isLargerThan768 ? "row" : "column"}>
          <Box flex={isLargerThan768 ? 2 : 1} mr={isLargerThan768 ? 4 : 0}>

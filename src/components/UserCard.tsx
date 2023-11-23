@@ -29,15 +29,6 @@ interface DataProps {
   mobile: number,
   address: string
 }
-const Feature = ({ title, description }: FeatureProps) => {
-  return (
-      <Flex direction='row' alignItems='center' justifyContent='space-between'>
-      <Text fontWeight={600} fontSize='sm' color='white'>{title}</Text>
-      <Text fontWeight={600} fontSize='sm' color='white'>{description}</Text>
-      </Flex>
-  )
-}
-
 
 export default function UserCard({ data}: UserProps) {
     //console.log(data)

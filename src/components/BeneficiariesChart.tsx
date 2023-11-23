@@ -33,7 +33,7 @@ const fetchData = async () => {
     const men = beneficiariesData?.men || 0;
     const women = beneficiariesData?.women || 0;
     const children = beneficiariesData?.children || 0;
-    const total = men + women + children;
+    
 
   const series = [men, women, children];
 
@@ -65,7 +65,8 @@ const fetchData = async () => {
             show: true,
             label: 'Total',
             formatter: function () {
-                return total
+              const total = men + women + children;
+              return total.toString()
             }
           }
         },

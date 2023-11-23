@@ -20,11 +20,11 @@ interface ChartProps {
   station: Station
 }
 
-const CategoryColumnChart: React.FC<ChartProps> = ({ station }) => {
+const CategoryHorizontalBarChart: React.FC<ChartProps> = ({ station }) => {
   // Prepare data for chart
   const chartData = station?.category.map(category => ({
-    x: category.name,
-    y: category.total,
+    y: category.name,
+    x: category.total,
     color: category.color,
   }));
 
@@ -33,17 +33,21 @@ const CategoryColumnChart: React.FC<ChartProps> = ({ station }) => {
     chart: {
       type: 'bar',
       height: 350,
-    },
-    xaxis: {
-      categories: chartData?.map(dataPoint => dataPoint.x),
+      background: 'white',
+      width: '25%',
     },
     yaxis: {
       title: {
-        text: 'Total',
+        text: 'Categories', // Adjust title as needed
       },
+    },
+    xaxis: {
+      type: 'category', // Specify the type as 'category'
+      categories: chartData?.map(dataPoint => dataPoint.y),
     },
     plotOptions: {
       bar: {
+        horizontal: true, // Set to true for horizontal bar chart
         columnWidth: '50%', // Adjust column width as needed
         borderRadius: 10,
         colors: {
@@ -62,7 +66,7 @@ const CategoryColumnChart: React.FC<ChartProps> = ({ station }) => {
         series={[
           {
             name: 'Total',
-            data: chartData?.map(dataPoint => dataPoint.y),
+            data: chartData?.map(dataPoint => dataPoint.x),
           },
         ]}
         type="bar"
@@ -72,4 +76,4 @@ const CategoryColumnChart: React.FC<ChartProps> = ({ station }) => {
   );
 };
 
-export default CategoryColumnChart;
+export default CategoryHorizontalBarChart;
