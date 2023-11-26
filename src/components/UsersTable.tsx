@@ -97,8 +97,10 @@ const UsersTable = () => {
         </Thead>
       <TableCaption>Users</TableCaption>
             <Tbody>
-              {currentUsers.map((user, index) => (
+              {currentUsers.map((user) => (
                 <UserRows
+                    key={user._id}
+                    _id={user?._id}
                     firstname={user?.firstname}
                     surname={user?.surname}
                     role={user?.role.name}

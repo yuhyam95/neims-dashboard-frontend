@@ -28,7 +28,7 @@ return (
     <>
 
     <Heading mb={4} ml={4}> Report </Heading>
-    <HStack justify='space-around'>
+    <HStack justify='space-around' alignItems="flex-start">
     <Box p={4} backgroundColor='white' borderRadius='10px' width="60%">
       {/* Header */}
       <VStack align="start" spacing={2}>

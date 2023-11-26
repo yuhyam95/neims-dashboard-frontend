@@ -5,13 +5,14 @@ import { useEffect, useState } from "react";
 import { Alert, AlertIcon, Box, Button, FormControl, FormLabel, HStack, Input, Select, Stack, Switch, Text } from "@chakra-ui/react";
 
 interface UserFormProps {
+    _id: string,
     firstname: string,
     surname: string,
     email: string,
-    status: string
+    status: boolean
   }
   
- const UpdateUserForm = ({ firstname, surname, email, status }: UserFormProps) => {
+ const UpdateUserForm = ({ _id, firstname, surname, email, status }: UserFormProps) => {
         
         const [showForm, setShowForm] = useState(true);
         const [queryParams, setQueryParams] = useState({});
@@ -19,8 +20,6 @@ interface UserFormProps {
         const {roles} = useRole();
     
         const {updateUser, createError, success, resetSuccess} = useUser()
-    
-        const [passwordError, setPasswordError] = useState("");
         
         const [formData, setFormData] = useState({
           firstname: firstname,
@@ -53,21 +52,16 @@ interface UserFormProps {
         
         const handleSubmit = async () => {
           
-          if (formData.password !== formData.confirmPassword) {
-            setPasswordError("Passwords do not match");
-            return;
-          }
-      
-          const newUser = {
+          const updatedUser = {
+            _id: _id,
             firstname: formData.firstname,
             surname: formData.surname,
             role:formData.role, 
             station: formData.station, 
-            email: formData.email,
-            password: formData.password
+            email: formData.email
           };
           try {
-            await updateUser(newUser);
+            await updateUser(updatedUser);
 
 
           } catch (error) {
@@ -130,7 +124,7 @@ interface UserFormProps {
               <FormLabel>Email address</FormLabel>
               <Input type="email" size='md' onChange={handleChange} value={formData.email}/>
             </FormControl>
-            <HStack>
+            {/* <HStack>
               <Box>
                 <FormControl id="password" isRequired>
                   <FormLabel>Password</FormLabel>
@@ -143,20 +137,20 @@ interface UserFormProps {
                   <Input type="password" size='md'onChange={handleChange} value={formData.confirmPassword}/>
                 </FormControl>
               </Box>        
-            </HStack>
+            </HStack> */}
             <FormControl id="status" isRequired>
             <FormLabel htmlFor='status'>Status:</FormLabel>
             <Switch id="status"
                   size="lg"
                   colorScheme="teal"
                   onChange={handleChange}
-                  isChecked={formData.status == 'active' ? true : false} />    
+                  isChecked={formData.status ? true : false} />    
             </FormControl>
-            {passwordError && (
+            {/* {passwordError && (
               <Text color="red.500" fontSize="sm">
                 {passwordError}
               </Text>
-            )}
+            )} */}
   
             <Stack spacing={10} pt={2}>
               <Button

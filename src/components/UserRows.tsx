@@ -18,21 +18,20 @@ import { FaRegEdit } from "react-icons/fa";
 import UpdateUserForm from "./UpdateUserForm";
   
   interface Props {
+    _id: string,
     firstname: string,
     surname: string,
     email: string,
     station: string,
     role: string,
-    status: string
+    status: boolean
   }
   
   function UserRows(props: Props) {
-    const { firstname, surname, email, station, role, status} = props;
+    const { _id, firstname, surname, email, station, role, status} = props;
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     const navigate = useNavigate();
-
-  
     
     return (
       <>
@@ -62,7 +61,7 @@ import UpdateUserForm from "./UpdateUserForm";
         <Button leftIcon={<FaRegEdit />} colorScheme='teal' variant='outline' size='sm' onClick={onOpen}>
             Edit
         </Button>
-        {status == 'active' ? <Switch  isChecked colorScheme='teal' size='lg'/> : <Switch isFocusable isDisabled colorScheme='teal' size='lg'/>}
+        {status == true ? <Switch  isChecked colorScheme='teal' size='lg'/> : <Switch isFocusable isDisabled colorScheme='teal' size='lg'/>}
         </HStack>
         </Td>
       </Tr>
@@ -73,7 +72,7 @@ import UpdateUserForm from "./UpdateUserForm";
         <ModalHeader> Update User</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-        <UpdateUserForm firstname={firstname} surname={surname} email={email} status={status}/>
+        <UpdateUserForm firstname={firstname} surname={surname} email={email} status={status} _id={_id}/>
         </ModalBody>
       </ModalContent>
       </Modal>

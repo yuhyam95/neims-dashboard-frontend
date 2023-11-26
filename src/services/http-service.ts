@@ -54,5 +54,4 @@ class HttpService {
 }
 
 const create = (endpoint: string) => new HttpService(endpoint);
-
 export default create;

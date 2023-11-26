@@ -9,6 +9,7 @@ const useUser = (queryParams = {}) => {
   const [createError, setCreateError] = useState("")
   const [isLoading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [updateError, setUpdateError] = useState("")
 
   useEffect(() => {
     setLoading(true);
