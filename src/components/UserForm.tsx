@@ -2,7 +2,7 @@ import useStations from '../hooks/useStation';
 import useUser from '../hooks/useUser';
 import useRole from '../hooks/useRole';
 import { useEffect, useState } from "react";
-import { Alert, AlertIcon, Box, Button, FormControl, FormLabel, HStack, Input, Select, Stack, Text } from "@chakra-ui/react";
+import { Alert, AlertIcon, Box, Button, FormControl, FormLabel, HStack, Input, Select, Stack, } from "@chakra-ui/react";
 
 interface UserFormProps {
     showForm: boolean;
@@ -17,16 +17,12 @@ interface UserFormProps {
     
         const {createUser, createError, success, resetSuccess} = useUser()
     
-        const [passwordError, setPasswordError] = useState("");
-        
         const [formData, setFormData] = useState({
           firstname: "",
           lastname: "",
           role: "",
           station: "",
-          email: "",
-          password: "",
-          confirmPassword: "",
+          email: ""
         });
 
         const resetForm = () => {
@@ -35,9 +31,7 @@ interface UserFormProps {
                 lastname: "",
                 role: "",
                 station: "",
-                email: "",
-                password: "",
-                confirmPassword: "",
+                email: ""
               })
         }
   
@@ -57,19 +51,12 @@ interface UserFormProps {
         };
       
         const handleSubmit = async () => {
-          
-          if (formData.password !== formData.confirmPassword) {
-            setPasswordError("Passwords do not match");
-            return;
-          }
-      
           const newUser = {
             firstname: formData.firstname,
             surname: formData.lastname,
             role:formData.role, 
             station: formData.station, 
             email: formData.email,
-            password: formData.password
           };
           try {
             await createUser(newUser);
@@ -136,25 +123,6 @@ interface UserFormProps {
               <FormLabel>Email address</FormLabel>
               <Input type="email" size='md' onChange={handleChange} value={formData.email}/>
             </FormControl>
-            <HStack>
-              <Box>
-                <FormControl id="password" isRequired>
-                  <FormLabel>Password</FormLabel>
-                  <Input type="password" size='md' onChange={handleChange} value={formData.password}/>
-                </FormControl>
-              </Box>
-              <Box>
-                <FormControl id="confirmPassword" isRequired>
-                  <FormLabel>Confirm Password</FormLabel>
-                  <Input type="password" size='md'onChange={handleChange} value={formData.confirmPassword}/>
-                </FormControl>
-              </Box>        
-            </HStack>
-            {passwordError && (
-              <Text color="red.500" fontSize="sm">
-                {passwordError}
-              </Text>
-            )}
   
             <Stack spacing={10} pt={2}>
               <Button

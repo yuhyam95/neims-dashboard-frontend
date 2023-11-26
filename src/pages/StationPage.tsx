@@ -1,6 +1,4 @@
-import { Box, Flex, HStack, Heading } from '@chakra-ui/react';
-import UserGrid from '../components/UserGrid';
-import ProductsGrid from '../components/ProductsGrid';
+import { Box, HStack, Heading } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Station } from '../services/station-service';
@@ -52,7 +50,7 @@ const category = selectedStation?.category;
         <UserCard data={selectedStation}/>
        </Box>
       </HStack>
-      <HStack>
+      <HStack alignItems="flex-start">
        <Box flex={2}> 
       <MyTable showHeader={false} items={5} width="100%" productData={products} showStation={false} showCategory={true}/>
       </Box>
