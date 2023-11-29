@@ -72,7 +72,7 @@ import UpdateUserForm from "./UpdateUserForm";
         <ModalHeader> Update User</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-        <UpdateUserForm firstname={firstname} surname={surname} email={email} status={status} _id={_id}/>
+        <UpdateUserForm firstname={firstname} surname={surname} email={email} status={status} _id={_id} role={role} station={station}/>
         </ModalBody>
       </ModalContent>
       </Modal>

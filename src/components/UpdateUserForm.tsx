@@ -2,21 +2,21 @@ import useStations from '../hooks/useStation';
 import useUser from '../hooks/useUser';
 import useRole from '../hooks/useRole';
 import { useEffect, useState } from "react";
-import { Alert, AlertIcon, Box, Button, FormControl, FormLabel, HStack, Input, Select, Stack, Switch, Text } from "@chakra-ui/react";
+import { Alert, AlertIcon, Box, Button, FormControl, FormLabel, HStack, Input, Select, Stack, Switch } from "@chakra-ui/react";
 
 interface UserFormProps {
     _id: string,
     firstname: string,
+    role: string,
+    station: string,
     surname: string,
     email: string,
     status: boolean
   }
   
- const UpdateUserForm = ({ _id, firstname, surname, email, status }: UserFormProps) => {
-        
-        const [showForm, setShowForm] = useState(true);
-        const [queryParams, setQueryParams] = useState({});
-        const {stations} = useStations(queryParams);
+ const UpdateUserForm = ({ _id, firstname, surname, email, status, role, station }: UserFormProps) => {
+        //const [queryParams, setQueryParams] = {}
+        const {stations} = useStations('');
         const {roles} = useRole();
     
         const {updateUser, createError, success, resetSuccess} = useUser()
@@ -24,11 +24,9 @@ interface UserFormProps {
         const [formData, setFormData] = useState({
           firstname: firstname,
           surname: surname,
-          role: "",
-          station: "",
+          role: role,
+          station: station,
           email: email,
-          password: "",
-          confirmPassword: "",
           status: status
         });
 
@@ -63,7 +61,6 @@ interface UserFormProps {
           try {
             await updateUser(updatedUser);
 
-
           } catch (error) {
             console.log(error)
           }
@@ -80,7 +77,6 @@ interface UserFormProps {
 
         return (
           <Stack spacing={4}>
-           {showForm && 
            <>
             <HStack>
               <Box>
@@ -124,20 +120,6 @@ interface UserFormProps {
               <FormLabel>Email address</FormLabel>
               <Input type="email" size='md' onChange={handleChange} value={formData.email}/>
             </FormControl>
-            {/* <HStack>
-              <Box>
-                <FormControl id="password" isRequired>
-                  <FormLabel>Password</FormLabel>
-                  <Input type="password" size='md' onChange={handleChange} value={formData.password}/>
-                </FormControl>
-              </Box>
-              <Box>
-                <FormControl id="confirmPassword" isRequired>
-                  <FormLabel>Confirm Password</FormLabel>
-                  <Input type="password" size='md'onChange={handleChange} value={formData.confirmPassword}/>
-                </FormControl>
-              </Box>        
-            </HStack> */}
             <FormControl id="status" isRequired>
             <FormLabel htmlFor='status'>Status:</FormLabel>
             <Switch id="status"
@@ -146,11 +128,6 @@ interface UserFormProps {
                   onChange={handleChange}
                   isChecked={formData.status ? true : false} />    
             </FormControl>
-            {/* {passwordError && (
-              <Text color="red.500" fontSize="sm">
-                {passwordError}
-              </Text>
-            )} */}
   
             <Stack spacing={10} pt={2}>
               <Button
@@ -165,7 +142,7 @@ interface UserFormProps {
                 Update
               </Button>
             </Stack>
-                   </>}
+              </>
             {success && 
               <Alert status='success'>
               <AlertIcon />
