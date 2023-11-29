@@ -26,10 +26,14 @@ interface Props {
 }
 
  interface ReportItem {
-    station: string,
+    _id: string,
+    station: {
+      _id: string,
+      name: string
+    },
     title: string,
     body: string,
-    date: string,
+    createdAt: string,
 }
 
 
@@ -89,12 +93,13 @@ const ReportsTable = ({reports}: Props) => {
           </Tr>
         </Thead> */}
             <Tbody>
-              {currentReports.map((report, index) => (
+              {currentReports.map((report) => (
                 <ReportRows
-                    station={report.station}
-                    title={report.title}
-                    body={report.body}
-                    date={moment(report.date).format('MMMM Do YYYY')}
+                    key={report?._id}
+                    station={report.station?.name}
+                    title={report?.title}
+                    body={report?.body}
+                    date={moment(report?.createdAt).format('MMMM Do YYYY')}
                 />
               ))}
             </Tbody>
