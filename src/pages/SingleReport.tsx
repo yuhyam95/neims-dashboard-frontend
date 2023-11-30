@@ -1,4 +1,4 @@
-import { Box, Button, Divider, HStack, Heading, Input, Stack, Text, Textarea, VStack } from "@chakra-ui/react"
+import { Box, Button, Divider, HStack, Heading, Stack, Text, Textarea, VStack } from "@chakra-ui/react"
 import { useLocation } from "react-router-dom"
 
 
@@ -21,7 +21,7 @@ const comments = [
 const SingleReport = () => {
   
     const location = useLocation()
-    const {title, body, station, date} = location.state
+    const {title, body, station} = location.state
 
 
 return (
@@ -43,7 +43,7 @@ return (
 
     <Box p={8} backgroundColor='white' borderRadius='10px' width="30%">
       <Text fontStyle='italic' mb={4} fontSize='xl'>
-        Comments
+        Replies
       </Text>
       {comments.map((comment, index) => (
         <VStack key={comment.id} align="start" spacing={1}>
@@ -54,7 +54,7 @@ return (
       ))}
     <Stack mt={10}>
     <Textarea placeholder='Leave a Comment' />
-      <Button colorScheme="teal">Comment</Button>
+      <Button colorScheme="teal">Reply</Button>
     </Stack>
     </Box>
     </HStack>

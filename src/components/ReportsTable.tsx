@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import {
   Table,
-  Thead,
   Tbody,
   Tr,
-  Th,
   Td,
   Input,
   TableCaption,

@@ -15,10 +15,13 @@ import {
 import { useState } from 'react';
 import apiClient from '../services/api-client';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+
 
 export default function Login() {
 
   const navigate = useNavigate()
+  const {login} = useAuth()
 
   const [formData, setFormData] = useState({
     email: '',
@@ -36,6 +39,7 @@ export default function Login() {
     try {
       const response = await apiClient.post('/auth/login', formData);
       if (response.status === 200) {
+        login(response.data.token);
         navigate('/');
       } else {
         console.error('Login failed');
