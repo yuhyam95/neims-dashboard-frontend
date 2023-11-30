@@ -16,6 +16,7 @@ import { useState } from 'react';
 import apiClient from '../services/api-client';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { jwtDecode } from 'jwt-decode';
 
 
 export default function Login() {
@@ -39,8 +40,9 @@ export default function Login() {
     try {
       const response = await apiClient.post('/auth/login', formData);
       if (response.status === 200) {
-        login(response.data.token);
-        navigate('/');
+        const { _id } = jwtDecode(response.data.token) as { _id: string, role: string };
+        login(_id);
+        // navigate('/');
       } else {
         console.error('Login failed');
       }

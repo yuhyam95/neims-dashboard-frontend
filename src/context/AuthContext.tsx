@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { jwtDecode } from "jwt-decode";
+import apiClient from '../services/api-client';
 
 interface User {
   _id: string;
@@ -20,18 +20,15 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
   
-    const login = (token: string) => {
+    const login = async (userId: string) => {
       try {
-        const decodedToken = jwtDecode(token) as { _id: string }; // Assuming the token contains an 'email' field
-        console.log(decodedToken)
-        if (decodedToken) {
-          const userData: User = { _id: decodedToken._id }; // Adjust according to your actual user data structure
-          setUser(userData);
-        } else {
-          console.error('Invalid token');
-        }
+        const userDetailsResponse = await apiClient.get(`/user/${userId}`);
+        const userData: User = userDetailsResponse.data;
+        console.log(userData)
+        setUser(userData);
+
       } catch (error) {
-        console.error('Error decoding token:', error);
+        console.error('Error fetching user details:', error);
       }
     };
   
