@@ -37,11 +37,12 @@ import ProductCategory from './ProductCategory'
 import BinCardPage from './BinCardPage'
 import Dashboard from './Dashboard'
 import StationPage from './StationPage'
-import { Link, Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import ReportsPage from './ReportsPage'
 import SingleReport from './SingleReport'
 import UserManagement from './UserManagement'
 import BeneficiariesPage from './BeneficiariesPage'
+import { useAuth } from '../context/AuthContext'
 
 interface LinkItemProps {
   name: string
@@ -135,6 +136,10 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
 }
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+  
+  const navigate = useNavigate()
+  const {user, logout} = useAuth()
+
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -167,7 +172,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                   alignItems="flex-start"
                   spacing="1px"
                   ml="2">
-                  <Text fontSize="sm">Yusuf Habu</Text>
+                  <Text fontSize="sm">{user?.firstname} {user?.surname}</Text>
                   <Text fontSize="xs" color="gray.600">
                     Admin
                   </Text>
@@ -180,10 +185,10 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
             <MenuList
               bg={useColorModeValue('white', 'gray.900')}
               borderColor={useColorModeValue('gray.200', 'gray.700')}>
-              <MenuItem>Profile</MenuItem>
-              <MenuItem>Settings</MenuItem>
-              <MenuDivider />
-              <MenuItem>Sign out</MenuItem>
+              <MenuItem onClick={() => {
+                logout;
+                navigate('/login')
+              }}>Sign out</MenuItem>
             </MenuList>
           </Menu>
         </Flex>

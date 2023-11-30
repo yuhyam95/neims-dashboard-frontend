@@ -42,7 +42,7 @@ export default function Login() {
       if (response.status === 200) {
         const { _id } = jwtDecode(response.data.token) as { _id: string, role: string };
         login(_id);
-        // navigate('/');
+        navigate('/');
       } else {
         console.error('Login failed');
       }
