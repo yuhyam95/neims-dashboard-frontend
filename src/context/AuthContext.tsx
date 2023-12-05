@@ -4,7 +4,15 @@ import apiClient from '../services/api-client';
 interface User {
   _id: string;
   firstname: string,
-  surname: string
+  surname: string,
+  role: {
+    _id: string,
+    name: string
+  },
+  station: {
+    _id: string,
+    name: string
+  }
 }
 
 interface AuthContextProps {

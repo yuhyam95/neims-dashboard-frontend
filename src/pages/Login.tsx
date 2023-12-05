@@ -23,6 +23,7 @@ export default function Login() {
 
   const navigate = useNavigate()
   const {login} = useAuth()
+  const [showError, setShowError] = useState(false);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -40,14 +41,18 @@ export default function Login() {
     try {
       const response = await apiClient.post('/auth/login', formData);
       if (response.status === 200) {
-        const { _id } = jwtDecode(response.data.token) as { _id: string, role: string };
+        const { _id, role } = jwtDecode(response.data.token) as { _id: string, role: {_id: string, name: string} };
         login(_id);
+        if (role.name == "Admin"){
         navigate('/');
-      } else {
-        console.error('Login failed');
       }
+      else{
+        setShowError(true)
+      }
+      } 
     } catch (error) {
       console.error('Error during login:', error);
+      setShowError(true)
     }
   };
 
@@ -80,7 +85,7 @@ export default function Login() {
               Sign in
             </Button>
           </Stack>
-          
+          {showError && <Text color={'red.500'}>Login Failed, try again</Text>}
         </Stack>
       </Flex>
       <Flex flex={1}>

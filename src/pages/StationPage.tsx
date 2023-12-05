@@ -9,15 +9,17 @@ import MyTable from '../components/MyTable';
 import CategoryGrid from '../components/CategoryGrid';
 import CategoryColumnChart from "../components/CategoryColumnChart";
 import UserCard from '../components/UserCard';
+//import { useAuth } from '../context/AuthContext';
 
 
 function StationPage() {
+// const {user} = useAuth()
 const location = useLocation()
 const {stationId, stateName, type} = location.state
+//let selectedId = user?.station._id;
 const [selectedStation, setSelectedStation] = useState<Station | any>(null)
 const [queryParams, setQueryParams] = useState({});
-const { products } = useProducts(queryParams);
-  
+const { products } = useProducts(queryParams);  
 
 useEffect(() => {
   const getById = (stationId: any) => {

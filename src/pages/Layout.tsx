@@ -16,7 +16,6 @@ import {
   FlexProps,
   Menu,
   MenuButton,
-  MenuDivider,
   MenuItem,
   MenuList,
   Heading,
@@ -65,7 +64,7 @@ interface SidebarProps extends BoxProps {
 
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', icon: FiHome, route: '/' },
-  { name: 'Reports', icon: FiFile, route: '/reports'},
+  { name: 'Disaster Reports', icon: FiFile, route: '/reports'},
   { name: 'Beneficiaries', icon: FiUsers, route: '/beneficiaries' },
   { name: 'User Management', icon: FiUser, route: '/usermanagement' },
   { name: 'Settings', icon: FiSettings },
