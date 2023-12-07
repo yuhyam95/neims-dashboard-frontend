@@ -65,7 +65,6 @@ interface SidebarProps extends BoxProps {
 
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', icon: FiHome, route: '/' },
-  { name: 'Station Dashboard', icon: FiHome, route: '/stationdashboard' },
   { name: 'Disaster Reports', icon: FiFile, route: '/reports'},
   { name: 'Beneficiaries', icon: FiUsers, route: '/beneficiaries' },
   { name: 'User Management', icon: FiUser, route: '/usermanagement' },
@@ -201,6 +200,9 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
 const Layout = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
    
+  const {user} = useAuth();
+  const userRole = user?.role.name;
+
   return (
     <Box minH="100vh" bg={useColorModeValue('#f6f8fc', '#f6f8fc')}>
       <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
@@ -219,7 +221,8 @@ const Layout = () => {
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
         <Routes>
-        <Route path="/"  element={<Dashboard /> } />
+        <Route path="/"  
+          element={userRole === 'Admin' ? <Dashboard /> : <StationDashboard /> }/>
         <Route path="/station" element={<StationPage />} />
         <Route path="/productcategory" element={<ProductCategory />} />
         <Route path="/bincardpage" element={<BinCardPage />} />
@@ -227,7 +230,6 @@ const Layout = () => {
         <Route path="/singlereport" element={<SingleReport />} />
         <Route path="/usermanagement" element={<UserManagement />} />
         <Route path="/beneficiaries" element={<BeneficiariesPage />} />
-        <Route path="/stationdashboard" element={<StationDashboard />} />
         </Routes>
       </Box>
     </Box>
