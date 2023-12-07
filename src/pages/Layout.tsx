@@ -42,6 +42,7 @@ import SingleReport from './SingleReport'
 import UserManagement from './UserManagement'
 import BeneficiariesPage from './BeneficiariesPage'
 import { useAuth } from '../context/AuthContext'
+import StationDashboard from './StationDashboard'
 
 interface LinkItemProps {
   name: string
@@ -64,6 +65,7 @@ interface SidebarProps extends BoxProps {
 
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', icon: FiHome, route: '/' },
+  { name: 'Station Dashboard', icon: FiHome, route: '/stationdashboard' },
   { name: 'Disaster Reports', icon: FiFile, route: '/reports'},
   { name: 'Beneficiaries', icon: FiUsers, route: '/beneficiaries' },
   { name: 'User Management', icon: FiUser, route: '/usermanagement' },
@@ -225,6 +227,7 @@ const Layout = () => {
         <Route path="/singlereport" element={<SingleReport />} />
         <Route path="/usermanagement" element={<UserManagement />} />
         <Route path="/beneficiaries" element={<BeneficiariesPage />} />
+        <Route path="/stationdashboard" element={<StationDashboard />} />
         </Routes>
       </Box>
     </Box>
