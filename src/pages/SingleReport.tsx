@@ -1,62 +1,41 @@
-import { Box, Button, Divider, HStack, Heading, Stack, Text, Textarea, VStack } from "@chakra-ui/react"
+import { HStack, Heading } from "@chakra-ui/react"
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom"
+import apiClient from "../services/api-client";
+import ReportStat from "../components/ReportStat";
 
-
-
-
-const comments = [
-  {
-      id: 1,
-      user: "Yusuf Habu",
-      comment: "I will review and get back to you."  
-  },
-  {
-    id: 2,
-    user: "Aisha Sambo",
-    comment: "Okay Sir, Awaiting your response"  
+interface Report {
+  state: string,
+  lga: string,
+  community: string
 }
-]
-
 
 const SingleReport = () => {
   
     const location = useLocation()
-    const {title, body, station} = location.state
-
-
+    const {_id} = location.state;
+    const [report, setReport] = useState<Report | null>(null);
+    
+    useEffect(() => {
+      fetchData();
+  }, []); 
+  
+  const fetchData = async () => {
+        try {
+                const res = await apiClient.get(`/report/${_id}`);
+                setReport(res.data);
+                console.log(res.data)
+        } catch (error) {
+            console.error(error);
+        }
+      };
 return (
     <>
-
     <Heading mb={4} ml={4}> Report </Heading>
-    <HStack justify='space-around' alignItems="flex-start">
-    <Box p={4} backgroundColor='white' borderRadius='10px' width="60%">
-      {/* Header */}
-      <VStack align="start" spacing={2}>
-        <Text fontSize="xl" fontWeight="bold">{station} Station</Text>
-        <Text fontSize="lg" fontWeight="bold">{title}</Text>
-      </VStack>
-
-      <Box mt={4} >
-        <Text>{body}</Text>
-      </Box>
-    </Box>
-
-    <Box p={8} backgroundColor='white' borderRadius='10px' width="30%">
-      <Text fontStyle='italic' mb={4} fontSize='xl'>
-        Replies
-      </Text>
-      {comments.map((comment, index) => (
-        <VStack key={comment.id} align="start" spacing={1}>
-          <Text fontWeight="bold" fontStyle='italic' color="gray.500">{comment.user}</Text>
-          <Text>{comment.comment}</Text>
-          {index < comments.length - 1 && <Divider w="100%" mb={2}/>}
-        </VStack>
-      ))}
-    <Stack mt={10}>
-    <Textarea placeholder='Leave a Comment' />
-      <Button colorScheme="teal">Reply</Button>
-    </Stack>
-    </Box>
+    <HStack spacing={8}>
+      <ReportStat title="State" body={report?.state}/>
+      <ReportStat title="LGA" body={report?.lga}/>
+      <ReportStat title="Community" body={report?.community}/>
     </HStack>
     </>
     )

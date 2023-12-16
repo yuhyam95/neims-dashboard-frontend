@@ -1,21 +1,15 @@
-import { Button, HStack, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react"
+import { HStack, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react"
 import ReportsTable from "../components/ReportsTable"
-import { FaPlus } from "react-icons/fa";
-//import { reports } from "../constants/mockData"
 import CreateReport from "../components/CreateReport";
 import useReports from "../hooks/useReports";
 
 const ReportsPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { reports } = useReports('')
-  console.log(reports)
   return (
     <>
     <HStack justify='space-between'>
     <Heading mb={4} ml={4}> Reports </Heading>
-    <Button leftIcon={<FaPlus />} colorScheme='teal' variant='solid' onClick={onOpen}>
-      Create Report
-    </Button>
     </HStack>
     <ReportsTable reports={reports}/>
     <Modal isOpen={isOpen} onClose={onClose} size='4xl'>
