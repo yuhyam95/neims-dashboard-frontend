@@ -13,11 +13,12 @@ import {
   InputLeftElement,
   HStack,
   Stack,
+  Thead,
+  Th,
 } from '@chakra-ui/react';
 
 import { BiSearchAlt2, } from 'react-icons/bi';
 import ReportRows from './ReportRows';
-import moment from 'moment';
 
 interface Props {
   reports: ReportItem[],
@@ -25,13 +26,11 @@ interface Props {
 
  interface ReportItem {
     _id: string,
-    station: {
-      _id: string,
-      name: string
-    },
-    title: string,
-    body: string,
-    createdAt: string,
+    state: string,
+    lga: string,
+    community: string,
+    numberofaffectedpersons: number,
+    datereported: string
 }
 
 
@@ -84,20 +83,26 @@ const ReportsTable = ({reports}: Props) => {
     <TableContainer bg="#FAFAFA" borderRadius="10px">
       <Table size='lg'>
       <TableCaption>Reports</TableCaption>
-        {/* <Thead>
+        <Thead>
           <Tr>
-            <Th>Station</Th>
-            <Th>Report</Th>
+            <Th>State</Th>
+            <Th>LGA</Th>
+            <Th>Community</Th>
+            <Th>Number of Affected Persons</Th>
+            <Th>Date Reported</Th>
           </Tr>
-        </Thead> */}
+        </Thead>
             <Tbody>
               {currentReports.map((report) => (
                 <ReportRows
                     key={report?._id}
-                    station={report.station?.name}
-                    title={report?.title}
-                    body={report?.body}
-                    date={moment(report?.createdAt).format('MMMM Do YYYY')}
+                    _id={report?._id}
+                    state={report.state}
+                    lga={report?.lga}
+                    community={report?.community}
+                    numberofaffectedpersons={report?.numberofaffectedpersons}
+                    datereported={report?.datereported}
+
                 />
               ))}
             </Tbody>

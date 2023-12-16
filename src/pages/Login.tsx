@@ -43,12 +43,8 @@ export default function Login() {
       if (response.status === 200) {
         const { _id, role } = jwtDecode(response.data.token) as { _id: string, role: {_id: string, name: string} };
         login(_id);
-        if (role.name == "Admin"){
         navigate('/');
-      }
-      else{
         setShowError(true)
-      }
       } 
     } catch (error) {
       console.error('Error during login:', error);

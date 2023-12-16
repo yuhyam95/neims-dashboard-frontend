@@ -2,50 +2,53 @@ import {
     Tr,
     Td,
     Text,
-    Stack,
   } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
   
   
   interface Props {
-    station: string;
-    title: string;
-    body: string;
-    date: string,
+    _id: string,
+    state: string;
+    lga: string;
+    community: string;
+    numberofaffectedpersons: number,
+    datereported: string,
   }
   
   function ReportRows(props: Props) {
-    const { station, title, body, date, } = props;
+    const { _id, state, lga, community, numberofaffectedpersons, datereported } = props;
     
-    const maxChars = 120;
-    const truncatedBody = body.length > maxChars ? `${body.slice(0, maxChars)}...` : body;
-
     const navigate = useNavigate();
 
     const handleClick = () => {
-      navigate('/singlereport', {state: {station, title, body, date}});
+      navigate('/singlereport', {state: {_id}});
     };
     
     return (
       <Tr onClick={handleClick} backgroundColor='white'>
         <Td >
-            <Text as='b'>
-              {station}
+            <Text>
+              {state}
             </Text>
         </Td>
         <Td>
-        <Stack justifyContent='space-around'> 
-          <Text as='b'>
-            {title}
-          </Text>
           <Text>
-            {truncatedBody}
+            {lga}
           </Text>
-        </Stack>
+          </Td>
+          <Td>
+          <Text>
+            {community}
+          </Text>
+          </Td>
+          <Td>
+          <Text>
+            {numberofaffectedpersons}
+          </Text>
         </Td>
         <Td>
         <Text>
-            {date}
+            {datereported}
           </Text>
         </Td>
       </Tr>

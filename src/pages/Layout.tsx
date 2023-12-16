@@ -63,6 +63,8 @@ interface SidebarProps extends BoxProps {
   onClose: () => void
 }
 
+
+
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', icon: FiHome, route: '/' },
   { name: 'Disaster Reports', icon: FiFile, route: '/reports'},
@@ -136,9 +138,9 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
 }
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
-  
-  const navigate = useNavigate()
   const {user, logout} = useAuth()
+  const navigate = useNavigate()
+  
 
   return (
     <Flex
@@ -198,9 +200,8 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
 }
 
 const Layout = () => {
+  const {user} = useAuth()
   const { isOpen, onOpen, onClose } = useDisclosure()
-   
-  const {user} = useAuth();
   const userRole = user?.role.name;
 
   return (
