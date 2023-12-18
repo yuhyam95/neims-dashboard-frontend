@@ -1,4 +1,4 @@
-import { Card, CardBody, HStack, Stack, Stat, StatLabel, StatNumber, Text } from '@chakra-ui/react'
+import { Card, CardBody, HStack, Stat, StatLabel, StatNumber } from '@chakra-ui/react'
 
 
 interface Props {

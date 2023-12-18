@@ -1,9 +1,11 @@
-import { Heading, SimpleGrid } from "@chakra-ui/react"
+import { Button, HStack, Heading, SimpleGrid, Text } from "@chakra-ui/react"
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom"
 import apiClient from "../services/api-client";
 import ReportStat from "../components/ReportStat";
+import { FaCheck } from "react-icons/fa6";
 import moment from "moment";
+import { useAuth } from "../context/AuthContext";
 
 interface Report {
   state: string,
@@ -31,10 +33,12 @@ interface Report {
 
 const SingleReport = () => {
   
+    const {user} = useAuth();
     const location = useLocation()
     const {_id} = location.state;
     const [report, setReport] = useState<Report | null>(null);
-    
+    const userRole = user?.role.name;
+
     useEffect(() => {
       fetchData();
   }, []); 
@@ -43,17 +47,38 @@ const SingleReport = () => {
         try {
                 const res = await apiClient.get(`/report/${_id}`);
                 setReport(res.data);
-                console.log(res.data)
         } catch (error) {
             console.error(error);
         }
       };
 
+      const ApproveReport = async () => {
+        try {
+          const req = await apiClient.put(`/report/${_id}`,
+          {
+              approved: true
+          });
+          console.log(req.data)
+      } catch (error) {
+      console.error(error);
+      }
+
+    }
+
   const dateofassessment = moment(report?.createdAt).format('D/MM/YYYY')    
 
 return (
     <>
+    <HStack justify='space-between'>
     <Heading mb={4} ml={4}> Report </Heading>
+    {userRole == "Head-officer" && report?.approved == false ?
+    <HStack spacing={2} mr={8}>
+    <Text fontSize='20'>Approve: </Text>
+    <Button size='sm' width='20' colorScheme='teal' variant='outline' onClick={ApproveReport}><FaCheck color='teal'/></Button>
+    </HStack> : 
+    <Text fontSize='20'> Status: Approved</Text>
+    }
+    </HStack>
     <SimpleGrid columns={{ base: 1, sm: 2, md: 3, lg: 3, xl: 5 }} spacing={6} >
       <ReportStat title="State" body={report?.state}/>
       <ReportStat title="LGA" body={report?.lga}/>
