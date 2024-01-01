@@ -10,10 +10,10 @@ const ReportsPage = () => {
 
   let queryParams = {}
   if (userRole == 'Head-officer') {
-    queryParams = {approved: true}
+    queryParams = {stationName: userStation}
   }
   else{
-    queryParams = '';
+    queryParams = {approved: true};
   }
   const { reports } = useReports(queryParams)
   
