@@ -3,8 +3,6 @@ import useBeneficiaries from "../hooks/useBeneficiaries"
 import BeneficiariesCard from "../components/BeneficiariesCard";
 import { IoManSharp, IoWomanSharp } from "react-icons/io5";
 import { FaChildren, FaPeopleRoof } from "react-icons/fa6";
-import { FaHome } from "react-icons/fa";
-import BigCard from "../components/BigCard";
 import BeneficiariesGrid from "../components/BeneficiariesGrid";
 
 const BeneficiariesPage = () => {
@@ -18,26 +16,15 @@ const totalbeneficiaries =
 
 return (
     <>
-    <Box mb={180}>
+    <Box>
       <HStack>
       <Heading margin={4}>Beneficiaries</Heading>    
       </HStack>
-    <SimpleGrid minChildWidth='120px' spacing='40px'>
-    <Box height='160px'>
-      <Stack spacing={3}>
+    <SimpleGrid columns={{ base: 1, sm: 2, md: 3, lg: 3, xl: 4 }} spacing={6}>
        <BeneficiariesCard name="Men" total={beneficiariesData?.men} color="#0090FF" icon={IoManSharp}/>
        <BeneficiariesCard name="Women" total={beneficiariesData?.women} color="#FE3169" icon={IoWomanSharp}/>
-      </Stack>  
-    </Box>
-    <Box height='120px'>
-    <BigCard name="Total Beneficiaries" total={totalbeneficiaries} color="#FFA523" size="lg" icon={FaPeopleRoof} height={285}/>
-    </Box>
-    <Box height='120px'>
-     <Stack spacing={3}>   
-    <BeneficiariesCard name="Children" total={beneficiariesData?.children} color="#A8CF45" icon={FaChildren}/>
-    <BeneficiariesCard name="Households" total={beneficiariesData?.children} color="#9F48A6" icon={FaHome}/>   
-    </Stack>
-    </Box>
+       <BeneficiariesCard name="Children" total={beneficiariesData?.children} color="#A8CF45" icon={FaChildren}/>
+       <BeneficiariesCard name="Total Beneficiaries" total={totalbeneficiaries} color="#FFA523" size="lg" icon={FaPeopleRoof} />
     </SimpleGrid>
     </Box>
     <Heading margin={5} size='md'>Beneficiaries by States</Heading>

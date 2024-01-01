@@ -21,7 +21,7 @@ const BeneficiariesCard = ({name, color, total, icon, size, height}: Props) => {
     <HStack>
     <StatLabel color="white" >Total {name}</StatLabel>
     </HStack>
-    <StatNumber color="white" fontSize='42px'>{formattedTotal}</StatNumber>
+    <StatNumber color="white" fontSize='50px'>{formattedTotal}</StatNumber>
     </Stat>
     {icon &&
         <Icon
