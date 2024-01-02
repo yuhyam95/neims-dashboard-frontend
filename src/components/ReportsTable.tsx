@@ -30,7 +30,8 @@ interface Props {
     lga: string,
     community: string,
     numberofaffectedpersons: number,
-    datereported: string
+    datereported: string,
+    approved: boolean
 }
 
 
@@ -90,6 +91,7 @@ const ReportsTable = ({reports}: Props) => {
             <Th>Community</Th>
             <Th>Number of Affected Persons</Th>
             <Th>Date Reported</Th>
+            <Th>Status</Th>
           </Tr>
         </Thead>
             <Tbody>
@@ -102,7 +104,7 @@ const ReportsTable = ({reports}: Props) => {
                     community={report?.community}
                     numberofaffectedpersons={report?.numberofaffectedpersons}
                     datereported={report?.datereported}
-
+                    approved={report?.approved}
                 />
               ))}
             </Tbody>

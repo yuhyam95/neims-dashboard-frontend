@@ -13,10 +13,11 @@ import { useNavigate } from "react-router-dom";
     community: string;
     numberofaffectedpersons: number,
     datereported: string,
+    approved: boolean
   }
   
   function ReportRows(props: Props) {
-    const { _id, state, lga, community, numberofaffectedpersons, datereported } = props;
+    const { _id, state, lga, community, numberofaffectedpersons, datereported, approved } = props;
     
     const navigate = useNavigate();
 
@@ -50,6 +51,9 @@ import { useNavigate } from "react-router-dom";
         <Text>
             {datereported}
           </Text>
+        </Td>
+        <Td>
+        {approved ? <Text>Approved</Text> : <Text>Not Approved</Text>}
         </Td>
       </Tr>
     );

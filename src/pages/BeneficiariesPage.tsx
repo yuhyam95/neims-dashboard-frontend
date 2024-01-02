@@ -1,4 +1,4 @@
-import { Box, HStack, Heading, SimpleGrid, Stack } from "@chakra-ui/react";
+import { Box, HStack, Heading, SimpleGrid } from "@chakra-ui/react";
 import useBeneficiaries from "../hooks/useBeneficiaries"
 import BeneficiariesCard from "../components/BeneficiariesCard";
 import { IoManSharp, IoWomanSharp } from "react-icons/io5";
