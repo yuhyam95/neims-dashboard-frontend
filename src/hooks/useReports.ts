@@ -33,7 +33,7 @@ const useReports = (queryParams = {}) => {
     setSuccess(false);
   };
 
-  return { reports, error, createError, isLoading, setReports, setError, success, resetSuccess };
+  return { reports, error, createError, isLoading, setReports, setError, success, resetSuccess, setCreateError };
 }
 
 export default useReports;

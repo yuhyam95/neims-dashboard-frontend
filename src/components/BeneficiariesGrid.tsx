@@ -1,5 +1,4 @@
 import { SimpleGrid } from "@chakra-ui/react"
-import BeneficiariesCard from "./BeneficiariesCard"
 import StateBeneficiaries from "./StateBeneficiaries"
 
 const states = [

@@ -6,7 +6,7 @@ interface Props {
   setSelectedTab: any
 }
 
-const StationTabs = ({ selectedTab, setSelectedTab }: Props) => {
+const StationTabs = ({ setSelectedTab }: Props) => {
   return (
     <Tabs variant='unstyled' align="center" bg="white" borderRadius="10px" width="50%" defaultIndex={0}>
       <TabList>

@@ -13,7 +13,7 @@ import ChartGrid from '../components/ChartGrid';
 
 function Dashboard() {
   const [selectedTab, setSelectedTab] = useState('Territorial');
-  const [queryParams, setQueryParams] = useState({});
+  const queryParams = "";
   const { stations } = useStations(queryParams);
   const { products } = useProducts(queryParams);    
 

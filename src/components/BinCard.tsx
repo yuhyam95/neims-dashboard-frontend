@@ -54,7 +54,7 @@ interface Props {
 
 const itemsPerPage = 10;
 
-const BinCard = ({bincard, name, quantity}: Props) => {
+const BinCard = ({bincard, name}: Props) => {
   const [searchText, setSearchText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [pdfData, setPdfData] = useState<string[][]>([]);

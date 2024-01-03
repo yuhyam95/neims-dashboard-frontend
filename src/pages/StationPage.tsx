@@ -18,7 +18,7 @@ const location = useLocation()
 const {stationId, stateName, type} = location.state
 //let selectedId = user?.station._id;
 const [selectedStation, setSelectedStation] = useState<Station | any>(null)
-const [queryParams, setQueryParams] = useState({});
+const queryParams = {stationName: stateName};
 const { products } = useProducts(queryParams);  
 
 useEffect(() => {

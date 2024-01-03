@@ -32,8 +32,8 @@ interface UserFormProps {
 
   
         const handleChange = (e: any) => {
-          const { id, value, type, checked } = e.target;
-          const fieldValue = type === 'checkbox' ? checked : value;
+          const { id, value } = e.target;
+          //const fieldValue = type === 'checkbox' ? checked : value;
 
           setFormData((prevData) => ({ ...prevData, [id]: value }));
         };

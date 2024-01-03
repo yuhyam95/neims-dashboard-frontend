@@ -9,9 +9,9 @@ interface UserFormProps {
     setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
   }
   
- const UserForm = ({  showForm, setShowForm }: UserFormProps) => {
+ const UserForm = ({  showForm }: UserFormProps) => {
         
-    const [queryParams, setQueryParams] = useState({});
+        const queryParams = "";
         const {stations} = useStations(queryParams);
         const {roles} = useRole();
     

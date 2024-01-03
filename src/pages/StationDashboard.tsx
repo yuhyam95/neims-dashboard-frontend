@@ -15,7 +15,7 @@ function StationDashboard() {
 const {user} = useAuth()
 const stationId = user?.station.id;
 const [selectedStation, setSelectedStation] = useState<Station | any>(null)
-const [queryParams, setQueryParams] = useState({});
+const queryParams = {stationName: user?.station.name};
 const { products } = useProducts(queryParams);  
 
 useEffect(() => {

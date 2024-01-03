@@ -2,13 +2,12 @@ import { Heading, Stack, Text } from "@chakra-ui/react"
 import MyTable from "../components/MyTable"
 import useProducts from "../hooks/useProducts";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
 
 
 const ProductCategory = () => {
   const location = useLocation()
   const {name, stateName, color, total, type} = location.state
-  const [queryParams, setQueryParams] = useState({stationName: stateName, category: name})
+  const queryParams = {stationName: stateName, category: name}
   const { products } = useProducts(queryParams);
   
   console.log(products)
