@@ -3,10 +3,9 @@ import StationGrid from '../components/StationGrid';
 import { Flex } from '@chakra-ui/react';
 import ProductsGrid from '../components/ProductsGrid';
 import StationTabs from '../components/StationTabs';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useStations from '../hooks/useStation';
 import useProducts from '../hooks/useProducts';
-import apiClient from '../services/api-client';
 import ChartGrid from '../components/ChartGrid';
 
 

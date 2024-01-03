@@ -13,7 +13,6 @@ import {
     Switch,
     HStack,
   } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
 import { FaRegEdit } from "react-icons/fa";  
 import UpdateUserForm from "./UpdateUserForm";
   
@@ -30,8 +29,6 @@ import UpdateUserForm from "./UpdateUserForm";
   function UserRows(props: Props) {
     const { _id, firstname, surname, email, station, role, status} = props;
     const { isOpen, onOpen, onClose } = useDisclosure()
-
-    const navigate = useNavigate();
     
     return (
       <>

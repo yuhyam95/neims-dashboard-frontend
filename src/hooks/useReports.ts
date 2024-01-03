@@ -28,39 +28,6 @@ const useReports = (queryParams = {}) => {
     return () => cancel();
   }, []);
 
-//   const createReport = async (newReportData: createReport) => {
-//     try {
-//       setLoading(true);
-//       const response = await reportService.create<createReport>(newReportData);
-//       setReports((prevReports) => [...prevReports, response.data]);
-//       setSuccess(true);
-//       setLoading(false);
-//     } catch (err: any) {
-//       if (err instanceof CanceledError) return;
-//       setCreateError(err.message);
-//       setLoading(false);
-//     }
-//   };
-
-//   const updateReport = async (updatedReportData: createReport) => {
-//     try {
-//       setLoading(true);
-//       const response = await reportService.update<createReport>(updatedReportData);
-//       const updatedReport = response.data;
-
-//       setReports((prevReports) =>
-//         prevReports.map((report) =>
-//           report._id === updatedReport._id ? updatedReport : report
-//         )
-//       );
-//       setSuccess(true);
-//       setLoading(false);
-//     } catch (err: any) {
-//       if (err instanceof CanceledError) return;
-//       setError(err.message);
-//       setLoading(false);
-//     }
-//   };
   
   const resetSuccess = () => {
     setSuccess(false);

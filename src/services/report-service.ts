@@ -7,7 +7,7 @@ export interface Report {
     community: string,
     numberofaffectedpersons: number,
     datereported: string,
-    
+    approved: boolean
 }
 
 

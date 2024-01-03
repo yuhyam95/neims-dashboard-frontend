@@ -30,6 +30,7 @@ import {
   FiUser,
   FiUsers,
   FiFile,
+  FiTrendingUp
 } from 'react-icons/fi'
 import { IconType } from 'react-icons'
 import ProductCategory from './ProductCategory'
@@ -43,6 +44,7 @@ import UserManagement from './UserManagement'
 import BeneficiariesPage from './BeneficiariesPage'
 import { useAuth } from '../context/AuthContext'
 import StationDashboard from './StationDashboard'
+import FinancialReport from './FinancialReport'
 
 interface LinkItemProps {
   name: string
@@ -67,6 +69,7 @@ interface SidebarProps extends BoxProps {
 
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', icon: FiHome, route: '/' },
+  { name: 'FInancial Report', icon: FiTrendingUp, route: '/financialreport'},
   { name: 'Disaster Reports', icon: FiFile, route: '/reports'},
   { name: 'Beneficiaries', icon: FiUsers, route: '/beneficiaries' },
   { name: 'User Management', icon: FiUser, route: '/usermanagement' },
@@ -231,6 +234,7 @@ const Layout = () => {
         <Route path="/singlereport" element={<SingleReport />} />
         <Route path="/usermanagement" element={<UserManagement />} />
         <Route path="/beneficiaries" element={<BeneficiariesPage />} />
+        <Route path="/financialreport" element={<FinancialReport />} />
         </Routes>
       </Box>
     </Box>

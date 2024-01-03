@@ -1,13 +1,13 @@
 import create from "./http-service";
   
  export interface User {
-      _id?: string,
+      _id: string,
       firstname: string,
       surname: string,
       email: string
       role: Role,
       station: Station, 
-      status: string
+      status: boolean
   }
   
   interface Role {

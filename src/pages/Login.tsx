@@ -41,7 +41,7 @@ export default function Login() {
     try {
       const response = await apiClient.post('/auth/login', formData);
       if (response.status === 200) {
-        const { _id, role } = jwtDecode(response.data.token) as { _id: string, role: {_id: string, name: string} };
+        const { _id } = jwtDecode(response.data.token) as { _id: string, role: {_id: string, name: string} };
         login(_id);
         navigate('/');
         setShowError(true)
