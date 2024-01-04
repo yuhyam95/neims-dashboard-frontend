@@ -191,7 +191,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               bg={useColorModeValue('white', 'gray.900')}
               borderColor={useColorModeValue('gray.200', 'gray.700')}>
               <MenuItem onClick={() => {
-                logout;
+                logout();
                 navigate('/login')
               }}>Sign out</MenuItem>
             </MenuList>

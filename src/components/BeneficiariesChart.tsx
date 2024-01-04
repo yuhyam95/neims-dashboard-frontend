@@ -33,8 +33,6 @@ const fetchData = async () => {
     const men = beneficiariesData?.men || 0;
     const women = beneficiariesData?.women || 0;
     const children = beneficiariesData?.children || 0;
-    const total = men + women + children;
-    console.log(total)
   const series = [men, women, children];
 
   const chartOptions: ApexOptions = {
