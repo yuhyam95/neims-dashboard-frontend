@@ -1,21 +1,16 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
 
-interface PrivateRouteProps {
-  element: React.ReactNode;
-}
+const PrivateRoute: React.FC<{ element: React.ReactNode }> = ({ element }) => {
+  // Check if there's a user in localStorage
+  const storedUser = localStorage.getItem('user');
 
-const PrivateRoute: React.FC<PrivateRouteProps> = ({ element }) => {
-  const { user } = useAuth();
-
-  // Check if the user is authenticated
-  if (!user) {
-    // Redirect to the login page if not authenticated
+  // If no user is found, redirect to the login page
+  if (!storedUser) {
     return <Navigate to="/login" />;
   }
 
-  // Render the protected route if authenticated
+  // If a user is found, render the protected route
   return <>{element}</>;
 };
 
