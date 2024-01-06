@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   Box,
@@ -15,53 +15,94 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
+  HStack,
 } from '@chakra-ui/react';
 import { RiAddLine } from 'react-icons/ri';
+import apiClient from '../services/api-client';
+import TransactionCard from '../components/TransactionCard';
+import moment from 'moment';
 
 interface Transaction {
-    id: number;
-    description: string;
-    amount: number;
-    type: 'Income' | 'Expense';
-  }
+  id: number;
+  description: string;
+  amount: number;
+  type: 'Income' | 'Expense';
+  createdAt: string
+}
 
 const FinancialReport = () => {
-    const [transactions, setTransactions] = useState<Transaction[]>([]);
-    const [description, setDescription] = useState('');
-    const [amount, setAmount] = useState('');
-    const [transactionType, setTransactionType] = useState<'Income' | 'Expense'>('Expense');
-    const [totalIncome, setTotalIncome] = useState(0);
-    const [totalExpense, setTotalExpense] = useState(0);
-    const [balance, setBalance] = useState(0);
-    const { isOpen, onOpen, onClose } = useDisclosure()
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [description, setDescription] = useState('');
+  const [amount, setAmount] = useState('');
+  const [transactionType, setTransactionType] = useState<'Income' | 'Expense'>('Expense');
+  const [totalIncome, setTotalIncome] = useState(0);
+  const [totalExpense, setTotalExpense] = useState(0);
+  const [balance, setBalance] = useState(0);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-    const addTransaction = () => {
-      if (description && amount) {
-        const newTransaction: Transaction = {
-          id: transactions.length + 1,
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const transactionsResponse = await apiClient.get('/transaction');
+        const transactionsData: Transaction[] = transactionsResponse.data;
+
+        setTransactions(transactionsData);
+
+        // Calculate total income, total expense, and balance
+        const totalIncomeValue = transactionsData
+          .filter((transaction) => transaction.type === 'Income')
+          .reduce((total, transaction) => total + transaction.amount, 0);
+
+        const totalExpenseValue = transactionsData
+          .filter((transaction) => transaction.type === 'Expense')
+          .reduce((total, transaction) => total + transaction.amount, 0);
+
+        setTotalIncome(totalIncomeValue);
+        setTotalExpense(totalExpenseValue);
+        setBalance(totalIncomeValue - totalExpenseValue);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const addTransaction = async () => {
+    if (description && amount) {
+      try {
+        const response = await apiClient.post('/transaction', {
           description,
           amount: parseFloat(amount),
           type: transactionType,
-        };
-  
-        setTransactions([...transactions, newTransaction]);
+        });
+
+        const data: Transaction = response.data;
+
+        setTransactions([...transactions, data]);
         setDescription('');
         setAmount('');
-  
+
         if (transactionType === 'Income') {
-          setTotalIncome((prevTotalIncome) => prevTotalIncome + newTransaction.amount);
-          setBalance((prevBalance) => prevBalance + newTransaction.amount);
+          setTotalIncome((prevTotalIncome) => prevTotalIncome + data.amount);
+          setBalance((prevBalance) => prevBalance + data.amount);
         } else {
-          setTotalExpense((prevTotalExpense) => prevTotalExpense + newTransaction.amount);
-          setBalance((prevBalance) => prevBalance - newTransaction.amount);
+          setTotalExpense((prevTotalExpense) => prevTotalExpense + data.amount);
+          setBalance((prevBalance) => prevBalance - data.amount);
         }
+      } catch (error) {
+        console.error('Error adding transaction:', error);
       }
-    };
-  
-    const deleteTransaction = (id: number, amount: number, type: 'Income' | 'Expense') => {
+    }
+  };
+
+  const deleteTransaction = async (id: number, amount: number, type: 'Income' | 'Expense') => {
+    try {
+      await apiClient.delete(`/transaction/${id}`);
+
       const updatedTransactions = transactions.filter((transaction) => transaction.id !== id);
       setTransactions(updatedTransactions);
-  
+
       if (type === 'Income') {
         setTotalIncome((prevTotalIncome) => prevTotalIncome - amount);
         setBalance((prevBalance) => prevBalance - amount);
@@ -69,27 +110,28 @@ const FinancialReport = () => {
         setTotalExpense((prevTotalExpense) => prevTotalExpense - amount);
         setBalance((prevBalance) => prevBalance + amount);
       }
-    };
-  
-  
-    return (
+    } catch (error) {
+      console.error('Error deleting transaction:', error);
+    }
+  };
+
+  return (
     <>
     <Box p={4}>
-        <Heading mb={4}>Financial Report</Heading>
+        <HStack alignItems="center" justify='space-between' mb={4}>
+        <Heading>Financial Overview</Heading>
         <Button leftIcon={<RiAddLine />} colorScheme='teal' variant='solid' size='sm' mr={8} onClick={onOpen}>
             Add Transaction
         </Button>
-        <VStack spacing={4} align="stretch">
-          <Text fontWeight="bold" fontSize="xl" mt={4}>
-            Total Income: ₦{totalIncome.toFixed(2)}
-          </Text>
-          <Text fontWeight="bold" fontSize="xl" mt={4}>
-            Total Expense: ₦{totalExpense.toFixed(2)}
-          </Text>
-          <Text fontWeight="bold" fontSize="xl" mt={4}>
-            Current Balance: ₦{balance.toFixed(2)}
-          </Text>
+        </HStack>
 
+        <HStack mb={4} spacing={12} justify='center'>
+          <TransactionCard description='Current Balance' total={balance.toFixed(2)} color='blue.500'/>
+          <TransactionCard description='Total Income' total={totalIncome.toFixed(2)} color='green.500'/>
+          <TransactionCard description='Total Expense' total={totalExpense.toFixed(2)} color='red.500'/>
+        </HStack>
+        
+          <Heading as='h3'size='lg' mb={4}>Latest Transactions </Heading>
           <VStack align="stretch">
             {transactions.map((transaction) => (
               <Box
@@ -102,6 +144,7 @@ const FinancialReport = () => {
                 <Text fontSize="lg">{transaction.description}</Text>
                 <Text fontWeight="bold">₦{transaction.amount.toFixed(2)}</Text>
                 <Text>Type: {transaction.type}</Text>
+                <Text>Date: {moment(transaction.createdAt).format("MMMM Do YYYY")}</Text>
                 <Button
                   colorScheme="red"
                   size="sm"
@@ -112,7 +155,6 @@ const FinancialReport = () => {
                 </Button>
               </Box>
             ))}
-          </VStack>
         </VStack>
       </Box>
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -149,7 +191,7 @@ const FinancialReport = () => {
       </ModalContent>
     </Modal>
     </>
-    )
-}
+  );
+};
 
-export default FinancialReport
+export default FinancialReport;

@@ -23,7 +23,6 @@ import {
 
 import {
   FiHome,
-  FiSettings,
   FiMenu,
   FiBell,
   FiChevronDown,
@@ -73,7 +72,6 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'Disaster Reports', icon: FiFile, route: '/reports'},
   { name: 'Beneficiaries', icon: FiUsers, route: '/beneficiaries' },
   { name: 'User Management', icon: FiUser, route: '/usermanagement' },
-  { name: 'Settings', icon: FiSettings },
 ]
 
 

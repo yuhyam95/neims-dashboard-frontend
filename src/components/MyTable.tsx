@@ -238,19 +238,20 @@ const MyTable = ({showHeader, items, width, productData, showStation, showCatego
             <tfoot>
               <Tr>
                 <Td colSpan={5}>
-                  <Flex justifyContent="center">
+                  <Flex justifyContent="center" flexWrap="wrap">
                     {Array.from({ length: totalPages }).map((_, index) => (
-                      <Button
-                        key={index}
-                        size="sm"
-                        variant="solid"
-                        colorScheme={index + 1 === currentPage ? 'blue' : 'gray'}
-                        onClick={() => setCurrentPage(index + 1)}
-                        borderRadius="full"
-                        mx={1}
-                      >
-                        {index + 1}
-                      </Button>
+                      <Box key={index} mx={1} width="30px" mb={2}> {/* Set the desired width and margin */}
+                        <Button
+                          size="sm"
+                          variant="solid"
+                          colorScheme={index + 1 === currentPage ? 'blue' : 'gray'}
+                          onClick={() => setCurrentPage(index + 1)}
+                          borderRadius="full"
+                          width="100%"
+                        >
+                          {index + 1}
+                        </Button>
+                      </Box>
                     ))}
                   </Flex>
                 </Td>
