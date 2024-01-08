@@ -24,7 +24,7 @@ import moment from 'moment';
 import { useAuth } from '../context/AuthContext';
 
 interface Transaction {
-  id: number;
+  _id: number;
   description: string;
   amount: number;
   type: 'Income' | 'Expense';
@@ -99,11 +99,11 @@ const FinancialReport = () => {
     }
   };
 
-  const deleteTransaction = async (id: number, amount: number, type: 'Income' | 'Expense') => {
+  const deleteTransaction = async (_id: number, amount: number, type: 'Income' | 'Expense') => {
     try {
-      await apiClient.delete(`/transaction/${id}`);
+      await apiClient.delete(`/transaction/${_id}`);
 
-      const updatedTransactions = transactions.filter((transaction) => transaction.id !== id);
+      const updatedTransactions = transactions.filter((transaction) => transaction._id !== _id);
       setTransactions(updatedTransactions);
 
       if (type === 'Income') {
@@ -139,7 +139,7 @@ const FinancialReport = () => {
           <VStack align="stretch">
             {transactions.map((transaction) => (
               <Box
-                key={transaction.id}
+                key={transaction._id}
                 borderWidth="1px"
                 borderRadius="lg"
                 p={4}
@@ -154,7 +154,7 @@ const FinancialReport = () => {
                   colorScheme="red"
                   size="sm"
                   mt={2}
-                  onClick={() => deleteTransaction(transaction.id, transaction.amount, transaction.type)}
+                  onClick={() => deleteTransaction(transaction._id, transaction.amount, transaction.type)}
                 >
                   Delete
                 </Button>}

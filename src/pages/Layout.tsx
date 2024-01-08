@@ -248,8 +248,18 @@ const Layout = () => {
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
         <Routes>
-        <Route path="/"  
-          element={userRole === 'Admin' ? <Dashboard /> : <StationDashboard /> }/>
+        <Route
+                path="/"
+                element={
+                  userRole === 'Admin' ? (
+                    <Dashboard />
+                  ) : userRole === 'account-officer' ? (
+                    <FinancialReport />
+                  ) : (
+                    <StationDashboard />
+                  )
+                }
+              />
         <Route path="/station" element={<StationPage />} />
         <Route path="/productcategory" element={<ProductCategory />} />
         <Route path="/bincardpage" element={<BinCardPage />} />
