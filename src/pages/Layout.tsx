@@ -166,7 +166,7 @@ const NavItem: React.FC<NavItemProps> = ({ icon, children, ...rest }) => {
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   const {user, logout} = useAuth()
   const navigate = useNavigate()
-  
+  const userRole = user?.role.name
 
   return (
     <Flex
@@ -202,7 +202,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                   ml="2">
                   <Text fontSize="sm">{user?.firstname} {user?.surname}</Text>
                   <Text fontSize="xs" color="gray.600">
-                    Admin
+                    {userRole}
                   </Text>
                 </VStack>
                 <Box display={{ base: 'none', md: 'flex' }}>
@@ -251,7 +251,7 @@ const Layout = () => {
         <Route
                 path="/"
                 element={
-                  userRole === 'Admin' ? (
+                  userRole === 'Admin' || 'DG' ? (
                     <Dashboard />
                   ) : userRole === 'account-officer' ? (
                     <FinancialReport />
