@@ -66,16 +66,38 @@ interface SidebarProps extends BoxProps {
 
 
 
-const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome, route: '/' },
-  { name: 'FInancial Report', icon: FiTrendingUp, route: '/financialreport'},
-  { name: 'Disaster Reports', icon: FiFile, route: '/reports'},
-  { name: 'Beneficiaries', icon: FiUsers, route: '/beneficiaries' },
-  { name: 'User Management', icon: FiUser, route: '/usermanagement' },
-]
+const LinkItems: Record<string, LinkItemProps[]> = {
+  'Admin': [
+    { name: 'Home', icon: FiHome, route: '/' },
+    { name: 'Financial Report', icon: FiTrendingUp, route: '/financialreport' },
+    { name: 'Disaster Reports', icon: FiFile, route: '/reports' },
+    { name: 'Beneficiaries', icon: FiUsers, route: '/beneficiaries' },
+    { name: 'User Management', icon: FiUser, route: '/usermanagement' },
+  ],
+  'DG': [
+    { name: 'Home', icon: FiHome, route: '/' },
+    { name: 'Financial Report', icon: FiTrendingUp, route: '/financialreport' },
+    { name: 'Disaster Reports', icon: FiFile, route: '/reports' },
+    { name: 'Beneficiaries', icon: FiUsers, route: '/beneficiaries' },
+  ],
+  'Director-Relief': [
+    { name: 'Home', icon: FiHome, route: '/' },
+    { name: 'Financial Report', icon: FiTrendingUp, route: '/financialreport' },
+    { name: 'Disaster Reports', icon: FiFile, route: '/reports' },
+    { name: 'Beneficiaries', icon: FiUsers, route: '/beneficiaries' },
+  ],
+  'Head-officer': [
+    { name: 'Home', icon: FiHome, route: '/' },
+    { name: 'Disaster Reports', icon: FiFile, route: '/reports' },
+    { name: 'Beneficiaries', icon: FiUsers, route: '/beneficiaries' },
+  ],
+  'account-officer': [
+    { name: 'Financial Report', icon: FiTrendingUp, route: '/financialreport' }
+  ],
+};
 
-
-const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+const SidebarContent: React.FC<SidebarProps & { userRole: string }> = ({ onClose, userRole, ...rest }) => {
+  const userLinks = LinkItems[userRole] || [];
 
   return (
     <Box
@@ -86,30 +108,31 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       w={{ base: 'full', md: 60 }}
       pos="fixed"
       h="full"
-      {...rest}>
+      {...rest}
+    >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
         <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
           NEIMS
         </Text>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
-      {LinkItems.map((link) => (
+      {userLinks.map((link) => (
         <Link key={link.name} to={link.route || '#'}>
-        <NavItem icon={link.icon}>{link.name}</NavItem>
-      </Link>
+          <NavItem icon={link.icon}>{link.name}</NavItem>
+        </Link>
       ))}
     </Box>
-  )
-}
+  );
+};
 
-const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
-  
+const NavItem: React.FC<NavItemProps> = ({ icon, children, ...rest }) => {
   return (
     <Box
       as="a"
       href="#"
       style={{ textDecoration: 'none' }}
-      _focus={{ boxShadow: 'none' }}>
+      _focus={{ boxShadow: 'none' }}
+    >
       <Flex
         align="center"
         p="4"
@@ -121,7 +144,8 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
           bg: 'teal',
           color: 'white',
         }}
-        {...rest}>
+        {...rest}
+      >
         {icon && (
           <Icon
             mr="4"
@@ -135,8 +159,9 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
         {children}
       </Flex>
     </Box>
-  )
-}
+  );
+};
+
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   const {user, logout} = useAuth()
@@ -204,10 +229,10 @@ const Layout = () => {
   const {user} = useAuth()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const userRole = user?.role.name;
-
+  
   return (
     <Box minH="100vh" bg={useColorModeValue('#f6f8fc', '#f6f8fc')}>
-      <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
+      <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} userRole={userRole || ''}/>
       <Drawer
         isOpen={isOpen}
         placement="left"
@@ -216,7 +241,7 @@ const Layout = () => {
         onOverlayClick={onClose}
         size="full">
         <DrawerContent>
-          <SidebarContent onClose={onClose} />
+          <SidebarContent onClose={onClose} userRole='Super-admin'/>
         </DrawerContent>
       </Drawer>
       {/* mobilenav */}

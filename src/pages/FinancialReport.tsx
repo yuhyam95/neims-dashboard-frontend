@@ -21,6 +21,7 @@ import { RiAddLine } from 'react-icons/ri';
 import apiClient from '../services/api-client';
 import TransactionCard from '../components/TransactionCard';
 import moment from 'moment';
+import { useAuth } from '../context/AuthContext';
 
 interface Transaction {
   id: number;
@@ -39,6 +40,8 @@ const FinancialReport = () => {
   const [totalExpense, setTotalExpense] = useState(0);
   const [balance, setBalance] = useState(0);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {user} = useAuth()
+  const userRole = user?.role.name;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -120,9 +123,10 @@ const FinancialReport = () => {
     <Box p={4}>
         <HStack alignItems="center" justify='space-between' mb={4}>
         <Heading>Financial Overview</Heading>
-        <Button leftIcon={<RiAddLine />} colorScheme='teal' variant='solid' size='sm' mr={8} onClick={onOpen}>
+        {userRole === 'account-officer' &&
+          <Button leftIcon={<RiAddLine />} colorScheme='teal' variant='solid' size='sm' mr={8} onClick={onOpen}>
             Add Transaction
-        </Button>
+        </Button>}
         </HStack>
 
         <HStack mb={4} spacing={12} justify='center'>
@@ -145,14 +149,15 @@ const FinancialReport = () => {
                 <Text fontWeight="bold">₦{transaction.amount.toFixed(2)}</Text>
                 <Text>Type: {transaction.type}</Text>
                 <Text>Date: {moment(transaction.createdAt).format("MMMM Do YYYY")}</Text>
-                <Button
+                {userRole === 'account-officer' &&
+                  <Button
                   colorScheme="red"
                   size="sm"
                   mt={2}
                   onClick={() => deleteTransaction(transaction.id, transaction.amount, transaction.type)}
                 >
                   Delete
-                </Button>
+                </Button>}
               </Box>
             ))}
         </VStack>
