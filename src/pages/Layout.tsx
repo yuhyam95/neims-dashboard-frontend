@@ -251,9 +251,13 @@ const Layout = () => {
         <Route
                 path="/"
                 element={
-                  userRole === 'Admin' || 'DG' ? (
+                  userRole === 'Admin' ? (
                     <Dashboard />
-                  ) : userRole === 'account-officer' ? (
+                  ) :
+                  userRole === 'DG' ? (
+                    <Dashboard />
+                  ) :
+                  userRole === 'account-officer' ? (
                     <FinancialReport />
                   ) : (
                     <StationDashboard />

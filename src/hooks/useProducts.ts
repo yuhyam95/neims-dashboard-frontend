@@ -24,7 +24,7 @@ const useProducts = (queryParams = {}) => {
       });
 
     return () => cancel();
-  }, [queryParams]);
+  }, []);
 
   return { products, error, isLoading, setProducts, setError };
 }

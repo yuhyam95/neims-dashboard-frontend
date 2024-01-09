@@ -26,7 +26,7 @@ interface DataProps {
 }
 
 export default function UserCard({ data}: UserProps) {
-    console.log(data)
+    //console.log(data)
   //const {head, mobile, location} = data;
 
   return (

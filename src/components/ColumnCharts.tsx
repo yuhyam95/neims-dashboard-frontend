@@ -44,12 +44,12 @@ const ColumnChart: React.FC<ChartProps> = ({ productData }) => {
     },
     yaxis: {
       title: {
-        text: 'Total Products',
+        text: 'Total Items',
       },
     },
     plotOptions: {
         bar: {
-          borderRadius: 10,
+          //borderRadius: 10,
         },
       },
   };
