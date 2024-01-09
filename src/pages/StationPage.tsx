@@ -55,7 +55,7 @@ const category = selectedStation?.category;
       <MyTable showHeader={false} items={5} width="100%" productData={products} showStation={false} showCategory={true}/>
       </Box>
       <Box>
-      <BeneficiariesChart />
+      <BeneficiariesChart station={stateName}/>
       </Box>
       </HStack>
     </div>

@@ -6,10 +6,10 @@ import { Beneficiary } from '../services/beneficiary-service';
 
 
 interface RadialBarChartProps {
-  state?: string
+  station?: string
 }
 
-const BeneficiariesChart: React.FC<RadialBarChartProps> = ({ state }) => {
+const BeneficiariesChart: React.FC<RadialBarChartProps> = ({ station }) => {
  
     
 const [beneficiariesData, setBeneficiariesData] = useState<Beneficiary>()
@@ -17,7 +17,7 @@ const fetchData = async () => {
         try {
           const response = await apiClient.get('/beneficiary', {
             params:{
-                state: state
+                stationName: station
             }
           });
           setBeneficiariesData(response.data);
