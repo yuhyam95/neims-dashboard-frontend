@@ -37,14 +37,15 @@ export default function Login() {
     });
   };
   
-  const handleLogin = async () => {
+  const handleLogin = async (e: any) => {
+    e.preventDefault(); 
     try {
       const response = await apiClient.post('/auth/login', formData);
       if (response.status === 200) {
         const { _id } = jwtDecode(response.data.token) as { _id: string, role: {_id: string, name: string} };
-        login(_id);
+        await login(_id);
         navigate('/');
-        setShowError(true)
+        //setShowError(true)
       } 
     } catch (error) {
       console.error('Error during login:', error);
