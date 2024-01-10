@@ -14,6 +14,7 @@ function StationDashboard() {
 const userString = localStorage.getItem('user');
 const user = userString ? JSON.parse(userString) : null;
 const stationId = user?.station.id;
+const stationName = user?.station.name;
 const [selectedStation, setSelectedStation] = useState<Station | any>(null)
 const queryParams = {stationName: user?.station.name};
 const { products } = useProducts(queryParams);  
@@ -54,7 +55,7 @@ const category = selectedStation?.category;
       <MyTable showHeader={false} items={5} width="100%" productData={products} showStation={false} showCategory={true}/>
       </Box>
       <Box>
-      <BeneficiariesChart station={selectedStation?.name}/>
+      <BeneficiariesChart station={stationName}/>
       </Box>
       </HStack>
     </div>

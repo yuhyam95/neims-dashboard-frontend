@@ -17,7 +17,7 @@ interface Report {
   datereported: string,
   createdAt: string,
   numberofaffectedpersons: number,
-  numberofhouseholdsaffected: number,
+  numberofhouseholdaffected: number,
   numberofmen: number,
   numberofwomen: number,
   numberofchildren: number,
@@ -91,7 +91,7 @@ return (
       <ReportStat title="Date Reported" body={report?.datereported}/>
       <ReportStat title="Date of Assessment" body={dateofassessment}/>
       <ReportStat title="Number of Affected Persons" body={report?.numberofaffectedpersons}/>
-      <ReportStat title="Number of Households Affected" body={report?.numberofhouseholdsaffected}/>
+      <ReportStat title="Number of Households Affected" body={report?.numberofhouseholdaffected}/>
       <ReportStat title="Number of Men" body={report?.numberofmen}/>
       <ReportStat title="Number of Women" body={report?.numberofwomen}/>
       <ReportStat title="Number of Children" body={report?.numberofchildren}/>
