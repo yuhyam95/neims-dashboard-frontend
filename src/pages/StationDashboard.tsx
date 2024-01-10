@@ -8,15 +8,12 @@ import MyTable from '../components/MyTable';
 import CategoryGrid from '../components/CategoryGrid';
 import CategoryColumnChart from "../components/CategoryColumnChart";
 import UserCard from '../components/UserCard';
-//import { useAuth } from '../context/AuthContext';
 
 
 function StationDashboard() {
-// const {user} = useAuth()
 const userString = localStorage.getItem('user');
 const user = userString ? JSON.parse(userString) : null;
 const stationId = user?.station.id;
-//const stationId = user?.station.id;
 const [selectedStation, setSelectedStation] = useState<Station | any>(null)
 const queryParams = {stationName: user?.station.name};
 const { products } = useProducts(queryParams);  

@@ -6,6 +6,7 @@ import { FaChildren, FaPeopleRoof } from "react-icons/fa6";
 import BeneficiariesGrid from "../components/BeneficiariesGrid";
 
 const BeneficiariesPage = () => {
+
 const queryParams = "";    
 const {beneficiariesData} = useBeneficiaries(queryParams)
 

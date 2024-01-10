@@ -89,9 +89,8 @@ const LinkItems: Record<string, LinkItemProps[]> = {
   'Head-officer': [
     { name: 'Home', icon: FiHome, route: '/' },
     { name: 'Disaster Reports', icon: FiFile, route: '/reports' },
-    { name: 'Beneficiaries', icon: FiUsers, route: '/beneficiaries' },
   ],
-  'account-officer': [
+  'Account-officer': [
     { name: 'Financial Report', icon: FiTrendingUp, route: '/financialreport' }
   ],
 };
@@ -257,7 +256,7 @@ const Layout = () => {
                   userRole === 'DG' ? (
                     <Dashboard />
                   ) :
-                  userRole === 'account-officer' ? (
+                  userRole === 'Acount-officer' ? (
                     <FinancialReport />
                   ) : (
                     <StationDashboard />
