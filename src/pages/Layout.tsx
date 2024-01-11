@@ -256,7 +256,7 @@ const Layout = () => {
                   userRole === 'DG' ? (
                     <Dashboard />
                   ) :
-                  userRole === 'Acount-officer' ? (
+                  userRole === 'Account-officer' ? (
                     <FinancialReport />
                   ) : (
                     <StationDashboard />
