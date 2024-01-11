@@ -123,7 +123,7 @@ const FinancialReport = () => {
     <Box p={4}>
         <HStack alignItems="center" justify='space-between' mb={4}>
         <Heading>Financial Overview</Heading>
-        {userRole === 'Account-officer' &&
+        {userRole === 'account-officer' &&
           <Button leftIcon={<RiAddLine />} colorScheme='teal' variant='solid' size='sm' mr={8} onClick={onOpen}>
             Add Transaction
         </Button>}
@@ -149,7 +149,7 @@ const FinancialReport = () => {
                 <Text fontWeight="bold">₦{transaction.amount.toFixed(2)}</Text>
                 <Text>Type: {transaction.type}</Text>
                 <Text>Date: {moment(transaction.createdAt).format("MMMM Do YYYY")}</Text>
-                {userRole === 'Account-officer' &&
+                {userRole === 'account-officer' &&
                   <Button
                   colorScheme="red"
                   size="sm"

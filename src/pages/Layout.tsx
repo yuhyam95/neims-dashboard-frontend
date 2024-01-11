@@ -90,7 +90,7 @@ const LinkItems: Record<string, LinkItemProps[]> = {
     { name: 'Home', icon: FiHome, route: '/' },
     { name: 'Disaster Reports', icon: FiFile, route: '/reports' },
   ],
-  'Account-officer': [
+  'account-officer': [
     { name: 'Financial Report', icon: FiTrendingUp, route: '/financialreport' }
   ],
 };
@@ -228,6 +228,7 @@ const Layout = () => {
   const {user} = useAuth()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const userRole = user?.role.name;
+  console.log(userRole)
   
   return (
     <Box minH="100vh" bg={useColorModeValue('#f6f8fc', '#f6f8fc')}>
@@ -256,7 +257,7 @@ const Layout = () => {
                   userRole === 'DG' ? (
                     <Dashboard />
                   ) :
-                  userRole === 'Account-officer' ? (
+                  userRole === 'account-officer' ? (
                     <FinancialReport />
                   ) : (
                     <StationDashboard />
