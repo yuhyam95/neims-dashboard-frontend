@@ -12,7 +12,7 @@ import ChartGrid from '../components/ChartGrid';
 
 
 function Dashboard() {
-  const [selectedTab, setSelectedTab] = useState('Territorial');
+  const [selectedTab, setSelectedTab] = useState('Overview');
   const queryParams = "";
   const { stations } = useStations(queryParams);
   const { products } = useProducts(queryParams);    
@@ -38,11 +38,12 @@ function Dashboard() {
       {selectedTab !== 'Overview' &&
         <StationGrid data={filteredStateData} selectedTab={selectedTab} />}
 
-      <Flex> 
+  {selectedTab === "Overview" &&   
+     <Flex> 
       <ChartGrid productData={products} />
-      </Flex>
+      </Flex>}
       <Flex>
-      <ProductsGrid productData={products} showStation={true} showCategory={true}/>
+      <ProductsGrid productData={products} showStation={true} showCategory={false} showHeader={true}/>
       </Flex>
     </div> 
   );
