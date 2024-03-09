@@ -18,7 +18,11 @@ function Dashboard() {
   const { products } = useProducts(queryParams);    
 
   const filteredStateData = stations.filter((station: any) => {
-    if (selectedTab === 'Territorial') {
+    
+    if (selectedTab === 'Overview') {
+      return station.type === '';
+    }
+    else if (selectedTab === 'Territorial') {
       return station.type === 'Territorial';
     } else if (selectedTab === 'Zonal') {
       return station.type === 'Zonal';
@@ -31,7 +35,9 @@ function Dashboard() {
   return (
     <div>
       <StationTabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
-      <StationGrid data={filteredStateData} selectedTab={selectedTab} />
+      {selectedTab !== 'Overview' &&
+        <StationGrid data={filteredStateData} selectedTab={selectedTab} />}
+
       <Flex> 
       <ChartGrid productData={products} />
       </Flex>

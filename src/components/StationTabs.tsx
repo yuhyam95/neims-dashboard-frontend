@@ -10,6 +10,12 @@ const StationTabs = ({ setSelectedTab }: Props) => {
   return (
     <Tabs variant='unstyled' align="center" bg="white" borderRadius="10px" width="50%" defaultIndex={0}>
       <TabList>
+      <Tab
+          _selected={{ color: 'blue.500', bg: 'gray.100', fontStyle: 'bold' }}
+          onClick={() => setSelectedTab('Overview')}
+        >
+          Overview
+        </Tab>
         <Tab
           _selected={{ color: 'blue.500', bg: 'gray.100', fontStyle: 'bold' }}
           onClick={() => setSelectedTab('Territorial')}

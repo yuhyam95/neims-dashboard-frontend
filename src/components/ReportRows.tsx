@@ -24,7 +24,7 @@ import { useNavigate } from "react-router-dom";
     const handleClick = () => {
       navigate('/singlereport', {state: {_id}});
     };
-    
+      
     return (
       <Tr onClick={handleClick} backgroundColor='white'>
         <Td >
