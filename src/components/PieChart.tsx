@@ -18,7 +18,7 @@ const PieChart: React.FC<PieChartProps> = ({ categoryData }) => {
     labels: categoryData.map((item) => item.name),
     colors: categoryData.map((item) => item.color),
     legend: {
-      show: false,
+      show: false, 
     },
   };
 

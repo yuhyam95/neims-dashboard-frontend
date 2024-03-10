@@ -18,7 +18,8 @@ interface Props {
   showStation: boolean
   showCategory: boolean,
   showBinCard?: boolean 
-  BinCardData?: BinCardItem[]
+  BinCardData?: BinCardItem[],
+  expiryDate: string
 }
 
 interface BinCardItem {
@@ -33,7 +34,7 @@ interface BinCardItem {
   
 
 function TableRows(props: Props) {
-  const {  name, quantity, reason, station, date, category, showStation, showCategory, showBinCard, BinCardData } = props;
+  const {  name, quantity, reason, station, date, category, showStation, showCategory, showBinCard, BinCardData, expiryDate } = props;
   
   const navigate = useNavigate()
 
@@ -74,6 +75,9 @@ function TableRows(props: Props) {
       </Td>}
       <Td>
         {date}
+      </Td>
+      <Td>
+        {expiryDate}
       </Td>
       {showBinCard && <Td>
       <Button colorScheme='teal' variant='solid' size='sm' onClick={handleClick}>

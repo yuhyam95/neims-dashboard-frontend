@@ -1,5 +1,3 @@
-
-
 import { useEffect, useState } from "react";
 import { CanceledError } from "../services/api-client";
 import productService, { Product } from "../services/product-service";
@@ -10,6 +8,7 @@ const useProducts = (queryParams = {}) => {
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
+    console.log("useEffect triggered with queryParams:", queryParams);
     setLoading(true);
     const { request, cancel } = productService.getAll<Product>(queryParams);
     request

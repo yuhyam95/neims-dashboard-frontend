@@ -56,7 +56,8 @@ interface ProductItem {
   date: string
   createdAt: string,
   bincard?: BinCardItem[],
-  updatedAt: string
+  updatedAt: string,
+  expiryDate: string
 }
 
 interface StationItem {
@@ -230,7 +231,8 @@ const totalQuantity = calculateTotalQuantity();
             <Th>Reason</Th>
             {showStation && <Th>Station</Th>} 
             {showCategory && <Th>Category</Th>}
-            <Th>Date</Th>
+            <Th>Date Added</Th>
+            <Th>Expiry Date</Th>
           </Tr>
         </Thead>
             <Tbody>
@@ -247,6 +249,7 @@ const totalQuantity = calculateTotalQuantity();
                 quantity={product.quantity}
                 date={moment(product.updatedAt).format("MMMM Do YYYY")}
                 BinCardData={product?.bincard}
+                expiryDate={product?.expiryDate}
               />
               ))}
             </Tbody>
