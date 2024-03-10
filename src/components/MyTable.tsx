@@ -42,6 +42,7 @@ interface Props {
   categoryTotal?: number,
   categoryColor?: string,
   showBinCard?: boolean,
+  showTotal: boolean
   
 }
 
@@ -78,12 +79,12 @@ interface BinCardItem {
   
 
 
-const MyTable = ({showHeader, items, width, productData, showStation, showCategory, categoryName, categoryTotal, categoryColor, showBinCard}: Props) => {
+const MyTable = ({showHeader, items, width, productData, showStation, showCategory, showTotal, categoryName, categoryColor, showBinCard}: Props) => {
   const [searchText, setSearchText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [pdfData, setPdfData] = useState<string[][]>([]);
   const [csvData, setCsvData] = useState<string[][]>([]);
-  
+  const [currentPageSet, setCurrentPageSet] = useState(1);
   const itemsPerPage = items;
 
   const handleSearchTextChange = (event: any) => {
@@ -107,6 +108,19 @@ const MyTable = ({showHeader, items, width, productData, showStation, showCatego
   );
 
   const totalPages = Math.ceil(filteredProducts?.length / itemsPerPage);
+  const totalPageSets = Math.ceil(totalPages / 10);
+
+
+const calculateTotalQuantity = () => {
+  let total = 0;
+  filteredProducts?.forEach((product) => {
+    total += product.quantity;
+  });
+  return total;
+};
+
+const totalQuantity = calculateTotalQuantity();
+
 
   const generatePDF = () => {
     const pdfContent: any[][] = [];
@@ -151,7 +165,7 @@ const MyTable = ({showHeader, items, width, productData, showStation, showCatego
           </InputLeftElement>
           <Input        
             type="text"
-            placeholder="Search Products..."
+            placeholder="Search Items..."
             value={searchText}
             onChange={handleSearchTextChange}
             width='50%' />
@@ -194,14 +208,15 @@ const MyTable = ({showHeader, items, width, productData, showStation, showCatego
           </Stack>
         </HStack>
         <HStack width="45%" ml={4}>
-          <Text color={categoryColor} as='b'>
+          <Text color={categoryColor} as='b' fontSize={'xl'}>
             {categoryName}
           </Text>
-        <Box borderWidth="0.5px" borderRadius="10px" width="25%" bg="#FAFAFA" display="flex"  justifyContent="center" alignItems="center">
-        <Text color={categoryColor} as='b'>
-          {categoryTotal}
+        {showTotal &&
+        <Box borderWidth="0.5px" borderRadius="10px" width="50%" bg="#FAFAFA" display="flex"  justifyContent="center" alignItems="center">
+        <Text as='b' fontSize={'xl'}>
+          Total Items: {totalQuantity}
         </Text>
-        </Box>
+        </Box>}
         </HStack>
         </Stack>}   
         
@@ -235,28 +250,62 @@ const MyTable = ({showHeader, items, width, productData, showStation, showCatego
               />
               ))}
             </Tbody>
-            <tfoot>
-              <Tr>
-                <Td colSpan={5}>
-                  <Flex justifyContent="center" flexWrap="wrap">
-                    {Array.from({ length: totalPages }).map((_, index) => (
-                      <Box key={index} mx={1} width="30px" mb={2}> {/* Set the desired width and margin */}
+                      <tfoot>
+            <Tr>
+              <Td colSpan={5}>
+                <Flex justifyContent="center" flexWrap="wrap">
+                  {Array.from({ length: Math.min(totalPages, 10) }).map((_, index) => {
+                    const pageNumber = index + (currentPageSet - 1) * 10 + 1;
+
+                    return (
+                      <Box key={index} mx={1} width="30px" mb={2}>
                         <Button
                           size="sm"
                           variant="solid"
-                          colorScheme={index + 1 === currentPage ? 'blue' : 'gray'}
-                          onClick={() => setCurrentPage(index + 1)}
+                          colorScheme={pageNumber === currentPage ? 'blue' : 'gray'}
+                          onClick={() => setCurrentPage(pageNumber)}
                           borderRadius="full"
                           width="100%"
                         >
-                          {index + 1}
+                          {pageNumber}
                         </Button>
                       </Box>
-                    ))}
-                  </Flex>
-                </Td>
-              </Tr>
-            </tfoot>
+                    );
+                  })}
+                  {totalPageSets > 1 && currentPageSet > 1 && (
+                    <Box mx={1} width="30px" mb={2}>
+                      <Button
+                        size="sm"
+                        variant="solid"
+                        colorScheme="blue"
+                        onClick={() => setCurrentPageSet(currentPageSet - 1)}
+                        borderRadius="full"
+                        width="100%"
+                        ml={4}
+                      >
+                        Prev
+                      </Button>
+                    </Box>
+                  )}
+                  {totalPageSets > 1 && currentPageSet < totalPageSets && (
+                    <Box mx={1} width="30px" mb={2}>
+                      <Button
+                        size="sm"
+                        variant="solid"
+                        colorScheme="blue"
+                        onClick={() => setCurrentPageSet(currentPageSet + 1)}
+                        borderRadius="full"
+                        width="100%"
+                        ml={4}
+                      >
+                        Next
+                      </Button>
+                    </Box>
+                  )}
+                </Flex>
+              </Td>
+            </Tr>
+          </tfoot>
           </Table>
           </TableContainer>
     </div> 

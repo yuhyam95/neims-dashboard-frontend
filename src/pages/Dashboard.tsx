@@ -44,7 +44,7 @@ function Dashboard() {
       <ChartGrid productData={products} />
       </Flex>}
       <Flex>
-      <ProductsGrid productData={products} showStation={true} showCategory={false} showHeader={true}/>
+      <ProductsGrid productData={products} showStation={true} showCategory={false} showHeader={true} showTotal={true}/>
       </Flex>
     </div> 
   );

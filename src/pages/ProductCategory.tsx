@@ -24,7 +24,7 @@ const ProductCategory = () => {
     </Stack>
     <MyTable showHeader={true} items={10} width="90%" showStation={false} 
               productData={products} showCategory={false} categoryName={name} 
-              categoryTotal={total} categoryColor={color} showBinCard />
+              categoryTotal={total} categoryColor={color} showBinCard showTotal={false}/>
     </>
   )
 }
