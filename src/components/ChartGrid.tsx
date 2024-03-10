@@ -26,7 +26,7 @@ const ChartGrid = ({productData}: StackedColumnChartProps) => {
         </Box> 
             <Box>    
            <BeneficiariesChart />
-           </Box>
+           </Box> 
       </Flex>
   );
 };

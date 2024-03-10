@@ -14,8 +14,7 @@ import ChartGrid from '../components/ChartGrid';
 function Dashboard() {
   const [selectedTab, setSelectedTab] = useState('Overview');
   const queryParams = "";
-  const { stations } = useStations(queryParams);
-  const { products } = useProducts(queryParams);    
+  const { stations } = useStations(queryParams); 
 
   const filteredStateData = stations.filter((station: any) => {
     
@@ -31,6 +30,8 @@ function Dashboard() {
     }
     return true; 
   }); 
+
+  const { products } = useProducts(queryParams); 
 
   return (
     <div>
