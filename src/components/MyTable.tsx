@@ -134,7 +134,7 @@ const totalQuantity = calculateTotalQuantity();
 
   const generateCSV = useCallback(() => {
     const csvContent: any[] = [];
-    currentProducts?.forEach((product) => {
+    filteredProducts?.forEach((product) => {
       csvContent.push({
         Name: product.name,
         Quantity: product.quantity,
@@ -144,7 +144,7 @@ const totalQuantity = calculateTotalQuantity();
       });
     });
     setCsvData(csvContent);
-  }, [currentProducts]);
+  }, [filteredProducts]);
 
   const downloadPDF = () => {
     generatePDF();

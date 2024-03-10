@@ -52,7 +52,7 @@ const category = selectedStation?.category;
       </HStack>
       <HStack alignItems="flex-start">
        <Box flex={2}> 
-      <MyTable showHeader={false} items={5} width="100%" productData={products} showStation={false} showCategory={true}/>
+      <MyTable showHeader={false} items={5} width="100%" productData={products} showStation={false} showCategory={true} showTotal={false}/>
       </Box>
       <Box>
       <BeneficiariesChart station={stationName}/>

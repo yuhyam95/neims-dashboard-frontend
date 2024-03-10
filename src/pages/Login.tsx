@@ -44,7 +44,6 @@ export default function Login() {
         const { _id } = jwtDecode(response.data.token) as { _id: string, role: {_id: string, name: string} };
         await login(_id);
         navigate('/');
-        //setShowError(true)
       } 
     } catch (error) {
       console.error('Error during login:', error);

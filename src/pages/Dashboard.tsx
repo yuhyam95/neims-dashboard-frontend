@@ -38,14 +38,13 @@ function Dashboard() {
       <StationTabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
       {selectedTab !== 'Overview' &&
         <StationGrid data={filteredStateData} selectedTab={selectedTab} />}
-
+      <Flex>
+      <ProductsGrid productData={products} showStation={true} showCategory={false} showHeader={true} showTotal={true}/>
+      </Flex>
   {selectedTab === "Overview" &&   
      <Flex> 
       <ChartGrid productData={products} />
       </Flex>}
-      <Flex>
-      <ProductsGrid productData={products} showStation={true} showCategory={false} showHeader={true} showTotal={true}/>
-      </Flex>
     </div> 
   );
 }

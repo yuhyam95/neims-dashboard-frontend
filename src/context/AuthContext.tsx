@@ -32,7 +32,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    // Check if there's a user in localStorage on component mount
+
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
@@ -44,8 +44,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const userDetailsResponse = await apiClient.get(`/user/${userId}`);
       const userData: User = userDetailsResponse.data;
       setUser(userData);
-
-      // Save user data to localStorage
+      
       localStorage.setItem('user', JSON.stringify(userData));
     } catch (error) {
       console.error('Error fetching user details:', error);

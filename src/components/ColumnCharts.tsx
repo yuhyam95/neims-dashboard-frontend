@@ -142,7 +142,7 @@ const StackedColumnChart: React.FC<ChartProps> = ({ productData }) => {
         horizontal: false,
       },
     },
-    colors: ['#FF5733', '#33FF57', '#5733FF', '#FF33A6', '#33A6FF'],
+    colors: ['#049FCB', '#FF6347', '#00B5B0', '#FFA523', '#9F48A6'],
   };
 
   return (
