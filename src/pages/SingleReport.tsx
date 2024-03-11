@@ -25,6 +25,7 @@ interface Report {
   numberofhousespartiallydamaged: number, 
   numberofinjured: number, 
   numberofdeath: number,
+  numberofidps: number,
   approved: boolean,
   longitude: string,
   latitude: string
@@ -59,10 +60,10 @@ const SingleReport = () => {
               approved: true
           });
           console.log(req.data)
+          window.location.reload();
       } catch (error) {
       console.error(error);
       }
-
     }
 
   const dateofassessment = moment(report?.createdAt).format('D/MM/YYYY')    
@@ -99,6 +100,7 @@ return (
       <ReportStat title="Houses Partially Damaged" body={report?.numberofhousespartiallydamaged}/>
       <ReportStat title="Number of Injured" body={report?.numberofinjured}/>
       <ReportStat title="Number of Death" body={report?.numberofdeath}/>
+      <ReportStat title="Number of IDPs" body={report?.numberofidps}/>
     </SimpleGrid>
     </>
     )
