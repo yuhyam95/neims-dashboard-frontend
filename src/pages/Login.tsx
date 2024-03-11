@@ -21,9 +21,9 @@ import { jwtDecode } from 'jwt-decode';
 export default function Login() {
 
   const navigate = useNavigate()
-  const {login, isLoading} = useAuth()
+  const {login} = useAuth()
   const [showError, setShowError] = useState(false);
-
+  const [isLoading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -39,15 +39,18 @@ export default function Login() {
   const handleLogin = async (e: any) => {
     e.preventDefault(); 
     try {
+      setLoading(true)
       const response = await apiClient.post('/auth/login', formData);
       if (response.status === 200) {
         const { _id } = jwtDecode(response.data.token) as { _id: string, role: {_id: string, name: string} };
         await login(_id);
+        setLoading(false)
         navigate('/');
       } 
     } catch (error) {
       console.error('Error during login:', error);
       setShowError(true)
+      setLoading(false)
     }
   };
 

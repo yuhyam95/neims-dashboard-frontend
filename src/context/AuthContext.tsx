@@ -20,7 +20,7 @@ interface AuthContextProps {
   user: User | null;
   login: (token: string) => void;
   logout: () => void;
-  isLoading: boolean;
+  
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -31,7 +31,7 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setLoading] = useState(false)
+  
   useEffect(() => {
 
     const storedUser = localStorage.getItem('user');
@@ -42,15 +42,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const login = async (userId: string) => {   
     try {
-      setLoading(true)
+     
       const userDetailsResponse = await apiClient.get(`/user/${userId}`);
       const userData: User = userDetailsResponse.data;
       setUser(userData);
-      setLoading(false)
+      
       localStorage.setItem('user', JSON.stringify(userData));
     } catch (error) {
       console.error('Error fetching user details:', error);
-      setLoading(false)
+      
     }
   };
 
@@ -61,7 +61,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isLoading, user, login, logout, }}>
+    <AuthContext.Provider value={{ user, login, logout, }}>
       {children}
     </AuthContext.Provider>
   );
