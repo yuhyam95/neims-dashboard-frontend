@@ -18,7 +18,8 @@ interface ProductItem {
   tag: string,
   createdAt: string
   category: CategoryItem
-  updatedAt: string
+  updatedAt: string,
+  expiryDate: string
 }
 
 interface StationItem {

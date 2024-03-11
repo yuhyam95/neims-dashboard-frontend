@@ -13,7 +13,8 @@ export interface Product {
     storeofficer: StoreOfficer,
     verificationofficer: VerificationOfficer,
     createdAt: string,
-    updatedAt: string
+    updatedAt: string,
+    expiryDate: string
 }
 
 interface StationItem {

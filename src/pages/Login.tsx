@@ -21,7 +21,7 @@ import { jwtDecode } from 'jwt-decode';
 export default function Login() {
 
   const navigate = useNavigate()
-  const {login} = useAuth()
+  const {login, isLoading} = useAuth()
   const [showError, setShowError] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -76,7 +76,8 @@ export default function Login() {
               <Checkbox>Remember me</Checkbox>
               <Text color={'blue.500'}>Forgot password?</Text>
             </Stack>
-            <Button colorScheme={'blue'} variant={'solid'} onClick={handleLogin}>
+            <Button colorScheme={'blue'} variant={'solid'} isLoading={isLoading}
+                    loadingText='Logging in' onClick={handleLogin}>
               Sign in
             </Button>
           </Stack>

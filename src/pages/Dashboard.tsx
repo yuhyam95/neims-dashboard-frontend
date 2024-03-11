@@ -31,7 +31,7 @@ function Dashboard() {
     return true; 
   }); 
 
-  const { products } = useProducts(selectedTab === 'Overview' ? {stationType: ''} : {stationType: selectedTab}); 
+  const { products } = useProducts(queryParams);
 
   return (
     <div>

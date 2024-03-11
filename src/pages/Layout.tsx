@@ -186,7 +186,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         aria-label="open menu"
         icon={<FiMenu />}
       />
-      <Heading display={{ base: 'flex',}} size='lg'>NEMA Inventory Management System</Heading>
+      <Heading display={{ base: 'flex',}} size='lg'>Inventory Management System</Heading>
 
       <HStack spacing={{ base: '0', md: '6' }}>
         <IconButton size="lg" variant="ghost" aria-label="open menu" icon={<FiBell />} />
