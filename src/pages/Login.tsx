@@ -17,6 +17,8 @@ import apiClient from '../services/api-client';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { jwtDecode } from 'jwt-decode';
+import nemalogo from '../assets/nema-logo1.png'
+import warehouse from '../assets/warehouse.jpg'
 
 export default function Login() {
 
@@ -61,7 +63,7 @@ export default function Login() {
           <Image 
             boxSize='300px'
             objectFit='cover'
-            src='https://nema.gov.ng/wp-content/uploads/cropped-NEMA-Logo-Raw-e1658325799934.png'/>
+            src={nemalogo}/>
           <Heading fontSize={'2xl'}>Sign in to your account</Heading>
           <FormControl id="email">
             <FormLabel>Email address</FormLabel>
@@ -92,7 +94,7 @@ export default function Login() {
           alt={'Login Image'}
           objectFit={'cover'}
           src={
-            'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80'
+            warehouse
           }
         />
       </Flex>
