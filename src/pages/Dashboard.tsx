@@ -7,6 +7,7 @@ import { useState } from 'react';
 import useStations from '../hooks/useStation';
 import useProducts from '../hooks/useProducts';
 import ChartGrid from '../components/ChartGrid';
+import OverviewGrid from '../components/OverViewGrid';
 
 
 
@@ -42,9 +43,13 @@ function Dashboard() {
       <ProductsGrid productData={products} showStation={true} showCategory={false} showHeader={true} showTotal={true}/>
       </Flex>
   {selectedTab === "Overview" &&   
+    <>
+    <OverviewGrid />
      <Flex> 
       <ChartGrid productData={products} />
-      </Flex>}
+      </Flex>
+      </>
+      }
     </div> 
   );
 }
