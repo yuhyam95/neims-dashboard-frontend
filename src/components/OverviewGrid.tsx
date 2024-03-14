@@ -36,7 +36,7 @@ const data = [
 
 const OverviewGrid = () => {
   return (
-    <SimpleGrid columns={{ base: 1, sm: 2, md: 3, lg: 3, xl: 5 }} spacing={6}>  
+    <SimpleGrid columns={{ base: 1, sm: 2, md: 3, lg: 5, xl: 5 }} spacing={6}>  
       {data?.map((category) => (
         <OverviewCategoryCard name={category.name} total={category.total} color={category.color} />
       ))}

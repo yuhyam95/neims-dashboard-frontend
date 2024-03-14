@@ -29,6 +29,9 @@ function Dashboard() {
     } else if (selectedTab === 'Operational') {
       return station.type === 'Operational';
     }
+    else if (selectedTab === 'Categories') {
+      return station.type === 'Categories';
+    }
     return true; 
   }); 
 
@@ -37,16 +40,21 @@ function Dashboard() {
   return (
     <div>
       <StationTabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
-      {selectedTab === "Overview" &&
-      <> 
+      
+      {selectedTab === "Categories" &&
       <Flex mt={4}>
       <OverviewGrid />
       </Flex>
+      }
+
+      {selectedTab === "Overview" &&
+      <> 
       <ProductsGrid productData={products} showStation={true} showCategory={false} showHeader={true} showTotal={true}/>
       <ChartGrid productData={products} />
       </>
       }
-        <StationGrid data={filteredStateData} selectedTab={selectedTab} />
+
+      <StationGrid data={filteredStateData} selectedTab={selectedTab} />
     </div> 
   );
 }

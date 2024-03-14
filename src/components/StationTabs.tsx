@@ -18,6 +18,12 @@ const StationTabs = ({ setSelectedTab }: Props) => {
         </Tab>
         <Tab
           _selected={{ color: 'blue.500', bg: 'gray.100', fontStyle: 'bold' }}
+          onClick={() => setSelectedTab('Categories')}
+        >
+          Categories
+        </Tab>
+        <Tab
+          _selected={{ color: 'blue.500', bg: 'gray.100', fontStyle: 'bold' }}
           onClick={() => setSelectedTab('Territorial')}
         >
           Territorial Offices
