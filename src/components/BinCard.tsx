@@ -32,7 +32,7 @@ import { PDFDownloadLink, Text as PdfText, Page, View, Document, StyleSheet } fr
 import { CSVLink } from 'react-csv';
 import moment from 'moment';
 
-
+ 
 interface Props {
   name: string,
   quantity: number,
