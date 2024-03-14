@@ -33,7 +33,7 @@ const fetchData = async () => {
     const men = beneficiariesData?.men || 0;
     const women = beneficiariesData?.women || 0;
     const children = beneficiariesData?.children || 0;
-  const series = [men, women, children];
+    const series = [men, women, children];
 
   const chartOptions: ApexOptions = {
     chart: {
@@ -58,6 +58,9 @@ const fetchData = async () => {
             color: '#111',
             fontSize: '30px',
             show: true,
+            formatter: function (val) {
+              return val.toString();
+            }
           },
           total: {
             show: true,
@@ -68,21 +71,20 @@ const fetchData = async () => {
           }
         },
       },
-
     },
-    labels: ['Men', 'Women', 'Children',],
+    labels: ['Men', 'Women', 'Children'],
     title: {
-        text: 'Beneficiaries Breakdown',
-        align: 'center',
-        style: {
-          fontSize: '16px',
-        },
+      text: 'Beneficiaries Breakdown',
+      align: 'center',
+      style: {
+        fontSize: '16px',
       },
-      legend: {
-        show: true,
-        floating: true,
-        position: 'bottom',
-      },
+    },
+    legend: {
+      show: true,
+      floating: true,
+      position: 'bottom',
+    },
   };
 
   return (
