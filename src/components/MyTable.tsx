@@ -228,8 +228,8 @@ const totalQuantity = calculateTotalQuantity();
           <Tr>
             <Th>Item</Th>
             <Th>Quantity</Th>
-            <Th>Reason</Th>
             {showStation && <Th>Station</Th>} 
+            <Th>Movement</Th>
             {showCategory && <Th>Category</Th>}
             <Th>Date Added</Th>
             <Th>Expiry Date</Th>

@@ -58,6 +58,10 @@ function TableRows(props: Props) {
         </Text>
         </Box>
       </Td>
+      {showStation &&
+      <Td>
+       {station}
+      </Td>}
       <Td>
       <Box borderWidth="0.5px" borderRadius="10px" width="80%" bg={reason == 'restock' ? '#BAF2E0' : '#FBD8D8' } display="flex" justifyContent="center" alignItems="center">
         <Text color={reason === 'restock' ? '#2FD197' : '#EB4547' }>
@@ -65,10 +69,6 @@ function TableRows(props: Props) {
         </Text>
         </Box>
       </Td>
-      {showStation &&
-      <Td>
-       {station}
-      </Td>}
       {showCategory &&
       <Td>
        {category}

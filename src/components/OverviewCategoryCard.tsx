@@ -30,6 +30,15 @@ const OverviewCategoryCard = ({name, total, color}: Props) => {
         <Td>Cement (5KG BAGS)</Td>
         <Td isNumeric>3048</Td>
       </Tr>
+      <Tr>
+        <Td>Rice (25KG BAGS)</Td>
+        <Td isNumeric>2540</Td>
+      </Tr>
+      <Tr>
+        <Td>Cement (5KG BAGS)</Td>
+        <Td isNumeric>3048</Td>
+      </Tr>
+      
     </Tbody>
     </Table>
     </CardBody>
