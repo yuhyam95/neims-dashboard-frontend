@@ -63,7 +63,7 @@ function TableRows(props: Props) {
        {station}
       </Td>}
       <Td>
-      <Box borderWidth="0.5px" borderRadius="10px" width="80%" bg={reason == 'restock' ? '#BAF2E0' : '#FBD8D8' } display="flex" justifyContent="center" alignItems="center">
+      <Box borderWidth="0.5px" borderRadius="10px" width="100%" bg={reason == 'restock' ? '#BAF2E0' : '#FBD8D8' } display="flex" justifyContent="center" alignItems="center">
         <Text color={reason === 'restock' ? '#2FD197' : '#EB4547' }>
           {reason === 'restock' ? "RESTOCK" : "DISTRIBUTION"}
         </Text>
